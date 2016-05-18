@@ -11,6 +11,7 @@
 		8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D7261CEB5F4C003B6ECC /* LTCategoryTableViewCell.m */; };
 		8D00D72A1CEB6AF0003B6ECC /* LTCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D7291CEB6AF0003B6ECC /* LTCategoryDetailViewController.m */; };
 		8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D72C1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m */; };
+		8D00D7351CEC6495003B6ECC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D00D7311CEC5F03003B6ECC /* libsqlite3.tbd */; };
 		8D0146371CEAD39F00FB4220 /* LTSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0146361CEAD39F00FB4220 /* LTSearchBar.m */; };
 		8D01465F1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01465E1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.m */; };
 		8D0146621CEB3DE300FB4220 /* LTCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0146611CEB3DE300FB4220 /* LTCategoryModel.m */; };
@@ -48,6 +49,7 @@
 		8D00D7291CEB6AF0003B6ECC /* LTCategoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTCategoryDetailViewController.m; sourceTree = "<group>"; };
 		8D00D72B1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryDetailTableViewCell.h; sourceTree = "<group>"; };
 		8D00D72C1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTCategoryDetailTableViewCell.m; sourceTree = "<group>"; };
+		8D00D7311CEC5F03003B6ECC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8D0146351CEAD39F00FB4220 /* LTSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSearchBar.h; sourceTree = "<group>"; };
 		8D0146361CEAD39F00FB4220 /* LTSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSearchBar.m; sourceTree = "<group>"; };
 		8D01465D1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LTUISearchBar+LTSetSearchBar.h"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D00D7351CEC6495003B6ECC /* libsqlite3.tbd in Frameworks */,
 				4E87891038EB620ABD0D21B6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +417,7 @@
 		C3FCBFBB9CC69A26E96F7697 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D00D7311CEC5F03003B6ECC /* libsqlite3.tbd */,
 				3AE94AFF070950DADC80B236 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -684,6 +688,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.lrymlt.JasonMLTJJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -700,6 +708,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.lrymlt.JasonMLTJJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

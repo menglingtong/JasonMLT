@@ -14,6 +14,11 @@
 
 #import "LTCategoryViewController.h"
 
+#import <FMDB.h>
+
+// 全局静态数据库指针
+//static sqlite3 *dbPoint = nil;
+
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -46,10 +51,93 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 获取本地document路径
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
+    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+    
+    // 判断文件存在就不执行创建
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
+        
+        // 创建数据库路径
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+        
+        // 判断打开数据库连接
+        if ([db open]) {
+            
+            // 创建栏目表 - 栏目ID(主键) - 栏目名称 -
+            NSString *createCategorySql = @"create table if not exists category(cateID integer primary key autoincrement, categoryTitle varchar(225) not null)";
+            
+            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null)";
+            
+            // 执行创建语句
+            [db executeUpdate:createCategorySql];
+            [db executeUpdate:createCategoryDetailSql];
+            
+            // 获取plist文件
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Category" ofType:@"plist"];
+            NSArray *array = [NSMutableArray arrayWithContentsOfFile:plistPath];
+            
+            // 解析plist文件
+            for (NSDictionary *dic in array) {
+                
+                LTCategoryModel *categoryModel = [[LTCategoryModel alloc] init];
+                
+                [categoryModel initWithDic:dic];
+                
+                // 创建插入主栏目sql语句
+                NSString *insertCategorySql = [NSString stringWithFormat:@"insert into category(categoryTitle) values('%@')", categoryModel.categoryTitle];
+                
+                // 执行语句
+                [db executeUpdate:insertCategorySql];
+                
+                
+                NSArray *categoryArray = [dic objectForKey:@"category"];
+                
+                for (NSDictionary *dicInArray in categoryArray) {
+                    
+                    if ([[dicInArray objectForKey:@"type"] isEqualToString:@"single"]) {
+                        
+                        
+                        // 创建插入子栏目 sql语句
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"]];
+                        
+                        [db executeUpdate:insertDetailCategorySql];
+                    }
+                    else
+                    {
+                        // 创建插入子栏目 sql语句
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目"];
+                        
+                        [db executeUpdate:insertDetailCategorySql];
+                        
+                        NSArray *supCategory = [dicInArray objectForKey:@"subCategory"];
+                        
+                        for (NSDictionary *dict in supCategory) {
+                            
+                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"]];
+                            
+                            [db executeUpdate:insertSubCategorySql];
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+            }
+            
+            [db close];
+            
+        }
+        
+    }
     
     
 }
+
+
 
 -(void)loadView
 {

@@ -8,6 +8,7 @@
 
 #import "LTCategoryDetailViewController.h"
 #import "LTBaseView.h"
+#import "LTCategoryDetailTableViewCell.h"
 
 @interface LTCategoryDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -54,11 +55,13 @@
     self.categoryDetailTableView.delegate = self;
     self.categoryDetailTableView.dataSource = self;
     
+    self.categoryDetailTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.view addSubview:_categoryDetailTableView];
     [_categoryDetailTableView release];
     
     // 初始化cell
-    [self.categoryDetailTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"categoryDetailCell"];
+    [self.categoryDetailTableView registerClass:[LTCategoryDetailTableViewCell class] forCellReuseIdentifier:@"categoryDetailCell"];
     
     
 }
@@ -77,15 +80,46 @@
     return self.categoryDetailDataSourceArray.count;
 }
 
+#pragma mark 每个cell的内容
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryDetailCell"];
+    LTCategoryDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryDetailCell"];
     
-    cell.textLabel.text = [[self.categoryDetailDataSourceArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    cell.titleLable.text = [[self.categoryDetailDataSourceArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    cell.isSelected = YES;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+#pragma mark 返回cell高度
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
+#pragma mark cell的点击方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    LTCategoryDetailTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell.isSelected) {
+        
+        cell.isSelected = NO;
+        
+        cell.pick.image = [UIImage imageNamed:@"addGray"];
+        
+    }
+    else
+    {
+        cell.isSelected = YES;
+        
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

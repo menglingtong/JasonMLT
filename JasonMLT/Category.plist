@@ -8,12 +8,16 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/daily_hot.php?_appid=iphone&amp;_bsize=750_1334&amp;_dev=iPhone%2C9.3.1&amp;_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&amp;_lat=0.000000&amp;_lng=0.000000&amp;_mac=02%3A00%3A00%3A00%3A00%3A00&amp;_net=wifi&amp;_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&amp;_uid=&amp;_utoken=&amp;_v=6.5.2&amp;_version=6.54&amp;app_id_4=310000&amp;app_ids=&amp;clean_local_cache=Y</string>
 				<key>title</key>
 				<string>今日看点</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/topic_list_new.php?_appid=iphone&amp;_bsize=750_1334&amp;_dev=iPhone%2C9.3.1&amp;_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&amp;_lat=0.000000&amp;_lng=0.000000&amp;_mac=02%3A00%3A00%3A00%3A00%3A00&amp;_net=wifi&amp;_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&amp;_uid=&amp;_utoken=&amp;_v=6.5.2&amp;_version=6.54</string>
 				<key>title</key>
@@ -27,18 +31,24 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=11146</string>
 				<key>title</key>
 				<string>冷兔</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=11581</string>
 				<key>title</key>
 				<string>爆笑日常</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=10721</string>
 				<key>title</key>
@@ -52,12 +62,16 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12175</string>
 				<key>title</key>
 				<string>美女</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=969</string>
 				<key>title</key>
@@ -71,18 +85,24 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12304</string>
 				<key>title</key>
 				<string>摄影札记</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12179&amp;clean_local_cache=Y</string>
 				<key>title</key>
 				<string>视频</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12207&amp;clean_local_cache=Y</string>
 				<key>title</key>
@@ -96,18 +116,24 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=11834</string>
 				<key>title</key>
 				<string>feekr旅行</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=10795&amp;clean_local_cache=Y</string>
 				<key>title</key>
 				<string>蝉游记</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=981&amp;clean_local_cache=Y</string>
 				<key>title</key>
@@ -161,12 +187,16 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=12&amp;clean_local_cache=Y</string>
 				<key>title</key>
 				<string>时尚频道</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=1067&amp;clean_local_cache=Y</string>
 				<key>title</key>
@@ -180,6 +210,8 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=11691&amp;clean_local_cache=Y</string>
 				<key>title</key>
@@ -215,12 +247,16 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=1039&amp;clean_local_cache=Y</string>
 				<key>title</key>
 				<string>科学频道</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=752&amp;clean_local_cache=Y</string>
 				<key>title</key>
@@ -234,6 +270,8 @@
 		<key>category</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<string>single</string>
 				<key>api_url</key>
 				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=750_1334&amp;_version=6.54&amp;app_id=11687&amp;clean_local_cache=Y</string>
 				<key>title</key>
