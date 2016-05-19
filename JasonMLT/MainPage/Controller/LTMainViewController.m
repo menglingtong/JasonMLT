@@ -16,9 +16,6 @@
 
 #import <FMDB.h>
 
-// 全局静态数据库指针
-//static sqlite3 *dbPoint = nil;
-
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
