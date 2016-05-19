@@ -29,7 +29,12 @@
 {
     [_mainMenuDataSourceArray release];
     
+    [_mainMenuWillDeleteDictionary release];
+    
     [_mainMenuWillDeleteArray release];
+    
+    _mainMenuCollectionView.delegate = nil;
+    _mainMenuCollectionView.dataSource = nil;
     
     [_mainMenuCollectionView release];
     
@@ -56,6 +61,8 @@
     
     NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
     
+    NSLog(@"%@", documentPath);
+    
     // 判断文件存在就不执行创建
     if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
         
@@ -68,7 +75,7 @@
             // 创建栏目表 - 栏目ID(主键) - 栏目名称 -
             NSString *createCategorySql = @"create table if not exists category(cateID integer primary key autoincrement, categoryTitle varchar(225) not null)";
             
-            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null)";
+            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null, is_Selected integer not null, indexPath integer not null)";
             
             // 执行创建语句
             [db executeUpdate:createCategorySql];
@@ -100,14 +107,14 @@
                         
                         
                         // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"]];
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 0, 1000];
                         
                         [db executeUpdate:insertDetailCategorySql];
                     }
                     else
                     {
                         // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目"];
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目", 0, 1000];
                         
                         [db executeUpdate:insertDetailCategorySql];
                         
@@ -115,7 +122,7 @@
                         
                         for (NSDictionary *dict in supCategory) {
                             
-                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url) values('%@', '%@', '%@')", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"]];
+                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"], 0, 1000];
                             
                             [db executeUpdate:insertSubCategorySql];
                         }
@@ -166,19 +173,55 @@
     
 }
 
+#pragma mark 页面即将出现
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    // 初始化数据源数组
+    self.mainMenuDataSourceArray = [[NSMutableArray alloc] init];
+    
+    // 获取本地document路径
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+    
+    // 创建数据库路径
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if ([db open]) {
+        
+        NSString *sql = @"select * from categoryDetail where is_Selected = 1 order by indexPath asc";
+        
+        [db executeStatements:sql withResultBlock:^int(NSDictionary *resultsDictionary) {
+           
+            
+            LTCategoryModel *model = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
+            
+            [self.mainMenuDataSourceArray addObject:model];
+            [model release];
+            
+            return 0;
+        }];
+        
+    }
+    
+    [db close];
+    
+    [self.mainMenuCollectionView reloadData];
+}
 
 #pragma mark 初始化主菜单的集合视图 < mainMenuCollectionView >
 - (void) createMainMenuCollectionView
 {
-    NSArray *array = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16"];
     
     // 初始化编辑模式为假
     self.isEditing = NO;
     
-    // 初始化数据源数组
-    self.mainMenuDataSourceArray = [NSMutableArray arrayWithArray:array];
+    
     
     // 初始化删除数组
+    self.mainMenuWillDeleteDictionary = [[NSMutableDictionary alloc] init];
     self.mainMenuWillDeleteArray = [[NSMutableArray alloc] init];
     
     // 设置集合视图的元素布局
@@ -244,6 +287,8 @@
     [self.deleteConfirm addSubview:deleteLabel];
     [deleteLabel release];
     
+    [self.deleteConfirm addTarget:self action:@selector(didClickedDeleteConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     // 将确认删除按钮添加到editView中
     [self.editView addSubview:_deleteConfirm];
     
@@ -273,41 +318,6 @@
     
 }
 
-#pragma mark exit退出按钮点击方法
-- (void) didClickedExitButton:(UIButton *)sender
-{
-    // 防止block中循环引用
-    __block LTMainViewController *LTSelf = self;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        LTSelf.editView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 96);
-        
-    } completion:^(BOOL finished) {
-        
-        for (LTMainMenuCollectionCell *tempCell in [self.mainMenuCollectionView visibleCells]) {
-            
-            tempCell.isEditImage.image = nil;
-            tempCell.isSelected = NO;
-            
-        }
-        
-        // 退出编辑模式
-        LTSelf.isEditing = NO;
-        
-        // 清空待删除数组
-        [LTSelf.mainMenuWillDeleteArray removeAllObjects];
-        
-        // 移除编辑按钮视图层
-        [LTSelf.editView removeFromSuperview];
-        
-        // 刷新collectionView
-        [LTSelf.mainMenuCollectionView reloadData];
-        
-    }];
-    
-    
-}
 
 #pragma mark 长按手势监听事件
 - (void) longPressCollectionViewCell:(UILongPressGestureRecognizer *)gesture
@@ -505,7 +515,7 @@
     
     for (int i = 0; i < temp.count; i++) {
         
-        [temp replaceObjectAtIndex:i withObject:[temp[i] mutableCopy]];
+//        [temp replaceObjectAtIndex:i withObject:[temp[i] mutableCopy]];
         
     }
     
@@ -584,6 +594,126 @@
     
 }
 
+#pragma mark deleteConfirm 确认删除按钮点击方法
+- (void) didClickedDeleteConfirmButton:(UIButton *)sender
+{
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"频道管理" message:[NSString stringWithFormat:@"你选择了%ld个频道,是否确定删除", self.mainMenuWillDeleteArray.count] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionLeft = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        NSArray *array = [self.mainMenuCollectionView visibleCells];
+        
+        
+        for (NSIndexPath *indexPath in self.mainMenuWillDeleteArray) {
+            
+            LTMainMenuCollectionCell *cell = [self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
+            
+            cell.hidden = YES;
+            
+            
+        }
+        
+        for (LTMainMenuCollectionCell *cell in [self.mainMenuCollectionView visibleCells]) {
+            
+            if (cell.isSelected) {
+                
+                NSIndexPath *indexPath = [self.mainMenuCollectionView indexPathForCell:cell];
+                
+                [self.mainMenuCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForItem:self.mainMenuDataSourceArray.count - 1  inSection:0]];
+                
+            }
+            
+        }
+        
+
+  
+        
+//        [self.mainMenuDataSourceArray removeObjectsInArray:self.mainMenuWillDeleteArray];
+//        [self.mainMenuWillDeleteArray removeAllObjects];
+        
+//        [self.mainMenuCollectionView reloadData];
+        
+        
+    }];
+    
+    UIAlertAction *actionRight = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:actionLeft];
+    [alertController addAction:actionRight];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+#pragma mark exit退出按钮点击方法
+- (void) didClickedExitButton:(UIButton *)sender
+{
+    // 防止block中循环引用
+    __block LTMainViewController *LTSelf = self;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        LTSelf.editView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 96);
+        
+    } completion:^(BOOL finished) {
+        
+        
+        for (LTMainMenuCollectionCell *tempCell in [self.mainMenuCollectionView visibleCells])
+        {
+            
+            tempCell.isEditImage.image = nil;
+            tempCell.isSelected = NO;
+            
+            
+        }
+        
+        // 退出编辑模式
+        LTSelf.isEditing = NO;
+        
+        // 清空待删除数组 字典
+        [LTSelf.mainMenuWillDeleteDictionary removeAllObjects];
+        [LTSelf.mainMenuWillDeleteArray removeAllObjects];
+        
+        // 移除编辑按钮视图层
+        [LTSelf.editView removeFromSuperview];
+        
+        // 刷新collectionView
+        [LTSelf.mainMenuCollectionView reloadItemsAtIndexPaths:[LTSelf.mainMenuCollectionView indexPathsForVisibleItems]];
+        
+        // 获取本地document路径
+        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        
+        NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+        
+        // 创建数据库路径
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+        
+        [db open];
+        
+        for (LTMainMenuCollectionCell *tempCell in [self.mainMenuCollectionView visibleCells])
+        {
+            
+            // 更新数据库
+            NSString *updateSql = [NSString stringWithFormat:@"update categoryDetail set indexPath = %d where title = '%@'", (int)tempCell.indexPathOfItem, tempCell.menuNameLabel.text];
+            
+            
+            if ([db open]) {
+                
+                [db executeUpdate:updateSql];
+                
+            }
+            
+        }
+        
+        [db close];
+        
+    }];
+    
+    
+}
+
 #pragma mark 用户设置按钮
 - (void) didClickedUserSetLeftButton:(UIBarButtonItem *)sender
 {
@@ -623,7 +753,6 @@
     
     self.hidesBottomBarWhenPushed = NO;
     
-//    [self.tabBarController.view bringSubviewToFront:_editView];
 }
 
 #pragma mark -
@@ -647,14 +776,20 @@
         LTMainMenuCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"mainMenuCell" forIndexPath:indexPath];
         
         cell.backgroundColor = [UIColor colorWithRed:0.99 green:0.86 blue:0.35 alpha:1.00];
+        cell.backgroundColor = [UIColor whiteColor];
         
-        cell.menuNameLabel.text = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+        LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+        
+        cell.menuNameLabel.text = model.title;
+        
+        // 标识当前cell的排序
+        cell.indexPathOfItem = indexPath.item;
         
         // 判断在编辑状态
         if (self.isEditing) {
             
-            // 判断cell已经被选中(在删除数组中已存储)
-            if ( [self.mainMenuWillDeleteArray containsObject:indexPath] ) {
+            // 判断cell已经被选中(在删除字典中已存储)
+            if ( [[self.mainMenuWillDeleteDictionary allKeys] containsObject:cell.menuNameLabel.text] ) {
                 
                 // 赋选中图片
                 cell.isEditImage.image = [UIImage imageNamed:@"radio-activeGray"];
@@ -699,8 +834,12 @@
             
             cell.isSelected = YES;
             
+            // 将is_Seleted 与 categoryTitle 存入即将删除字典,方便更新数据库
+            [self.mainMenuWillDeleteDictionary setObject:@"0" forKey:cell.menuNameLabel.text];
+            
+            // 将indexPath 存入 数组,方便更鞋页面
             [self.mainMenuWillDeleteArray addObject:indexPath];
-//            [cell release];
+            
             
         }
         else if (_isEditing && cell.isSelected)
@@ -710,13 +849,16 @@
             
             cell.isSelected = NO;
             
-            [self.mainMenuWillDeleteArray removeObject:indexPath];
+            [self.mainMenuWillDeleteDictionary removeObjectForKey:cell.menuNameLabel.text];
             
+            [self.mainMenuWillDeleteArray removeObject:indexPath];
             
         }
         
-        
+     
     }
+    
+    
 }
 
 #pragma mark 设置section的个数

@@ -10,11 +10,5 @@
 
 @implementation LTCategoryModel
 
--(void)dealloc
-{
-    [_categoryTitle release];
-    [_category release];
-    [super dealloc];
-}
 
 @end

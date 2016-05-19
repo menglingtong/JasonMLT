@@ -19,4 +19,13 @@
 /** 判断cell是否被选中 */
 @property (nonatomic, assign) BOOL isSelected;
 
+/** 右边线 */
+@property (nonatomic, retain) UILabel *borderRight;
+
+/** 下边线 */
+@property (nonatomic, retain) UILabel *borderBottom;
+
+/** 当前cell的排序 */
+@property (nonatomic, assign) NSInteger indexPathOfItem;
+
 @end

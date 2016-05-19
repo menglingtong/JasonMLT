@@ -10,6 +10,8 @@
 #import "LTCategoryTableViewCell.h"
 #import "LTCategoryDetailViewController.h"
 
+#import <FMDB.h>
+
 @interface LTCategoryViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @end
@@ -53,16 +55,29 @@
     
     // 初始化栏目数据源数组
     self.categoryDataSource = [[NSMutableArray alloc] init];
-    NSArray *array = [NSMutableArray arrayWithContentsOfFile:@"/Users/menglingtong/百度云同步盘/iOS代码/Project/JasonMLT/JasonMLT/Category.plist"];
     
-    for (NSDictionary *dic in array) {
+    // 获取本地document路径
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+    
+    // 创建数据库路径
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if ([db open]) {
         
-        LTCategoryModel *categoryModel = [[LTCategoryModel alloc] init];
+        NSString *sql = @"select categoryTitle from category";
         
-        [categoryModel initWithDic:dic];
+        [db executeStatements:sql withResultBlock:^int(NSDictionary *resultsDictionary) {
+            
+            LTCategoryModel *categoryModel = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
+            
+            [self.categoryDataSource addObject:categoryModel];
+            [categoryModel release];
+            
+            return 0;
+        }];
         
-        [self.categoryDataSource addObject:categoryModel];
-        [categoryModel release];
     }
     
     
@@ -87,6 +102,15 @@
     // 注册cell
     [self.categoryTableView registerClass:[LTCategoryTableViewCell class] forCellReuseIdentifier:@"categoryCell"];
     
+    
+}
+
+#pragma mark push新页面的时候,隐藏tabBar
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
     
 }
 

@@ -35,6 +35,7 @@
 		8DBE60CB1CE34C71007F2D1F /* LTCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CA1CE34C71007F2D1F /* LTCommunityViewController.m */; };
 		8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */; };
 		8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */; };
+		8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */; };
 		8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF67AE1CE96A1E00C8D3B1 /* LTCategoryViewController.m */; };
 		8DFF67D41CE9C06E00C8D3B1 /* Category.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF67D31CE9C06E00C8D3B1 /* Category.plist */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,8 @@
 		8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayViewController.m; sourceTree = "<group>"; };
 		8DBE60CF1CE34CA0007F2D1F /* LTUserSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUserSetViewController.h; sourceTree = "<group>"; };
 		8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUserSetViewController.m; sourceTree = "<group>"; };
+		8DFF077C1CED6DE700C6EC7B /* LTDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTDataBaseManager.h; sourceTree = "<group>"; };
+		8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTDataBaseManager.m; sourceTree = "<group>"; };
 		8DFF67AD1CE96A1E00C8D3B1 /* LTCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryViewController.h; sourceTree = "<group>"; };
 		8DFF67AE1CE96A1E00C8D3B1 /* LTCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTCategoryViewController.m; sourceTree = "<group>"; };
 		8DFF67D31CE9C06E00C8D3B1 /* Category.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Category.plist; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				8D0146361CEAD39F00FB4220 /* LTSearchBar.m */,
 				8D01465D1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.h */,
 				8D01465E1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.m */,
+				8DFF077C1CED6DE700C6EC7B /* LTDataBaseManager.h */,
+				8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */,
 			);
 			path = MyToolsClass;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 				8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */,
 				8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */,
 				8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */,
+				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
 				8D5AFE161CE2C38B007C6E6C /* LTMainViewController.m in Sources */,

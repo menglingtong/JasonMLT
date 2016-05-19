@@ -10,6 +10,8 @@
 #import "LTBaseView.h"
 #import "LTCategoryDetailTableViewCell.h"
 
+#import <FMDB.h>
+
 @interface LTCategoryDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -21,6 +23,7 @@
     [_categoryDetailTableView release];
     [_categoryDetailDataSourceArray release];
     [_model release];
+    [_tempArray release];
     
     [super dealloc];
 }
@@ -41,14 +44,42 @@
 }
 
 
+
 -(void)loadView
 {
     [super loadView];
     
     // 初始化详细栏目数据源数组
-    self.categoryDetailDataSourceArray = [[NSArray alloc] init];
+    self.categoryDetailDataSourceArray = [[NSMutableArray alloc] init];
     
-    self.categoryDetailDataSourceArray = self.model.category;
+    // 将临时数组初始化
+    self.tempArray = [[NSMutableArray alloc] init];
+    
+    // 将临时字典初始化
+    self.tempDic = [[NSMutableDictionary alloc] init];
+    
+    
+    // 获取本地document路径
+    NSString *dbPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:@"/JasonMLT.sqlite"];
+    
+    // 创建数据库路径
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if ([db open]) {
+        
+        NSString *sql = [NSString stringWithFormat:@"select * from categoryDetail where parentTitle = '%@'", self.model.categoryTitle];
+        
+        [db executeStatements:sql withResultBlock:^int(NSDictionary *resultsDictionary) {
+            
+            LTCategoryModel *model = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
+            
+            [self.categoryDetailDataSourceArray addObject:model];
+            
+            return 0;
+        }];
+        
+    }
+    [db close];
     
     self.categoryDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 49) style:UITableViewStylePlain];
     
@@ -69,6 +100,28 @@
 #pragma mark 返回方法
 - (void) popToFrontPage
 {
+    
+    // 获取本地document路径
+    NSString *dbPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:@"/JasonMLT.sqlite"];
+    
+    // 创建数据库路径
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if ([db open]) {
+        
+        NSArray *arr = [self.tempDic allKeys];
+        
+        for (NSString *str in arr) {
+            
+            NSString *sql = [NSString stringWithFormat:@"update categoryDetail set is_Selected = %d, indexPath = 1000 where title = '%@'",[[self.tempDic objectForKey:str] intValue]  ,str];
+            
+            [db executeUpdate:sql];
+            
+        }
+        
+    }
+    [db close];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -85,9 +138,11 @@
 {
     LTCategoryDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryDetailCell"];
     
-    cell.titleLable.text = [[self.categoryDetailDataSourceArray objectAtIndex:indexPath.row] objectForKey:@"title"];
+    LTCategoryModel *model = [self.categoryDetailDataSourceArray objectAtIndex:indexPath.row];
     
-    cell.isSelected = YES;
+    cell.titleLable.text = model.title;
+    
+    cell.isSelected = model.is_Selected;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -106,17 +161,27 @@
     
     LTCategoryDetailTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
+    
     if (cell.isSelected) {
         
         cell.isSelected = NO;
         
         cell.pick.image = [UIImage imageNamed:@"addGray"];
         
+        NSString *str = [NSString stringWithFormat:@"%d", cell.isSelected];
+        
+        // 开始接收修改的属性
+        [self.tempDic setValue:str forKey:cell.titleLable.text];
+        
     }
     else
     {
         cell.isSelected = YES;
         
+        NSString *str = [NSString stringWithFormat:@"%d", cell.isSelected];
+        
+        // 开始接收修改的属性
+        [self.tempDic setValue:str forKey:cell.titleLable.text];
         
     }
     

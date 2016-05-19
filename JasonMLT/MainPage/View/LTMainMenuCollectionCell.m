@@ -20,6 +20,9 @@
     
     [_menuNameLabel release];
     
+    [_borderRight release];
+    [_borderBottom release];
+    
     [super dealloc];
 }
 
@@ -37,10 +40,17 @@
         // 菜单名字label的初始化
         self.menuNameLabel = [[UILabel alloc] init];
         
-        
-        
         [self.contentView addSubview:_menuNameLabel];
         [_menuNameLabel release];
+        
+        self.borderRight = [[UILabel alloc] init];
+        [self.contentView addSubview:_borderRight];
+        [_borderRight release];
+        
+        
+        self.borderBottom = [[UILabel alloc] init];
+        [self.contentView addSubview:_borderBottom];
+        [_borderBottom release];
         
     }
     return self;
@@ -73,14 +83,42 @@
         
         make.right.equalTo(self.contentView).offset(-10);
         
-        make.height.equalTo(30);
+        make.height.equalTo(20);
         
         
     }];
     
-    self.menuNameLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.73 blue:0.61 alpha:1.00];
-    self.menuNameLabel.textColor = [UIColor whiteColor];
+//    self.menuNameLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.73 blue:0.61 alpha:1.00];
+    self.menuNameLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
     self.menuNameLabel.textAlignment = 1;
+    [self.menuNameLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    
+    [self.borderRight makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.contentView).offset(0);
+        
+        make.right.equalTo(self.contentView).offset(0);
+        
+        make.bottom.equalTo(self.contentView).offset(0);
+        
+        make.width.equalTo(1);
+    }];
+    
+    self.borderRight.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1.00];
+    
+    [self.borderBottom makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.contentView).offset(0);
+        
+        make.right.equalTo(self.contentView).offset(0);
+        
+        make.bottom.equalTo(self.contentView).offset(0);
+        
+        make.height.equalTo(1);
+    }];
+    
+    self.borderBottom.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1.00];
     
 }
 
