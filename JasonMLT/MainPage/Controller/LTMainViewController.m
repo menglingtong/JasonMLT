@@ -601,38 +601,84 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"频道管理" message:[NSString stringWithFormat:@"你选择了%ld个频道,是否确定删除", self.mainMenuWillDeleteArray.count] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionLeft = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        // 此处隐藏效果有bug
+//        for (NSIndexPath *indexPath in self.mainMenuWillDeleteArray) {
+//            
+//            LTMainMenuCollectionCell *cell = [self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
+//            
+//            cell.hidden = YES;
+//            
+//            
+//        }
         
-        NSArray *array = [self.mainMenuCollectionView visibleCells];
+        // 新建一个临时数组用于存储 被筛选出来要删除的model
+        NSMutableArray *tempArr = [NSMutableArray array];
         
-        
-        for (NSIndexPath *indexPath in self.mainMenuWillDeleteArray) {
-            
-            LTMainMenuCollectionCell *cell = [self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
-            
-            cell.hidden = YES;
-            
-            
-        }
-        
+        // 遍历所有的cell
         for (LTMainMenuCollectionCell *cell in [self.mainMenuCollectionView visibleCells]) {
             
             if (cell.isSelected) {
                 
+                // 获取到 状态是被选则的cell
                 NSIndexPath *indexPath = [self.mainMenuCollectionView indexPathForCell:cell];
                 
+                // 将被选择的cell 移动到最后
                 [self.mainMenuCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForItem:self.mainMenuDataSourceArray.count - 1  inSection:0]];
                 
+                // 获取本地document路径
+                NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                
+                NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+                
+                // 创建数据库路径
+                FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+                
+                // 打开数据库
+                [db open];
+                
+                // 遍历数据源中的model
+                for (LTCategoryModel *model in self.mainMenuDataSourceArray) {
+                    
+                    // 如果数据源数组中的model 的title 与被选择的cell的menuNameLabel.text相等, 执行sql语句将其在数据库中的状态修改
+                    if ([model.title isEqualToString:cell.menuNameLabel.text]) {
+                        
+                        NSString *sql = [NSString stringWithFormat:@"update categoryDetail set is_Selected = 0 where title = '%@'", cell.menuNameLabel.text];
+                        
+
+                        if ([db open]) {
+
+                            [db executeUpdate:sql];
+                            
+                        }
+                        
+                        // 将被筛选出的model存储到临时数组中等待 从数据源数组中 删除
+                        [tempArr addObject:model];
+                        
+                    }
+
+                }
+
+                // 关闭数据库
+                [db close];
+
             }
             
         }
         
-
-  
+        // 将临时数组中的model从数据源数组中删除
+        [self.mainMenuDataSourceArray removeObjectsInArray:tempArr];
         
-//        [self.mainMenuDataSourceArray removeObjectsInArray:self.mainMenuWillDeleteArray];
-//        [self.mainMenuWillDeleteArray removeAllObjects];
+        // 清空临时数组
+        [tempArr removeAllObjects];
         
-//        [self.mainMenuCollectionView reloadData];
+        // 将待删除的数组清空
+        [self.mainMenuWillDeleteArray removeAllObjects];
+        
+        // 将待删除的字典清空
+        [self.mainMenuWillDeleteDictionary removeAllObjects];
+        
+        // 刷新页面
+        [self.mainMenuCollectionView reloadData];
         
         
     }];
@@ -642,7 +688,9 @@
     }];
     
     [alertController addAction:actionLeft];
+    
     [alertController addAction:actionRight];
+    
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
@@ -710,6 +758,8 @@
         [db close];
         
     }];
+    
+    [self.mainMenuCollectionView reloadData];
     
     
 }
