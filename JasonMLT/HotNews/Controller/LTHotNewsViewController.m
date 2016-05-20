@@ -8,9 +8,10 @@
 
 #import "LTHotNewsViewController.h"
 #import "LTHotTableViewCell.h"
+#import "LTHotTrebleImageCell.h"
 
 #import "LTHotModel.h"
-#import "LTThumbnailMediasModel.h"
+
 
 #import "LTNetTool.h"
 
@@ -34,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self askForData:@"http://hotphone.myzaker.com/daily_hot_new.php?_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&_uid=11483531"];
+    [self askForData:@"http://api.irecommend.ifeng.com/read.php?uid=864260027969516"];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -63,7 +64,7 @@
     
     // 注册cell
     [self.hotTableView registerClass:[LTHotTableViewCell class] forCellReuseIdentifier:@"hotCell"];
-    
+    [self.hotTableView registerClass:[LTHotTrebleImageCell class] forCellReuseIdentifier:@"hotTrebleImageCell"];
 }
 
 #pragma mark -
@@ -75,7 +76,7 @@
     // 调用网络请求方法开始请求数据
     [LTNetTool GetNetWithUrl:urlStr body:nil header:nil response:LTJSON success:^(id result) {
         
-        NSArray *tempArr = [[result objectForKey:@"data"] objectForKey:@"articles"];
+        NSArray *tempArr = [result objectForKey:@"item"];
         
         for (NSDictionary *tempDic in tempArr) {
             
@@ -85,7 +86,7 @@
             [model release];
             
         }
-        
+        NSLog(@"%@", result);
         [self.hotTableView reloadData];
         
     } failure:^(NSError *error) {
@@ -107,21 +108,54 @@
 #pragma mark 初始化cell 重用方法
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LTHotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotCell"];
-    
     LTHotModel *model = [self.hotDataSourceArray objectAtIndex:indexPath.row];
     
-    cell.model = model;
+    if ([model.type isEqualToString:@"doc"]) {
+        
+        LTHotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotCell"];
+        
+        cell.model = model;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+        
+    }
+    else if ([model.type isEqualToString:@"slide"])
+    {
+        
+        LTHotTrebleImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hotTrebleImageCell"];
+        
+        cell.model = model;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+        
+    }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    return cell;
+    return nil;
 }
 
 #pragma mark 返回每个cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 117;
+    LTHotModel *model = [self.hotDataSourceArray objectAtIndex:indexPath.row];
+    
+    if ([model.type isEqualToString:@"doc"]) {
+        
+        return 113;
+        
+    }
+    else if ([model.type isEqualToString:@"slide"])
+    {
+        
+        return 283;
+        
+    }
+
+    return 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,3 +174,6 @@
 */
 
 @end
+
+
+

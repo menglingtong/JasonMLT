@@ -1,8 +1,8 @@
 //
-//  LTHotTableViewCell.h
+//  LTHotTrebleImageCell.h
 //  JasonMLT
 //
-//  Created by 孟令通 on 16/5/19.
+//  Created by 孟令通 on 16/5/20.
 //  Copyright © 2016年 LryMlt. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "LTBaseView.h"
 #import "LTHotModel.h"
 
-@interface LTHotTableViewCell : UITableViewCell
+@interface LTHotTrebleImageCell : UITableViewCell
 
 /** 下边线,粗线 */
 @property (nonatomic, retain) UILabel *borderBottom;
@@ -39,7 +39,14 @@
 /** 评论数 */
 @property (nonatomic, retain) UILabel *comment;
 
-/** 图片 */
-@property (nonatomic, retain) UIImageView *singImageView;
+/** 图片左 */
+@property (nonatomic, retain) UIImageView *leftImageView;
+
+/** 图片右上 */
+@property (nonatomic, retain) UIImageView *rightTopImageView;
+
+/** 图片右下 */
+@property (nonatomic, retain) UIImageView *rightBottomImageView;
+
 
 @end

@@ -37,7 +37,9 @@
 		8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */; };
 		8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */; };
 		8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */; };
-		8DFE946F1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */; };
+		8DFE94B61CEEF1BE00A63DC9 /* LTHotStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94B51CEEF1BE00A63DC9 /* LTHotStyleModel.m */; };
+		8DFE94B91CEEF60900A63DC9 /* LTHotLinkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94B81CEEF60900A63DC9 /* LTHotLinkModel.m */; };
+		8DFE94BC1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94BB1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m */; };
 		8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */; };
 		8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF67AE1CE96A1E00C8D3B1 /* LTCategoryViewController.m */; };
 		8DFF67D41CE9C06E00C8D3B1 /* Category.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF67D31CE9C06E00C8D3B1 /* Category.plist */; };
@@ -102,8 +104,12 @@
 		8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotTableViewCell.m; sourceTree = "<group>"; };
 		8DFE946A1CEE19E100A63DC9 /* LTHotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotModel.h; sourceTree = "<group>"; };
 		8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotModel.m; sourceTree = "<group>"; };
-		8DFE946D1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTThumbnailMediasModel.h; sourceTree = "<group>"; };
-		8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTThumbnailMediasModel.m; sourceTree = "<group>"; };
+		8DFE94B41CEEF1BE00A63DC9 /* LTHotStyleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotStyleModel.h; sourceTree = "<group>"; };
+		8DFE94B51CEEF1BE00A63DC9 /* LTHotStyleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotStyleModel.m; sourceTree = "<group>"; };
+		8DFE94B71CEEF60900A63DC9 /* LTHotLinkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotLinkModel.h; sourceTree = "<group>"; };
+		8DFE94B81CEEF60900A63DC9 /* LTHotLinkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotLinkModel.m; sourceTree = "<group>"; };
+		8DFE94BA1CEF0CF200A63DC9 /* LTHotTrebleImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotTrebleImageCell.h; sourceTree = "<group>"; };
+		8DFE94BB1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotTrebleImageCell.m; sourceTree = "<group>"; };
 		8DFF077C1CED6DE700C6EC7B /* LTDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTDataBaseManager.h; sourceTree = "<group>"; };
 		8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTDataBaseManager.m; sourceTree = "<group>"; };
 		8DFF67AD1CE96A1E00C8D3B1 /* LTCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryViewController.h; sourceTree = "<group>"; };
@@ -353,8 +359,10 @@
 			children = (
 				8DFE946A1CEE19E100A63DC9 /* LTHotModel.h */,
 				8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */,
-				8DFE946D1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.h */,
-				8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */,
+				8DFE94B41CEEF1BE00A63DC9 /* LTHotStyleModel.h */,
+				8DFE94B51CEEF1BE00A63DC9 /* LTHotStyleModel.m */,
+				8DFE94B71CEEF60900A63DC9 /* LTHotLinkModel.h */,
+				8DFE94B81CEEF60900A63DC9 /* LTHotLinkModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,6 +372,8 @@
 			children = (
 				8DFE94671CEE14EB00A63DC9 /* LTHotTableViewCell.h */,
 				8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */,
+				8DFE94BA1CEF0CF200A63DC9 /* LTHotTrebleImageCell.h */,
+				8DFE94BB1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -572,7 +582,9 @@
 				8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */,
 				8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */,
 				8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */,
-				8DFE946F1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m in Sources */,
+				8DFE94B61CEEF1BE00A63DC9 /* LTHotStyleModel.m in Sources */,
+				8DFE94B91CEEF60900A63DC9 /* LTHotLinkModel.m in Sources */,
+				8DFE94BC1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m in Sources */,
 				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,

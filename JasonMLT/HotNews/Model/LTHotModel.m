@@ -10,4 +10,22 @@
 
 @implementation LTHotModel
 
+-(instancetype)initWithDic:(NSDictionary *)dic
+{
+    
+    self = [super initWithDic:dic];
+    
+    if (self) {
+        
+        LTHotStyleModel *model = [[LTHotStyleModel alloc] initWithDic:self.style];
+        
+        [self.styleArray addObject:model];
+        [model release];
+        
+    }
+    
+    
+    return self;
+}
+
 @end
