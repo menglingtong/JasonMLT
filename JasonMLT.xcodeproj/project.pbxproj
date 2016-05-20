@@ -35,6 +35,9 @@
 		8DBE60CB1CE34C71007F2D1F /* LTCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CA1CE34C71007F2D1F /* LTCommunityViewController.m */; };
 		8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */; };
 		8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */; };
+		8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */; };
+		8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */; };
+		8DFE946F1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */; };
 		8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */; };
 		8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF67AE1CE96A1E00C8D3B1 /* LTCategoryViewController.m */; };
 		8DFF67D41CE9C06E00C8D3B1 /* Category.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF67D31CE9C06E00C8D3B1 /* Category.plist */; };
@@ -95,6 +98,12 @@
 		8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayViewController.m; sourceTree = "<group>"; };
 		8DBE60CF1CE34CA0007F2D1F /* LTUserSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUserSetViewController.h; sourceTree = "<group>"; };
 		8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUserSetViewController.m; sourceTree = "<group>"; };
+		8DFE94671CEE14EB00A63DC9 /* LTHotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotTableViewCell.h; sourceTree = "<group>"; };
+		8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotTableViewCell.m; sourceTree = "<group>"; };
+		8DFE946A1CEE19E100A63DC9 /* LTHotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotModel.h; sourceTree = "<group>"; };
+		8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotModel.m; sourceTree = "<group>"; };
+		8DFE946D1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTThumbnailMediasModel.h; sourceTree = "<group>"; };
+		8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTThumbnailMediasModel.m; sourceTree = "<group>"; };
 		8DFF077C1CED6DE700C6EC7B /* LTDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTDataBaseManager.h; sourceTree = "<group>"; };
 		8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTDataBaseManager.m; sourceTree = "<group>"; };
 		8DFF67AD1CE96A1E00C8D3B1 /* LTCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryViewController.h; sourceTree = "<group>"; };
@@ -342,6 +351,10 @@
 		8DBE60BC1CE34BF1007F2D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DFE946A1CEE19E100A63DC9 /* LTHotModel.h */,
+				8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */,
+				8DFE946D1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.h */,
+				8DFE946E1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,6 +362,8 @@
 		8DBE60BD1CE34BF1007F2D1F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DFE94671CEE14EB00A63DC9 /* LTHotTableViewCell.h */,
+				8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,6 +572,7 @@
 				8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */,
 				8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */,
 				8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */,
+				8DFE946F1CEEB0DA00A63DC9 /* LTThumbnailMediasModel.m in Sources */,
 				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
@@ -565,8 +581,10 @@
 				8D0146371CEAD39F00FB4220 /* LTSearchBar.m in Sources */,
 				8D5AFE091CE2C1E8007C6E6C /* LTBaseViewController.m in Sources */,
 				8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */,
+				8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */,
 				8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */,
 				8DBE60CB1CE34C71007F2D1F /* LTCommunityViewController.m in Sources */,
+				8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */,
 				8D01465F1CEB0CC500FB4220 /* LTUISearchBar+LTSetSearchBar.m in Sources */,
 				8DBE60C81CE34C55007F2D1F /* LTHotNewsViewController.m in Sources */,
 				8D00D72A1CEB6AF0003B6ECC /* LTCategoryDetailViewController.m in Sources */,

@@ -20,6 +20,8 @@
 
 -(void)dealloc
 {
+    _categoryDetailTableView.delegate = nil;
+    _categoryDetailTableView.dataSource = nil;
     [_categoryDetailTableView release];
     [_categoryDetailDataSourceArray release];
     [_model release];
