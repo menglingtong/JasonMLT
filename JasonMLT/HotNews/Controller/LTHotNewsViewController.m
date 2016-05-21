@@ -12,10 +12,13 @@
 
 #import "LTHotModel.h"
 
-
 #import "LTNetTool.h"
 
+#import <MJRefresh.h>
+
 @interface LTHotNewsViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, copy) NSString *url;
 
 @end
 
@@ -35,7 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self askForData:@"http://api.irecommend.ifeng.com/read.php?uid=864260027969516"];
+    self.url = @"http://api.irecommend.ifeng.com/read.php?uid=864260027969516";
+    
+    [self askForData:self.url Action:@"pullUp"];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -65,16 +70,32 @@
     // 注册cell
     [self.hotTableView registerClass:[LTHotTableViewCell class] forCellReuseIdentifier:@"hotCell"];
     [self.hotTableView registerClass:[LTHotTrebleImageCell class] forCellReuseIdentifier:@"hotTrebleImageCell"];
+    
+    
+    // 下拉刷新
+    self.hotTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self askForData:self.url Action:@"pullDown"];
+        
+    }];
+    
+    // 上拉加载
+    self.hotTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self askForData:self.url Action:@"pullUp"];
+        
+    }];
+    
+    
 }
 
 #pragma mark -
 #pragma mark 请求数据
--(void)askForData:(NSString *)urlStr
+-(void)askForData:(NSString *)urlString Action:(NSString *)action
 {
-    
-    
+
     // 调用网络请求方法开始请求数据
-    [LTNetTool GetNetWithUrl:urlStr body:nil header:nil response:LTJSON success:^(id result) {
+    [LTNetTool GetNetWithUrl:urlString body:nil header:nil response:LTJSON success:^(id result) {
         
         NSArray *tempArr = [result objectForKey:@"item"];
         
@@ -82,11 +103,31 @@
             
             LTHotModel *model = [[LTHotModel alloc] initWithDic:tempDic];
             
-            [self.hotDataSourceArray addObject:model];
+            if ([action isEqualToString:@"pullDown"]) {
+                
+                // 下拉刷新时,把新请求的数据放到数组最前面
+                [self.hotDataSourceArray insertObject:model atIndex:0];
+                
+            }
+            else if ([action isEqualToString:@"pullUp"])
+            {
+                
+                // 上拉加载时,把新请求的数据放到数组最后面
+                [self.hotDataSourceArray addObject:model];
+                
+            }
+            
+            
             [model release];
             
         }
-        NSLog(@"%@", result);
+        
+//        self.hotDataSourceArray = [[self.hotDataSourceArray reverseObjectEnumerator] allObjects];
+        
+        [self.hotTableView.mj_header endRefreshing];
+        
+        [self.hotTableView.mj_footer endRefreshing];
+        
         [self.hotTableView reloadData];
         
     } failure:^(NSError *error) {

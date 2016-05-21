@@ -16,7 +16,21 @@
 
 #import <FMDB.h>
 
+#import "LTNetTool.h"
+
+#import "LTScrollModel.h"
+
+#import <MJRefresh.h>
+
+#import <UIImageView+WebCache.h>
+
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+/** 掉下来的封面图链接 */
+@property (nonatomic, copy) NSString *fontImageStr;
+
+/** 掉下来的图片 */
+@property (nonatomic, retain) UIImageView *frontImage;
 
 @end
 
@@ -24,6 +38,8 @@
 
 -(void)dealloc
 {
+    [_frontImage release];
+    
     [_mainMenuDataSourceArray release];
     
     [_mainMenuWillDeleteDictionary release];
@@ -147,10 +163,12 @@
 {
     [super loadView];
     
-    NSArray *arr = @[@"1", @"2", @"3", @"4", @"5", @"6"];
     
     // 初始化滚动视图数据源数组
-    self.scrollViewDataSource = [NSMutableArray arrayWithArray:arr];
+    self.scrollViewDataSource = [[NSMutableArray alloc] init];
+    
+    // 调用请求方法,请求滚动视图数据
+    [self askForScrollImageData];
     
     // 设置导航左侧按钮
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedUserSetLeftButton:)] autorelease];
@@ -158,15 +176,130 @@
     // 设置导航右侧按钮
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedAddCategoryButton:)] autorelease];
     
-    // 初始化自定义滚动视图
-    self.scrollImage = [[LTScrollImage alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (211 / 375.0) * self.view.frame.size.width) dataSource:self.scrollViewDataSource time:6 isCirculatory:YES isHasText:YES];
-    
     
     // 调用方法初始化主菜单集合视图
     [self createMainMenuCollectionView];
     
+    self.mainMenuCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self askForFronImagePage];
+        
+        
+    }];
     
     
+}
+
+#pragma mark 请求掉下来的图片
+- (void) askForFronImagePage
+{
+    
+    NSString *frontImageApiUrl = @"http://iphone.myzaker.com/zaker/cover.php?_appid=iphone&_bsize=750_1334&_dev=iPhone%2C9.3.1&_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&_lat=0.000000&_lng=0.000000&_mac=02%3A00%3A00%3A00%3A00%3A00&_net=wifi&_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&_uid=&_utoken=&_v=6.5.2&_version=6.54&api_version=3.4";
+    
+    
+    [LTNetTool GetNetWithUrl:frontImageApiUrl body:nil header:nil response:LTJSON success:^(id result) {
+        
+        self.fontImageStr = [[result objectForKey:@"data"] objectForKey:@"pic"];
+        
+        NSURL *url = [NSURL URLWithString:self.fontImageStr];
+        
+        self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight)];
+        
+        // 打开交互
+        self.frontImage.userInteractionEnabled = YES;
+        
+        // 创建一个轻扫手势
+        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFontImageBack)];
+        
+        // 设置清扫手势向上
+        swipe.direction = UISwipeGestureRecognizerDirectionUp;
+        
+        [self.frontImage addGestureRecognizer:swipe];
+        [swipe release];
+        
+        [self.frontImage sd_setImageWithURL:url];
+        
+        [self.view addSubview:_frontImage];
+        [_frontImage release];
+        
+        
+        [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+    
+            [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
+    
+                self.frontImage.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    
+            }];
+    
+    
+        } completion:^(BOOL finished) {
+            
+            
+            
+        }];
+        
+        
+        
+        
+        [self.mainMenuCollectionView.mj_header endRefreshing];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+}
+
+#pragma mark 将掉下来的图片送回去
+- (void) swipeFontImageBack
+{
+    
+    [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+        
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
+            
+            self.frontImage.frame = CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight);
+            
+        }];
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+        
+    }];
+    
+}
+
+#pragma mark 请求滚动视图数据
+- (void) askForScrollImageData
+{
+    
+    NSString *scrollUrl = @"http://iphone.myzaker.com/zaker/follow_promote.php?_appid=iphone&_bsize=750_1334&_dev=iPhone%2C9.3.1&_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&_lat=0.000000&_lng=0.000000&_mac=02%3A00%3A00%3A00%3A00%3A00&_net=wifi&_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&_uid=&_utoken=&_v=6.5.2&_version=6.54&m=1462848242";
+    
+    
+    [LTNetTool GetNetWithUrl:scrollUrl body:nil header:nil response:LTJSON success:^(id result) {
+        
+        NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"list"];
+        
+        for (NSDictionary *dic in arr) {
+            
+            LTScrollModel *model = [[LTScrollModel alloc] initWithDic:dic];
+            
+            [self.scrollViewDataSource addObject:model];
+            [model release];
+            
+        }
+        
+        // 初始化自定义滚动视图
+        self.scrollImage = [[LTScrollImage alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (211 / 375.0) * self.view.frame.size.width) dataSource:self.scrollViewDataSource time:6 isCirculatory:YES isHasText:YES];
+        
+        [self.mainMenuCollectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
     
 }
 

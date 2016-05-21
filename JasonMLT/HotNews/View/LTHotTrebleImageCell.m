@@ -7,6 +7,7 @@
 //
 
 #import "LTHotTrebleImageCell.h"
+#import <UIImageView+WebCache.h>
 
 @implementation LTHotTrebleImageCell
 
@@ -178,7 +179,7 @@
     }];
     
     
-    self.leftImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
+//    self.leftImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
     
     // 布局右上
     [self.rightTopImageView makeConstraints:^(MASConstraintMaker *make) {
@@ -194,7 +195,7 @@
     }];
     
     
-    self.rightTopImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
+//    self.rightTopImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
     
     // 布局右下
     [self.rightBottomImageView makeConstraints:^(MASConstraintMaker *make) {
@@ -209,7 +210,7 @@
         
     }];
     
-    self.rightBottomImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
+//    self.rightBottomImageView.backgroundColor = [UIColor colorWithRed:0.53 green:0.85 blue:0.45 alpha:1.00];
     
     
     
@@ -233,7 +234,7 @@
     // 布局 dateLabel
     [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.autherNameLabel.right).offset(20);
+        make.right.equalTo(self.contentView).offset(-20);
         
         make.top.equalTo(self.leftImageView.bottom).offset(9);
         
@@ -297,7 +298,25 @@
         
         self.autherNameLabel.text = model.source;
         
+        self.hotStyleModel = [self.model.styleArray firstObject];
         
+        // 将左侧图片链接取出转成NSURL类型
+        NSURL *leftUrl = [NSURL URLWithString:[self.hotStyleModel.images firstObject]];
+        
+        // 为左侧图片赋值
+        [self.leftImageView sd_setImageWithURL:leftUrl placeholderImage:[UIImage imageNamed:@"placehoderYellow"]];
+        
+        // 将右上图片链接取出转成NSURL类型
+        NSURL *rightTopUrl = [NSURL URLWithString:[self.hotStyleModel.images objectAtIndex:1]];
+        
+        // 为右上图片赋值
+        [self.rightTopImageView sd_setImageWithURL:rightTopUrl placeholderImage:[UIImage imageNamed:@"placehoderYellow"]];
+        
+        // 将右下图片链接取出转成NSURL类型
+        NSURL *rightBottomUrl = [NSURL URLWithString:[self.hotStyleModel.images objectAtIndex:2]];
+        
+        // 为右下图片赋值
+        [self.rightBottomImageView sd_setImageWithURL:rightBottomUrl placeholderImage:[UIImage imageNamed:@"placehoderYellow"]];
         
     }
     

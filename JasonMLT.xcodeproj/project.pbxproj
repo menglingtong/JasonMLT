@@ -18,6 +18,7 @@
 		8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D06230B1CE4A75100507E69 /* LTPageControl.m */; };
 		8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D069F351CE4173A00B29D25 /* LTScrollImage.m */; };
 		8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */; };
+		8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */; };
 		8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDED1CE2BFA3007C6E6C /* main.m */; };
 		8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDF01CE2BFA3007C6E6C /* AppDelegate.m */; };
 		8D5AFDF41CE2BFA3007C6E6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDF31CE2BFA3007C6E6C /* ViewController.m */; };
@@ -68,6 +69,8 @@
 		8D069F351CE4173A00B29D25 /* LTScrollImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollImage.m; sourceTree = "<group>"; };
 		8D118D421CE726FE00FBAF9C /* LTMainMenuCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainMenuCollectionCell.h; sourceTree = "<group>"; };
 		8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainMenuCollectionCell.m; sourceTree = "<group>"; };
+		8D223D481CEFFF3C0000B2EB /* LTScrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollModel.h; sourceTree = "<group>"; };
+		8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollModel.m; sourceTree = "<group>"; };
 		8D5AFDE91CE2BFA3007C6E6C /* JasonMLT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JasonMLT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5AFDED1CE2BFA3007C6E6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D5AFDEF1CE2BFA3007C6E6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				8D5AFE181CE2C3AA007C6E6C /* LTMainModel.m */,
 				8D0146601CEB3DE300FB4220 /* LTCategoryModel.h */,
 				8D0146611CEB3DE300FB4220 /* LTCategoryModel.m */,
+				8D223D481CEFFF3C0000B2EB /* LTScrollModel.h */,
+				8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 				8D5AFE0F1CE2C21E007C6E6C /* LTBaseView.m in Sources */,
 				8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */,
 				8D5AFE1C1CE2C3C7007C6E6C /* LTMainView.m in Sources */,
+				8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

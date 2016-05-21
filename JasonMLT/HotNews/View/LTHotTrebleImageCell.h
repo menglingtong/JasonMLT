@@ -30,6 +30,9 @@
 /** hot news model */
 @property (nonatomic, retain) LTHotModel *model;
 
+/** hot style model */
+@property (nonatomic, retain) LTHotStyleModel *hotStyleModel;
+
 /** 文章来源 */
 @property (nonatomic, retain) UILabel *autherNameLabel;
 

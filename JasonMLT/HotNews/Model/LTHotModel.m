@@ -10,12 +10,20 @@
 
 @implementation LTHotModel
 
+-(void)dealloc
+{
+    [_styleArray release];
+    [super dealloc];
+}
+
 -(instancetype)initWithDic:(NSDictionary *)dic
 {
     
     self = [super initWithDic:dic];
     
     if (self) {
+        
+        self.styleArray = [[NSMutableArray alloc] init];
         
         LTHotStyleModel *model = [[LTHotStyleModel alloc] initWithDic:self.style];
         

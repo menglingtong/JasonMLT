@@ -9,6 +9,8 @@
 #import "LTScrollImage.h"
 #import <UIImageView+WebCache.h>
 
+#import "LTScrollModel.h"
+
 
 @implementation LTScrollImage 
 
@@ -55,11 +57,11 @@
         [self addSubview:_scrollImageView];
         [_scrollImageView release];
         
+        
     }
     
     return self;
 }
-
 
 #pragma mark 设置滚动视图具体细节
 /**
@@ -123,8 +125,9 @@
             
         }
         
+        LTScrollModel *model = [self.scrollImageDataSource objectAtIndex:i];
         // 获取数组中的图片网络地址,并转换成NSURL类型
-        NSURL *url = [NSURL URLWithString:[self.scrollImageDataSource objectAtIndex:i]];
+        NSURL *url = [NSURL URLWithString:model.promotion_img];
         
         // 使用SDWebImage 将图片请求到本地并放置到imageview上
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderScroll"]];
@@ -141,7 +144,9 @@
         // 在第一个位置添加尾图
         UIImageView *first = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
-        NSURL *FirstUrl = [NSURL URLWithString:[self.scrollImageDataSource lastObject]];
+        LTScrollModel *model = [self.scrollImageDataSource lastObject];
+        
+        NSURL *FirstUrl = [NSURL URLWithString:model.promotion_img];
         
         [first sd_setImageWithURL:FirstUrl placeholderImage:[UIImage imageNamed:@"placeholderScroll"]];
         
@@ -153,7 +158,9 @@
         // 在最后一个位置添加首图
         UIImageView *last = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width * (self.numOfImage - 1), 0, frame.size.width, frame.size.height)];
         
-        NSURL *LastUrl = [NSURL URLWithString:[self.scrollImageDataSource lastObject]];
+        LTScrollModel *model2 = [self.scrollImageDataSource firstObject];
+        
+        NSURL *LastUrl = [NSURL URLWithString:model2.promotion_img];
         
         [last sd_setImageWithURL:LastUrl placeholderImage:[UIImage imageNamed:@"placeholderScroll"]];
         
@@ -178,17 +185,6 @@
     
     self.pageControl = [[LTPageControl alloc] initWithFrame:CGRectMake(140, 200, 100, 30) pageStyle:LTPageControlStyleSquare imageArray:nil];
     
-//    [self.pageControl makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.equalTo(self).offset(100);
-//        
-//        make.right.equalTo(self).offset(-100);
-//        
-//        make.bottom.equalTo(self).offset(-20);
-//        
-//        make.height.equalTo(10);
-//        
-//    }];
     
     self.pageControl.pageCount = self.scrollImageDataSource.count;
     
@@ -196,9 +192,12 @@
     
     self.pageControl.selectedColor = [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00];
     
+    self.pageControl.layer.contentsCenter = self.scrollImageView.layer.contentsCenter;
+    
     [self addSubview:_pageControl];
     [_pageControl release];
     
+    [self.scrollImageView bringSubviewToFront:_pageControl];
     
 }
 
@@ -206,9 +205,10 @@
 #pragma mark 播放滚动图片
 - (void) setTimerCirculatory
 {
+    // 设置一个currentPage属性 记录当前第几张图片
     self.currentPage += 1;
     
-    
+    // 判断,当前的图片不是最后一张图
     if (self.currentPage != self.scrollImageDataSource.count + 1) {
         
         self.pageControl.currentPage = self.currentPage - 1;
