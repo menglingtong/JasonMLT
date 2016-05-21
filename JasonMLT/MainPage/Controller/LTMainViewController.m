@@ -219,7 +219,7 @@
         
         [self.frontImage sd_setImageWithURL:url];
         
-        [self.view addSubview:_frontImage];
+        [self.tabBarController.view addSubview:_frontImage];
         [_frontImage release];
         
         

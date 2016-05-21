@@ -19,6 +19,17 @@
 		8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D069F351CE4173A00B29D25 /* LTScrollImage.m */; };
 		8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */; };
 		8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */; };
+		8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D4C1CF049F30000B2EB /* LTPlayCell.m */; };
+		8D223D501CF060670000B2EB /* LTPlayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D4F1CF060670000B2EB /* LTPlayModel.m */; };
+		8D223D531CF069420000B2EB /* LTArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D521CF069420000B2EB /* LTArticleModel.m */; };
+		8D223D561CF069640000B2EB /* LTPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D551CF069640000B2EB /* LTPicModel.m */; };
+		8D223D591CF06E8A0000B2EB /* LTSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D581CF06E8A0000B2EB /* LTSectionModel.m */; };
+		8D223D5C1CF082CC0000B2EB /* LTBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D5B1CF082CC0000B2EB /* LTBannerModel.m */; };
+		8D223D5F1CF085170000B2EB /* LTPlayScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D5E1CF085170000B2EB /* LTPlayScrollModel.m */; };
+		8D223D621CF085D20000B2EB /* LTScrollWebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D611CF085D20000B2EB /* LTScrollWebModel.m */; };
+		8D223D651CF090D00000B2EB /* LTTwoDisplayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D641CF090D00000B2EB /* LTTwoDisplayModel.m */; };
+		8D223D681CF092160000B2EB /* LTDisplayPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D671CF092160000B2EB /* LTDisplayPicModel.m */; };
+		8D223D6B1CF0926B0000B2EB /* LTDisplayWebModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D6A1CF0926B0000B2EB /* LTDisplayWebModel.m */; };
 		8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDED1CE2BFA3007C6E6C /* main.m */; };
 		8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDF01CE2BFA3007C6E6C /* AppDelegate.m */; };
 		8D5AFDF41CE2BFA3007C6E6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5AFDF31CE2BFA3007C6E6C /* ViewController.m */; };
@@ -71,6 +82,28 @@
 		8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainMenuCollectionCell.m; sourceTree = "<group>"; };
 		8D223D481CEFFF3C0000B2EB /* LTScrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollModel.h; sourceTree = "<group>"; };
 		8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollModel.m; sourceTree = "<group>"; };
+		8D223D4B1CF049F30000B2EB /* LTPlayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTPlayCell.h; sourceTree = "<group>"; };
+		8D223D4C1CF049F30000B2EB /* LTPlayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayCell.m; sourceTree = "<group>"; };
+		8D223D4E1CF060670000B2EB /* LTPlayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTPlayModel.h; sourceTree = "<group>"; };
+		8D223D4F1CF060670000B2EB /* LTPlayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayModel.m; sourceTree = "<group>"; };
+		8D223D511CF069420000B2EB /* LTArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTArticleModel.h; sourceTree = "<group>"; };
+		8D223D521CF069420000B2EB /* LTArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTArticleModel.m; sourceTree = "<group>"; };
+		8D223D541CF069640000B2EB /* LTPicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTPicModel.h; sourceTree = "<group>"; };
+		8D223D551CF069640000B2EB /* LTPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPicModel.m; sourceTree = "<group>"; };
+		8D223D571CF06E8A0000B2EB /* LTSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSectionModel.h; sourceTree = "<group>"; };
+		8D223D581CF06E8A0000B2EB /* LTSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSectionModel.m; sourceTree = "<group>"; };
+		8D223D5A1CF082CC0000B2EB /* LTBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTBannerModel.h; sourceTree = "<group>"; };
+		8D223D5B1CF082CC0000B2EB /* LTBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTBannerModel.m; sourceTree = "<group>"; };
+		8D223D5D1CF085170000B2EB /* LTPlayScrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTPlayScrollModel.h; sourceTree = "<group>"; };
+		8D223D5E1CF085170000B2EB /* LTPlayScrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayScrollModel.m; sourceTree = "<group>"; };
+		8D223D601CF085D20000B2EB /* LTScrollWebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollWebModel.h; sourceTree = "<group>"; };
+		8D223D611CF085D20000B2EB /* LTScrollWebModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollWebModel.m; sourceTree = "<group>"; };
+		8D223D631CF090D00000B2EB /* LTTwoDisplayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTwoDisplayModel.h; sourceTree = "<group>"; };
+		8D223D641CF090D00000B2EB /* LTTwoDisplayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTwoDisplayModel.m; sourceTree = "<group>"; };
+		8D223D661CF092160000B2EB /* LTDisplayPicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTDisplayPicModel.h; sourceTree = "<group>"; };
+		8D223D671CF092160000B2EB /* LTDisplayPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTDisplayPicModel.m; sourceTree = "<group>"; };
+		8D223D691CF0926B0000B2EB /* LTDisplayWebModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTDisplayWebModel.h; sourceTree = "<group>"; };
+		8D223D6A1CF0926B0000B2EB /* LTDisplayWebModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTDisplayWebModel.m; sourceTree = "<group>"; };
 		8D5AFDE91CE2BFA3007C6E6C /* JasonMLT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JasonMLT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5AFDED1CE2BFA3007C6E6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D5AFDEF1CE2BFA3007C6E6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -405,6 +438,26 @@
 		8DBE60C01CE34BF1007F2D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D223D571CF06E8A0000B2EB /* LTSectionModel.h */,
+				8D223D581CF06E8A0000B2EB /* LTSectionModel.m */,
+				8D223D5A1CF082CC0000B2EB /* LTBannerModel.h */,
+				8D223D5B1CF082CC0000B2EB /* LTBannerModel.m */,
+				8D223D4E1CF060670000B2EB /* LTPlayModel.h */,
+				8D223D4F1CF060670000B2EB /* LTPlayModel.m */,
+				8D223D511CF069420000B2EB /* LTArticleModel.h */,
+				8D223D521CF069420000B2EB /* LTArticleModel.m */,
+				8D223D541CF069640000B2EB /* LTPicModel.h */,
+				8D223D551CF069640000B2EB /* LTPicModel.m */,
+				8D223D5D1CF085170000B2EB /* LTPlayScrollModel.h */,
+				8D223D5E1CF085170000B2EB /* LTPlayScrollModel.m */,
+				8D223D601CF085D20000B2EB /* LTScrollWebModel.h */,
+				8D223D611CF085D20000B2EB /* LTScrollWebModel.m */,
+				8D223D631CF090D00000B2EB /* LTTwoDisplayModel.h */,
+				8D223D641CF090D00000B2EB /* LTTwoDisplayModel.m */,
+				8D223D661CF092160000B2EB /* LTDisplayPicModel.h */,
+				8D223D671CF092160000B2EB /* LTDisplayPicModel.m */,
+				8D223D691CF0926B0000B2EB /* LTDisplayWebModel.h */,
+				8D223D6A1CF0926B0000B2EB /* LTDisplayWebModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,6 +465,8 @@
 		8DBE60C11CE34BF1007F2D1F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D223D4B1CF049F30000B2EB /* LTPlayCell.h */,
+				8D223D4C1CF049F30000B2EB /* LTPlayCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -586,6 +641,8 @@
 				8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */,
 				8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */,
 				8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */,
+				8D223D531CF069420000B2EB /* LTArticleModel.m in Sources */,
+				8D223D591CF06E8A0000B2EB /* LTSectionModel.m in Sources */,
 				8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */,
 				8DFE94B61CEEF1BE00A63DC9 /* LTHotStyleModel.m in Sources */,
 				8DFE94B91CEEF60900A63DC9 /* LTHotLinkModel.m in Sources */,
@@ -593,12 +650,17 @@
 				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
+				8D223D6B1CF0926B0000B2EB /* LTDisplayWebModel.m in Sources */,
+				8D223D501CF060670000B2EB /* LTPlayModel.m in Sources */,
 				8D5AFE161CE2C38B007C6E6C /* LTMainViewController.m in Sources */,
+				8D223D651CF090D00000B2EB /* LTTwoDisplayModel.m in Sources */,
 				8D5AFE0C1CE2C20B007C6E6C /* LTBaseModel.m in Sources */,
 				8D0146371CEAD39F00FB4220 /* LTSearchBar.m in Sources */,
 				8D5AFE091CE2C1E8007C6E6C /* LTBaseViewController.m in Sources */,
+				8D223D5C1CF082CC0000B2EB /* LTBannerModel.m in Sources */,
 				8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */,
 				8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */,
+				8D223D621CF085D20000B2EB /* LTScrollWebModel.m in Sources */,
 				8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */,
 				8DBE60CB1CE34C71007F2D1F /* LTCommunityViewController.m in Sources */,
 				8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */,
@@ -607,10 +669,14 @@
 				8D00D72A1CEB6AF0003B6ECC /* LTCategoryDetailViewController.m in Sources */,
 				8D5AFE191CE2C3AA007C6E6C /* LTMainModel.m in Sources */,
 				8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */,
+				8D223D681CF092160000B2EB /* LTDisplayPicModel.m in Sources */,
 				8D5AFE351CE2CD13007C6E6C /* LTNetTool.m in Sources */,
 				8D0146621CEB3DE300FB4220 /* LTCategoryModel.m in Sources */,
 				8D5AFE0F1CE2C21E007C6E6C /* LTBaseView.m in Sources */,
 				8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */,
+				8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */,
+				8D223D5F1CF085170000B2EB /* LTPlayScrollModel.m in Sources */,
+				8D223D561CF069640000B2EB /* LTPicModel.m in Sources */,
 				8D5AFE1C1CE2C3C7007C6E6C /* LTMainView.m in Sources */,
 				8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */,
 			);
