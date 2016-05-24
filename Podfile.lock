@@ -19,6 +19,8 @@ PODS:
   - FMDB/standard (2.6.2)
   - Masonry (1.0.0)
   - MJRefresh (3.1.0)
+  - SDCycleScrollView (1.64):
+    - SDWebImage (~> 3.7)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
@@ -28,6 +30,7 @@ DEPENDENCIES:
   - FMDB
   - Masonry
   - MJRefresh
+  - SDCycleScrollView (~> 1.64)
   - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
@@ -35,6 +38,7 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
 COCOAPODS: 0.39.0

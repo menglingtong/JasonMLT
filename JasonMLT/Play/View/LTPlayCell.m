@@ -9,6 +9,10 @@
 #import "LTPlayCell.h"
 #import "LTBaseView.h"
 
+#import "LTPicModel.h"
+
+#import <UIImageView+WebCache.h>
+
 @implementation LTPlayCell
 
 -(void)dealloc
@@ -17,6 +21,7 @@
     [_LTImageView release];
     [_LTcontentLabel release];
     [_grayView release];
+    [_indexPath release];
     [super dealloc];
 }
 
@@ -49,6 +54,8 @@
         
         [self.contentView addSubview:_LTcontentLabel];
         [_LTcontentLabel release];
+        
+        
         
     }
     
@@ -99,6 +106,7 @@
     }];
     
     self.LTtitleLabel.textAlignment = 1;
+    self.LTtitleLabel.textColor = [UIColor whiteColor];
     
     [self.LTcontentLabel makeConstraints:^(MASConstraintMaker *make) {
         
@@ -110,11 +118,37 @@
     }];
     
     self.LTcontentLabel.textAlignment = 1;
+    self.LTcontentLabel.textColor = [UIColor whiteColor];
+    [self.LTcontentLabel setFont:[UIFont systemFontOfSize:12]];
     
     
     
     
 }
+
+#pragma mark 重写model的set方法
+-(void)setModel:(LTPlayModel *)model
+{
+    if (_model != model) {
+        
+        [_model release];
+        
+        _model = [model retain];
+        
+        
+        self.LTtitleLabel.text = model.title;
+        
+        self.LTcontentLabel.text = model.content;
+        
+        LTPicModel *picModel = [model.picModelArray firstObject];
+        
+        [self.LTImageView sd_setImageWithURL:[NSURL URLWithString:picModel.url] placeholderImage:[UIImage imageNamed:@"placehoderYellow"]];
+        
+    }
+}
+
+
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

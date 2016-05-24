@@ -28,4 +28,8 @@
 /** 当前cell的排序 */
 @property (nonatomic, assign) NSInteger indexPathOfItem;
 
+/** pic */
+@property (nonatomic, retain) UIImageView *LTImageView;
+
+
 @end

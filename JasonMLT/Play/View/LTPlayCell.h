@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LTPlayModel.h"
 
 @interface LTPlayCell : UITableViewCell
 
@@ -21,5 +22,11 @@
 
 /** 玩乐的content 小字 */
 @property (nonatomic, retain) UILabel *LTcontentLabel;
+
+/** 记录当前cell的排序 */
+@property (nonatomic, retain) NSIndexPath *indexPath;
+
+/** 赋值用的model */
+@property (nonatomic, retain) LTPlayModel *model;
 
 @end

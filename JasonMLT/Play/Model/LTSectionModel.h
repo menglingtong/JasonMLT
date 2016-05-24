@@ -12,6 +12,7 @@
 
 @interface LTSectionModel : LTBaseModel
 
+/** section title */
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, retain) NSArray *items;

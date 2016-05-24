@@ -53,5 +53,9 @@
 /** 自定义滚动视图 */
 @property (nonatomic, retain) LTScrollImage *scrollImage;
 
+@property (nonatomic, retain) NSArray *imageClassArray;
+
+@property (nonatomic, retain) NSArray *tableClassArray;
+
 
 @end

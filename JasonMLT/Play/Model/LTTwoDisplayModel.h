@@ -13,7 +13,11 @@
 /** 滚动视图下面两个展示的图片 */
 @property (nonatomic, retain) NSDictionary *pic;
 
+@property (nonatomic, retain) NSMutableArray *picModelArray;
+
 /** 滚动视图下面两个展示的跳转链接 */
 @property (nonatomic, retain) NSDictionary *block_info;
+
+@property (nonatomic, retain) NSMutableArray *webModelArray;
 
 @end

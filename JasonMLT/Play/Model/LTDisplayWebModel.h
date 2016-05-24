@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *title;
 
+/** 滚动视图下面两个展示的跳转链接 */
 @property (nonatomic, copy) NSString *api_url;
 
 @end

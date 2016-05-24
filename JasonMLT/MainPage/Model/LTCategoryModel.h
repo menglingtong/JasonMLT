@@ -25,4 +25,10 @@
 /** 父类名字 */
 @property (nonatomic, copy) NSString *parentTitle;
 
+/** 图片名 */
+@property (nonatomic, copy) NSString *pic;
+
+/** 十六进制颜色 */
+@property (nonatomic, copy) NSString *color;
+
 @end

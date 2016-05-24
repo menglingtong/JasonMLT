@@ -23,6 +23,8 @@
     [_borderRight release];
     [_borderBottom release];
     
+    [_LTImageView release];
+    
     [super dealloc];
 }
 
@@ -31,10 +33,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.LTImageView = [[UIImageView alloc] init];
+        
+        [self.contentView addSubview:_LTImageView];
+        [_LTImageView release];
+        
         self.isEditImage = [[UIImageView alloc] init];
         
         [self.contentView addSubview:_isEditImage];
         [_isEditImage release];
+        
+        
         
         
         // 菜单名字label的初始化
@@ -59,6 +68,16 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    [self.LTImageView makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(self.contentView).offset(0);
+        make.left.equalTo(self.contentView).offset(0);
+        make.right.equalTo(self.contentView).offset(0);
+        make.bottom.equalTo(self.contentView).offset(0);
+        
+        
+    }];
     
     // 为编辑模式下右上角的图标布局
     [self.isEditImage makeConstraints:^(MASConstraintMaker *make) {

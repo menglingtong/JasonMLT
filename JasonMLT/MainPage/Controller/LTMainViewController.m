@@ -24,6 +24,9 @@
 
 #import <UIImageView+WebCache.h>
 
+#import "LTMainPicCategoryViewController.h"
+
+
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 /** 掉下来的封面图链接 */
@@ -88,7 +91,7 @@
             // 创建栏目表 - 栏目ID(主键) - 栏目名称 -
             NSString *createCategorySql = @"create table if not exists category(cateID integer primary key autoincrement, categoryTitle varchar(225) not null)";
             
-            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null, is_Selected integer not null, indexPath integer not null)";
+            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null, is_Selected integer not null, indexPath integer not null, pic varchar(225) not null, color varchar(225) not null)";
             
             // 执行创建语句
             [db executeUpdate:createCategorySql];
@@ -120,14 +123,14 @@
                         
                         
                         // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 0, 1000];
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 0, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
                         
                         [db executeUpdate:insertDetailCategorySql];
                     }
                     else
                     {
                         // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目", 0, 1000];
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目", 0, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
                         
                         [db executeUpdate:insertDetailCategorySql];
                         
@@ -135,7 +138,7 @@
                         
                         for (NSDictionary *dict in supCategory) {
                             
-                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath) values('%@', '%@', '%@', %d, %d)", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"], 0, 1000];
+                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"], 0, 1000, @"图片", @"颜色"];
                             
                             [db executeUpdate:insertSubCategorySql];
                         }
@@ -163,6 +166,9 @@
 {
     [super loadView];
     
+    
+    self.imageClassArray = @[@"美女",@"妹子图", @"摄影札记", @"图片"];
+    self.tableClassArray = @[@"今日看点", @"冷兔", @"爆笑日常", @"蝉游记", @"Feekr旅行", @"旅游频道", @"汽车频道", @"时尚频道", @"", @"奢饰品频道", @"股票频道", @"财经新闻", @"科学频道", @"IT之家", @"网易娱乐"];
     
     // 初始化滚动视图数据源数组
     self.scrollViewDataSource = [[NSMutableArray alloc] init];
@@ -347,8 +353,6 @@
     
     // 初始化编辑模式为假
     self.isEditing = NO;
-    
-    
     
     // 初始化删除数组
     self.mainMenuWillDeleteDictionary = [[NSMutableDictionary alloc] init];
@@ -960,6 +964,21 @@
         
         LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
         
+        NSString *picName = [NSString stringWithFormat:@"%@", model.pic];
+        
+        UIImage *img = [[UIImage imageNamed:picName] imageWithRenderingMode:2];
+        
+        cell.LTImageView.image = img;
+        
+        cell.LTImageView.backgroundColor = [UIColor whiteColor];
+        
+        NSString *str = [NSString stringWithFormat:@"0x%@", model.color];
+        
+        cell.LTImageView.tintColor = UIColorFromRGBA((NSInteger)str, 0.75);
+        
+        cell.LTImageView.clipsToBounds = YES;
+        
+        
         cell.menuNameLabel.text = model.title;
         
         // 标识当前cell的排序
@@ -1006,7 +1025,7 @@
 {
     if (collectionView == self.mainMenuCollectionView) {
         
-        LTMainMenuCollectionCell *cell = [self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
+        LTMainMenuCollectionCell *cell = (LTMainMenuCollectionCell *)[self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
         
         if (_isEditing && cell.isSelected == NO) {
             
@@ -1032,6 +1051,32 @@
             [self.mainMenuWillDeleteDictionary removeObjectForKey:cell.menuNameLabel.text];
             
             [self.mainMenuWillDeleteArray removeObject:indexPath];
+            
+        }
+        else if (_isEditing == NO)
+        {
+            
+            if ([self.imageClassArray containsObject:cell.menuNameLabel.text]) {
+                
+                LTMainPicCategoryViewController *picVC = [[LTMainPicCategoryViewController alloc] init];
+                
+                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+                
+                picVC.url = model.api_url;
+                
+                picVC.categoryName = model.title;
+                
+                [self.navigationController pushViewController:picVC animated:YES];
+                
+            }
+            else if ([self.tableClassArray containsObject:cell.menuNameLabel.text])
+            {
+                NSLog(@"哈哈哈");
+            }
+            
+            
+            
+            
             
         }
         

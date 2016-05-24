@@ -10,6 +10,7 @@
 
 @interface LTDisplayPicModel : LTBaseModel
 
+/** 滚动视图下面两个展示的图片 */
 @property (nonatomic, copy) NSString *m_url;
 
 @end
