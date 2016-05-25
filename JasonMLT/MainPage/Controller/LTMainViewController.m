@@ -26,6 +26,8 @@
 
 #import "LTMainPicCategoryViewController.h"
 
+#import "LTMainListCategoryViewController.h"
+
 
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -168,7 +170,7 @@
     
     
     self.imageClassArray = @[@"美女",@"妹子图", @"摄影札记", @"图片"];
-    self.tableClassArray = @[@"今日看点", @"冷兔", @"爆笑日常", @"蝉游记", @"Feekr旅行", @"旅游频道", @"汽车频道", @"时尚频道", @"", @"奢饰品频道", @"股票频道", @"财经新闻", @"科学频道", @"IT之家", @"网易娱乐"];
+    self.tableClassArray = @[@"今日看点", @"冷兔", @"爆笑日常", @"蝉游记", @"feekr旅行", @"旅游频道", @"汽车频道", @"时尚频道", @"", @"奢侈品频道", @"股票频道", @"财经新闻", @"科学频道", @"IT之家", @"网易娱乐"];
     
     // 初始化滚动视图数据源数组
     self.scrollViewDataSource = [[NSMutableArray alloc] init];
@@ -1027,6 +1029,7 @@
         
         LTMainMenuCollectionCell *cell = (LTMainMenuCollectionCell *)[self.mainMenuCollectionView cellForItemAtIndexPath:indexPath];
         
+        // 当前为编辑模式,并且判断cell未被选择,点击选择
         if (_isEditing && cell.isSelected == NO) {
             
             cell.isEditImage.image = [UIImage imageNamed:@"radio-activeGray"];
@@ -1041,6 +1044,7 @@
             
             
         }
+        // 当前为编辑模式,并且判断cell已被选择,点击取消选择
         else if (_isEditing && cell.isSelected)
         {
             
@@ -1048,11 +1052,13 @@
             
             cell.isSelected = NO;
             
+            // 点击将从即将删除的 字典 与 数组 中移除
             [self.mainMenuWillDeleteDictionary removeObjectForKey:cell.menuNameLabel.text];
             
             [self.mainMenuWillDeleteArray removeObject:indexPath];
             
         }
+        // 当前非编辑模式,点击跳转
         else if (_isEditing == NO)
         {
             
@@ -1071,12 +1077,60 @@
             }
             else if ([self.tableClassArray containsObject:cell.menuNameLabel.text])
             {
-                NSLog(@"哈哈哈");
+                
+                LTMainListCategoryViewController *listVC = [[LTMainListCategoryViewController alloc] init];
+                
+                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+                
+                if ([model.api_url isEqualToString:@"子栏目"]) {
+                    
+                    // 获取本地document路径
+                    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                    
+                    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+                    
+                    // 创建数据库路径
+                    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+                    
+                    if ([db open]) {
+                        
+                        NSString *str =[NSString stringWithFormat:@"select * from categoryDetail where parentTitle = '%@'", model.title];
+                        
+                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                        
+                        [db executeStatements:str withResultBlock:^int(NSDictionary *resultsDictionary) {
+                            
+                            LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
+                            
+                            [tempArray addObject:tempModel];
+                            [tempModel release];
+                            
+                            return 0;
+                        }];
+                        
+                        
+                        LTCategoryModel *m = [tempArray objectAtIndex:0];
+                        
+                        listVC.url = m.api_url;
+                        
+                        [self.navigationController pushViewController:listVC animated:YES];
+                    }
+                    
+                    
+                    
+                }
+                else
+                {
+                    
+                    listVC.url = model.api_url;
+                    
+                    listVC.categoryName = model.title;
+                    
+                    [self.navigationController pushViewController:listVC animated:YES];
+                }
+                
             }
-            
-            
-            
-            
+
             
         }
         

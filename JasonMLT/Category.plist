@@ -19,6 +19,18 @@
 				<key>title</key>
 				<string>今日看点</string>
 			</dict>
+			<dict>
+				<key>pic</key>
+				<string>ztpd</string>
+				<key>color</key>
+				<string>fda6ac</string>
+				<key>type</key>
+				<string>single</string>
+				<key>api_url</key>
+				<string>http://iphone.myzaker.com/zaker/topic_list_new.php?_appid=iphone&amp;_bsize=750_1334&amp;_dev=iPhone%2C9.3.1&amp;_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&amp;_lat=0.000000&amp;_lng=0.000000&amp;_mac=02%3A00%3A00%3A00%3A00%3A00&amp;_net=wifi&amp;_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&amp;_uid=&amp;_utoken=&amp;_v=6.5.2&amp;_version=6.54</string>
+				<key>title</key>
+				<string>专题频道</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>
@@ -320,7 +332,7 @@
 			</dict>
 			<dict>
 				<key>pic</key>
-				<string>itpd</string>
+				<string>itzj</string>
 				<key>color</key>
 				<string>3a3f5c</string>
 				<key>type</key>

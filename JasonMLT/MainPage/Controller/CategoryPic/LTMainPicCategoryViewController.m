@@ -55,6 +55,8 @@
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
     
+    self.mainTableView.showsVerticalScrollIndicator = NO;
+    
     self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:_mainTableView];

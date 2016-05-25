@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4E87891038EB620ABD0D21B6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE94AFF070950DADC80B236 /* libPods.a */; };
+		8D0086601CF4597A00D0902B /* LTMainListCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00865F1CF4597A00D0902B /* LTMainListCategoryCell.m */; };
+		8D0086631CF4728100D0902B /* LTListOnePicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0086621CF4728100D0902B /* LTListOnePicTableViewCell.m */; };
+		8D0086661CF4729800D0902B /* LTListNoPicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0086651CF4729800D0902B /* LTListNoPicTableViewCell.m */; };
 		8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D7261CEB5F4C003B6ECC /* LTCategoryTableViewCell.m */; };
 		8D00D72A1CEB6AF0003B6ECC /* LTCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D7291CEB6AF0003B6ECC /* LTCategoryDetailViewController.m */; };
 		8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D00D72C1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m */; };
@@ -49,6 +52,7 @@
 		8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */; };
 		8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */; };
 		8DFD69911CF34CF000B560F3 /* LTMainPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFD69901CF34CF000B560F3 /* LTMainPicModel.m */; };
+		8DFD69941CF3F2C200B560F3 /* LTMainListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFD69931CF3F2C200B560F3 /* LTMainListModel.m */; };
 		8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */; };
 		8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE946B1CEE19E100A63DC9 /* LTHotModel.m */; };
 		8DFE94B61CEEF1BE00A63DC9 /* LTHotStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94B51CEEF1BE00A63DC9 /* LTHotStyleModel.m */; };
@@ -67,6 +71,12 @@
 		3AE94AFF070950DADC80B236 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		70817FA5C6A5C47DB0F453DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8917DFA15828E5F7D43A73D6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8D00865E1CF4597A00D0902B /* LTMainListCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainListCategoryCell.h; sourceTree = "<group>"; };
+		8D00865F1CF4597A00D0902B /* LTMainListCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainListCategoryCell.m; sourceTree = "<group>"; };
+		8D0086611CF4728100D0902B /* LTListOnePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTListOnePicTableViewCell.h; sourceTree = "<group>"; };
+		8D0086621CF4728100D0902B /* LTListOnePicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTListOnePicTableViewCell.m; sourceTree = "<group>"; };
+		8D0086641CF4729800D0902B /* LTListNoPicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTListNoPicTableViewCell.h; sourceTree = "<group>"; };
+		8D0086651CF4729800D0902B /* LTListNoPicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTListNoPicTableViewCell.m; sourceTree = "<group>"; };
 		8D00D7251CEB5F4C003B6ECC /* LTCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryTableViewCell.h; sourceTree = "<group>"; };
 		8D00D7261CEB5F4C003B6ECC /* LTCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTCategoryTableViewCell.m; sourceTree = "<group>"; };
 		8D00D7281CEB6AF0003B6ECC /* LTCategoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTCategoryDetailViewController.h; sourceTree = "<group>"; };
@@ -146,6 +156,8 @@
 		8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUserSetViewController.m; sourceTree = "<group>"; };
 		8DFD698F1CF34CF000B560F3 /* LTMainPicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainPicModel.h; sourceTree = "<group>"; };
 		8DFD69901CF34CF000B560F3 /* LTMainPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainPicModel.m; sourceTree = "<group>"; };
+		8DFD69921CF3F2C200B560F3 /* LTMainListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainListModel.h; sourceTree = "<group>"; };
+		8DFD69931CF3F2C200B560F3 /* LTMainListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainListModel.m; sourceTree = "<group>"; };
 		8DFE94671CEE14EB00A63DC9 /* LTHotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotTableViewCell.h; sourceTree = "<group>"; };
 		8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHotTableViewCell.m; sourceTree = "<group>"; };
 		8DFE946A1CEE19E100A63DC9 /* LTHotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHotModel.h; sourceTree = "<group>"; };
@@ -562,6 +574,12 @@
 		8DFF3B3A1CF2ED490062391B /* CategoryListCell */ = {
 			isa = PBXGroup;
 			children = (
+				8D00865E1CF4597A00D0902B /* LTMainListCategoryCell.h */,
+				8D00865F1CF4597A00D0902B /* LTMainListCategoryCell.m */,
+				8D0086611CF4728100D0902B /* LTListOnePicTableViewCell.h */,
+				8D0086621CF4728100D0902B /* LTListOnePicTableViewCell.m */,
+				8D0086641CF4729800D0902B /* LTListNoPicTableViewCell.h */,
+				8D0086651CF4729800D0902B /* LTListNoPicTableViewCell.m */,
 			);
 			path = CategoryListCell;
 			sourceTree = "<group>";
@@ -578,6 +596,8 @@
 		8DFF3B3C1CF30F680062391B /* CategoryListModel */ = {
 			isa = PBXGroup;
 			children = (
+				8DFD69921CF3F2C200B560F3 /* LTMainListModel.h */,
+				8DFD69931CF3F2C200B560F3 /* LTMainListModel.m */,
 			);
 			path = CategoryListModel;
 			sourceTree = "<group>";
@@ -731,6 +751,7 @@
 				8DFD69911CF34CF000B560F3 /* LTMainPicModel.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
+				8D0086631CF4728100D0902B /* LTListOnePicTableViewCell.m in Sources */,
 				8D223D6B1CF0926B0000B2EB /* LTDisplayWebModel.m in Sources */,
 				8D223D501CF060670000B2EB /* LTPlayModel.m in Sources */,
 				8DFFAC7B1CF3302D00977E52 /* LTMainPicCategoryCell.m in Sources */,
@@ -741,6 +762,7 @@
 				8D0146371CEAD39F00FB4220 /* LTSearchBar.m in Sources */,
 				8D5AFE091CE2C1E8007C6E6C /* LTBaseViewController.m in Sources */,
 				8D223D5C1CF082CC0000B2EB /* LTBannerModel.m in Sources */,
+				8D0086601CF4597A00D0902B /* LTMainListCategoryCell.m in Sources */,
 				8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */,
 				8DFE946C1CEE19E100A63DC9 /* LTHotModel.m in Sources */,
 				8D223D621CF085D20000B2EB /* LTScrollWebModel.m in Sources */,
@@ -753,6 +775,8 @@
 				8D5AFE191CE2C3AA007C6E6C /* LTMainModel.m in Sources */,
 				8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */,
 				8D223D681CF092160000B2EB /* LTDisplayPicModel.m in Sources */,
+				8DFD69941CF3F2C200B560F3 /* LTMainListModel.m in Sources */,
+				8D0086661CF4729800D0902B /* LTListNoPicTableViewCell.m in Sources */,
 				8D5AFE351CE2CD13007C6E6C /* LTNetTool.m in Sources */,
 				8D0146621CEB3DE300FB4220 /* LTCategoryModel.m in Sources */,
 				8D5AFE0F1CE2C21E007C6E6C /* LTBaseView.m in Sources */,
