@@ -51,6 +51,18 @@
 		8DBE60CB1CE34C71007F2D1F /* LTCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CA1CE34C71007F2D1F /* LTCommunityViewController.m */; };
 		8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */; };
 		8DBE60D11CE34CA0007F2D1F /* LTUserSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */; };
+		8DFCA45D1CF5B43F005FD6F4 /* LTTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA45C1CF5B43F005FD6F4 /* LTTopicViewController.m */; };
+		8DFCA4641CF5CC77005FD6F4 /* LTTopicDailyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4631CF5CC77005FD6F4 /* LTTopicDailyModel.m */; };
+		8DFCA4671CF5D4EC005FD6F4 /* LTTopicListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4661CF5D4EC005FD6F4 /* LTTopicListModel.m */; };
+		8DFCA46A1CF5D695005FD6F4 /* LTTopicEntranceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4691CF5D695005FD6F4 /* LTTopicEntranceModel.m */; };
+		8DFCA46D1CF5D7A6005FD6F4 /* LTEntranceDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA46C1CF5D7A6005FD6F4 /* LTEntranceDetailModel.m */; };
+		8DFCA4701CF5D854005FD6F4 /* LTTopicGalleryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA46F1CF5D854005FD6F4 /* LTTopicGalleryModel.m */; };
+		8DFCA4731CF5EB66005FD6F4 /* LTGalleryDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4721CF5EB66005FD6F4 /* LTGalleryDetailModel.m */; };
+		8DFCA4761CF5EF5C005FD6F4 /* LTTopicArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4751CF5EF5C005FD6F4 /* LTTopicArticleModel.m */; };
+		8DFCA4791CF5F329005FD6F4 /* LTArticleDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4781CF5F329005FD6F4 /* LTArticleDetailModel.m */; };
+		8DFCA47F1CF60225005FD6F4 /* LTTopicGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA47E1CF60225005FD6F4 /* LTTopicGalleryCell.m */; };
+		8DFCA4821CF6023C005FD6F4 /* LTTopicArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4811CF6023C005FD6F4 /* LTTopicArticleCell.m */; };
+		8DFCA4851CF60282005FD6F4 /* LTTopicEntranceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCA4841CF60282005FD6F4 /* LTTopicEntranceCell.m */; };
 		8DFD69911CF34CF000B560F3 /* LTMainPicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFD69901CF34CF000B560F3 /* LTMainPicModel.m */; };
 		8DFD69941CF3F2C200B560F3 /* LTMainListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFD69931CF3F2C200B560F3 /* LTMainListModel.m */; };
 		8DFE94691CEE14EB00A63DC9 /* LTHotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFE94681CEE14EB00A63DC9 /* LTHotTableViewCell.m */; };
@@ -154,6 +166,30 @@
 		8DBE60CD1CE34C8F007F2D1F /* LTPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPlayViewController.m; sourceTree = "<group>"; };
 		8DBE60CF1CE34CA0007F2D1F /* LTUserSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTUserSetViewController.h; sourceTree = "<group>"; };
 		8DBE60D01CE34CA0007F2D1F /* LTUserSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTUserSetViewController.m; sourceTree = "<group>"; };
+		8DFCA45B1CF5B43F005FD6F4 /* LTTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicViewController.h; sourceTree = "<group>"; };
+		8DFCA45C1CF5B43F005FD6F4 /* LTTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicViewController.m; sourceTree = "<group>"; };
+		8DFCA4621CF5CC77005FD6F4 /* LTTopicDailyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicDailyModel.h; sourceTree = "<group>"; };
+		8DFCA4631CF5CC77005FD6F4 /* LTTopicDailyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicDailyModel.m; sourceTree = "<group>"; };
+		8DFCA4651CF5D4EC005FD6F4 /* LTTopicListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicListModel.h; sourceTree = "<group>"; };
+		8DFCA4661CF5D4EC005FD6F4 /* LTTopicListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicListModel.m; sourceTree = "<group>"; };
+		8DFCA4681CF5D695005FD6F4 /* LTTopicEntranceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicEntranceModel.h; sourceTree = "<group>"; };
+		8DFCA4691CF5D695005FD6F4 /* LTTopicEntranceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicEntranceModel.m; sourceTree = "<group>"; };
+		8DFCA46B1CF5D7A6005FD6F4 /* LTEntranceDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTEntranceDetailModel.h; sourceTree = "<group>"; };
+		8DFCA46C1CF5D7A6005FD6F4 /* LTEntranceDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTEntranceDetailModel.m; sourceTree = "<group>"; };
+		8DFCA46E1CF5D854005FD6F4 /* LTTopicGalleryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicGalleryModel.h; sourceTree = "<group>"; };
+		8DFCA46F1CF5D854005FD6F4 /* LTTopicGalleryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicGalleryModel.m; sourceTree = "<group>"; };
+		8DFCA4711CF5EB66005FD6F4 /* LTGalleryDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTGalleryDetailModel.h; sourceTree = "<group>"; };
+		8DFCA4721CF5EB66005FD6F4 /* LTGalleryDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTGalleryDetailModel.m; sourceTree = "<group>"; };
+		8DFCA4741CF5EF5C005FD6F4 /* LTTopicArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicArticleModel.h; sourceTree = "<group>"; };
+		8DFCA4751CF5EF5C005FD6F4 /* LTTopicArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicArticleModel.m; sourceTree = "<group>"; };
+		8DFCA4771CF5F329005FD6F4 /* LTArticleDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTArticleDetailModel.h; sourceTree = "<group>"; };
+		8DFCA4781CF5F329005FD6F4 /* LTArticleDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTArticleDetailModel.m; sourceTree = "<group>"; };
+		8DFCA47D1CF60225005FD6F4 /* LTTopicGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicGalleryCell.h; sourceTree = "<group>"; };
+		8DFCA47E1CF60225005FD6F4 /* LTTopicGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicGalleryCell.m; sourceTree = "<group>"; };
+		8DFCA4801CF6023C005FD6F4 /* LTTopicArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicArticleCell.h; sourceTree = "<group>"; };
+		8DFCA4811CF6023C005FD6F4 /* LTTopicArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicArticleCell.m; sourceTree = "<group>"; };
+		8DFCA4831CF60282005FD6F4 /* LTTopicEntranceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTTopicEntranceCell.h; sourceTree = "<group>"; };
+		8DFCA4841CF60282005FD6F4 /* LTTopicEntranceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTTopicEntranceCell.m; sourceTree = "<group>"; };
 		8DFD698F1CF34CF000B560F3 /* LTMainPicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainPicModel.h; sourceTree = "<group>"; };
 		8DFD69901CF34CF000B560F3 /* LTMainPicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainPicModel.m; sourceTree = "<group>"; };
 		8DFD69921CF3F2C200B560F3 /* LTMainListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainListModel.h; sourceTree = "<group>"; };
@@ -306,6 +342,7 @@
 		8D5AFE111CE2C332007C6E6C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8DFCA4571CF5B2A1005FD6F4 /* Topic */,
 				8DFF3B351CF2EB050062391B /* CategoryList */,
 				8DFF3B361CF2EB050062391B /* CategoryPic */,
 				8D5AFE141CE2C38B007C6E6C /* LTMainViewController.h */,
@@ -321,6 +358,7 @@
 		8D5AFE121CE2C332007C6E6C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DFCA4611CF5CC77005FD6F4 /* TopicModel */,
 				8DFD698E1CF34CF000B560F3 /* CategoryPicModel */,
 				8DFF3B3C1CF30F680062391B /* CategoryListModel */,
 				8D5AFE171CE2C3AA007C6E6C /* LTMainModel.h */,
@@ -336,6 +374,7 @@
 		8D5AFE131CE2C332007C6E6C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DFCA45A1CF5B2D7005FD6F4 /* Topic */,
 				8DFF3B3A1CF2ED490062391B /* CategoryListCell */,
 				8DFF3B3B1CF2ED490062391B /* CategoryPicCell */,
 				8D5AFE1A1CE2C3C7007C6E6C /* LTMainView.h */,
@@ -544,6 +583,51 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8DFCA4571CF5B2A1005FD6F4 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				8DFCA45B1CF5B43F005FD6F4 /* LTTopicViewController.h */,
+				8DFCA45C1CF5B43F005FD6F4 /* LTTopicViewController.m */,
+			);
+			path = Topic;
+			sourceTree = "<group>";
+		};
+		8DFCA45A1CF5B2D7005FD6F4 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				8DFCA47D1CF60225005FD6F4 /* LTTopicGalleryCell.h */,
+				8DFCA47E1CF60225005FD6F4 /* LTTopicGalleryCell.m */,
+				8DFCA4801CF6023C005FD6F4 /* LTTopicArticleCell.h */,
+				8DFCA4811CF6023C005FD6F4 /* LTTopicArticleCell.m */,
+				8DFCA4831CF60282005FD6F4 /* LTTopicEntranceCell.h */,
+				8DFCA4841CF60282005FD6F4 /* LTTopicEntranceCell.m */,
+			);
+			path = Topic;
+			sourceTree = "<group>";
+		};
+		8DFCA4611CF5CC77005FD6F4 /* TopicModel */ = {
+			isa = PBXGroup;
+			children = (
+				8DFCA4621CF5CC77005FD6F4 /* LTTopicDailyModel.h */,
+				8DFCA4631CF5CC77005FD6F4 /* LTTopicDailyModel.m */,
+				8DFCA4651CF5D4EC005FD6F4 /* LTTopicListModel.h */,
+				8DFCA4661CF5D4EC005FD6F4 /* LTTopicListModel.m */,
+				8DFCA4681CF5D695005FD6F4 /* LTTopicEntranceModel.h */,
+				8DFCA4691CF5D695005FD6F4 /* LTTopicEntranceModel.m */,
+				8DFCA46B1CF5D7A6005FD6F4 /* LTEntranceDetailModel.h */,
+				8DFCA46C1CF5D7A6005FD6F4 /* LTEntranceDetailModel.m */,
+				8DFCA46E1CF5D854005FD6F4 /* LTTopicGalleryModel.h */,
+				8DFCA46F1CF5D854005FD6F4 /* LTTopicGalleryModel.m */,
+				8DFCA4711CF5EB66005FD6F4 /* LTGalleryDetailModel.h */,
+				8DFCA4721CF5EB66005FD6F4 /* LTGalleryDetailModel.m */,
+				8DFCA4741CF5EF5C005FD6F4 /* LTTopicArticleModel.h */,
+				8DFCA4751CF5EF5C005FD6F4 /* LTTopicArticleModel.m */,
+				8DFCA4771CF5F329005FD6F4 /* LTArticleDetailModel.h */,
+				8DFCA4781CF5F329005FD6F4 /* LTArticleDetailModel.m */,
+			);
+			path = TopicModel;
+			sourceTree = "<group>";
+		};
 		8DFD698E1CF34CF000B560F3 /* CategoryPicModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,21 +820,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5AFDF41CE2BFA3007C6E6C /* ViewController.m in Sources */,
+				8DFCA4671CF5D4EC005FD6F4 /* LTTopicListModel.m in Sources */,
+				8DFCA4641CF5CC77005FD6F4 /* LTTopicDailyModel.m in Sources */,
+				8DFCA4731CF5EB66005FD6F4 /* LTGalleryDetailModel.m in Sources */,
 				8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */,
 				8DFF3B401CF31C690062391B /* LTMainPicCategoryViewController.m in Sources */,
 				8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */,
 				8D5AFDF11CE2BFA3007C6E6C /* AppDelegate.m in Sources */,
 				8D223D531CF069420000B2EB /* LTArticleModel.m in Sources */,
 				8D223D591CF06E8A0000B2EB /* LTSectionModel.m in Sources */,
+				8DFCA4821CF6023C005FD6F4 /* LTTopicArticleCell.m in Sources */,
+				8DFCA4791CF5F329005FD6F4 /* LTArticleDetailModel.m in Sources */,
 				8D5AFDEE1CE2BFA3007C6E6C /* main.m in Sources */,
 				8DFF3B391CF2EC930062391B /* LTMainListCategoryViewController.m in Sources */,
 				8DFE94B61CEEF1BE00A63DC9 /* LTHotStyleModel.m in Sources */,
+				8DFCA45D1CF5B43F005FD6F4 /* LTTopicViewController.m in Sources */,
 				8DFE94B91CEEF60900A63DC9 /* LTHotLinkModel.m in Sources */,
 				8DFE94BC1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m in Sources */,
 				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8DFD69911CF34CF000B560F3 /* LTMainPicModel.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
+				8DFCA4761CF5EF5C005FD6F4 /* LTTopicArticleModel.m in Sources */,
 				8D0086631CF4728100D0902B /* LTListOnePicTableViewCell.m in Sources */,
 				8D223D6B1CF0926B0000B2EB /* LTDisplayWebModel.m in Sources */,
 				8D223D501CF060670000B2EB /* LTPlayModel.m in Sources */,
@@ -774,19 +865,24 @@
 				8D00D72A1CEB6AF0003B6ECC /* LTCategoryDetailViewController.m in Sources */,
 				8D5AFE191CE2C3AA007C6E6C /* LTMainModel.m in Sources */,
 				8DBE60CE1CE34C8F007F2D1F /* LTPlayViewController.m in Sources */,
+				8DFCA4701CF5D854005FD6F4 /* LTTopicGalleryModel.m in Sources */,
+				8DFCA47F1CF60225005FD6F4 /* LTTopicGalleryCell.m in Sources */,
 				8D223D681CF092160000B2EB /* LTDisplayPicModel.m in Sources */,
 				8DFD69941CF3F2C200B560F3 /* LTMainListModel.m in Sources */,
+				8DFCA46D1CF5D7A6005FD6F4 /* LTEntranceDetailModel.m in Sources */,
 				8D0086661CF4729800D0902B /* LTListNoPicTableViewCell.m in Sources */,
 				8D5AFE351CE2CD13007C6E6C /* LTNetTool.m in Sources */,
 				8D0146621CEB3DE300FB4220 /* LTCategoryModel.m in Sources */,
 				8D5AFE0F1CE2C21E007C6E6C /* LTBaseView.m in Sources */,
 				8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */,
+				8DFCA46A1CF5D695005FD6F4 /* LTTopicEntranceModel.m in Sources */,
 				8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */,
 				8D223D5F1CF085170000B2EB /* LTPlayScrollModel.m in Sources */,
 				8D223D561CF069640000B2EB /* LTPicModel.m in Sources */,
 				8D223D6E1CF17CF50000B2EB /* LTDisPlayCell.m in Sources */,
 				8D5AFE1C1CE2C3C7007C6E6C /* LTMainView.m in Sources */,
 				8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */,
+				8DFCA4851CF60282005FD6F4 /* LTTopicEntranceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

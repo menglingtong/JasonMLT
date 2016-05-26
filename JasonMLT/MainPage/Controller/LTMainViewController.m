@@ -28,6 +28,8 @@
 
 #import "LTMainListCategoryViewController.h"
 
+#import "LTTopicViewController.h"
+
 
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -1061,12 +1063,13 @@
         // 当前非编辑模式,点击跳转
         else if (_isEditing == NO)
         {
+            LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
             
             if ([self.imageClassArray containsObject:cell.menuNameLabel.text]) {
                 
                 LTMainPicCategoryViewController *picVC = [[LTMainPicCategoryViewController alloc] init];
                 
-                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+//                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
                 
                 picVC.url = model.api_url;
                 
@@ -1080,7 +1083,7 @@
                 
                 LTMainListCategoryViewController *listVC = [[LTMainListCategoryViewController alloc] init];
                 
-                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+//                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
                 
                 if ([model.api_url isEqualToString:@"子栏目"]) {
                     
@@ -1128,6 +1131,18 @@
                     
                     [self.navigationController pushViewController:listVC animated:YES];
                 }
+                
+            }
+            else if ([cell.menuNameLabel.text isEqualToString:@"专题频道"])
+            {
+                
+                LTTopicViewController *topicVC = [[LTTopicViewController alloc] init];
+                
+                topicVC.categoryTitle = model.title;
+                
+                topicVC.url = model.api_url;
+                
+                [self.navigationController pushViewController:topicVC animated:YES];
                 
             }
 
