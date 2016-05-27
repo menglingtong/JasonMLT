@@ -14,7 +14,7 @@
 
 #import "LTMainListCategoryCell.h"
 
-@interface LTMainListCategoryViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface LTMainListCategoryViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, retain) NSMutableArray *tempArray;
 

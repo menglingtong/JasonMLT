@@ -30,6 +30,8 @@
 
 #import "LTTopicViewController.h"
 
+#import "LTMovieViewController.h"
+
 
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -1143,6 +1145,50 @@
                 topicVC.url = model.api_url;
                 
                 [self.navigationController pushViewController:topicVC animated:YES];
+                
+            }
+            else if ([cell.menuNameLabel.text isEqualToString:@"电影资讯"])
+            {
+                LTMovieViewController *movieVC = [[LTMovieViewController alloc] init];
+                
+                if ([model.api_url isEqualToString:@"子栏目"]) {
+                    
+                    // 获取本地document路径
+                    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                    
+                    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+                    
+                    // 创建数据库路径
+                    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+                    
+                    if ([db open]) {
+                        
+                        NSString *str =[NSString stringWithFormat:@"select * from categoryDetail where parentTitle = '%@'", model.title];
+                        
+                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                        
+                        [db executeStatements:str withResultBlock:^int(NSDictionary *resultsDictionary) {
+                            
+                            LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
+                            
+                            [tempArray addObject:tempModel];
+                            [tempModel release];
+                            
+                            return 0;
+                        }];
+                        
+                        LTCategoryModel *m = [tempArray objectAtIndex:1];
+                        
+                        movieVC.url = m.api_url;
+                        
+                        movieVC.categoryTitle = m.title;
+                        
+                        
+                        [self.navigationController pushViewController:movieVC animated:YES];
+                        
+                    }
+                        
+                }
                 
             }
 

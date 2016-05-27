@@ -17,6 +17,8 @@
 
 #import "LTTopicEntranceModel.h"
 
+#import "LTEntranceDetailModel.h"
+
 #import "LTTopicArticleModel.h"
 
 
@@ -27,6 +29,8 @@
 #import "LTTopicEntranceCell.h"
 
 #import <MJRefresh.h>
+
+#import "LTTopicEntranceListViewController.h"
 
 @interface LTTopicViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -53,14 +57,14 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.00];
     
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self; // 自定义返回按钮后，边缘返回手势失效，使边缘手势生效
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
 }
 
 -(void)loadView
 {
     [super loadView];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
     
     // 初始化数据源数组
     self.dataSourceArray = [[NSMutableArray alloc] init];
@@ -135,6 +139,15 @@
     
     [self.view addSubview:_backBar];
     [_backBar release];
+    
+}
+
+#pragma mark push新页面的时候,隐藏tabBar
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    self.hidesBottomBarWhenPushed = YES;
     
 }
 
@@ -293,6 +306,42 @@
     }
     
     return 0;
+}
+
+#pragma mark cell点击方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 一个 model 是个一section
+    LTTopicListModel *model = [self.dataSourceArray objectAtIndex:indexPath.section];
+    
+    if (indexPath.row == 0) {
+        
+        
+        
+    }
+    else if (indexPath.row < 3)
+    {
+        
+        
+        
+    }
+    else if (indexPath.row == 3)
+    {
+        
+        LTTopicEntranceListViewController *entranceListVC = [[LTTopicEntranceListViewController alloc] init];
+        
+        LTTopicEntranceModel *entranceModel = [model.entranceModelArray firstObject];
+        
+        LTEntranceDetailModel *entranceDetailModel = [entranceModel.entranceDetailModelArray firstObject];
+        
+        entranceListVC.url = entranceDetailModel.api_url;
+        
+        entranceListVC.entranceTitle = entranceModel.title;
+        
+        [self.navigationController pushViewController:entranceListVC animated:YES];
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

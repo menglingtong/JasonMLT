@@ -204,7 +204,12 @@
     
     cycleScrollView.autoScroll = YES;
     
+    cycleScrollView.showPageControl = YES;
+    
+    cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+    
     [headerView addSubview:cycleScrollView];
+    
     
     UICollectionViewFlowLayout *displayLayout = [[UICollectionViewFlowLayout alloc] init];
     
