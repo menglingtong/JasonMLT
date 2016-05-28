@@ -10,4 +10,10 @@
 
 @interface LTCommunityViewController : LTBaseViewController
 
+@property (nonatomic, retain) UITableView *mainTableView;
+
+@property (nonatomic, retain) UIView *topView;
+
+@property (nonatomic, retain) UIImageView *capital;
+
 @end

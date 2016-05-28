@@ -18,6 +18,8 @@
 
 #import "LTPlayScrollModel.h"
 
+#import "LTArticleModel.h"
+
 #import "LTTwoDisplayModel.h"
 
 #import "LTBannerModel.h"
@@ -29,6 +31,7 @@
 
 #import <MJRefresh.h>
 
+#import "LTWKWebView.h"
 
 
 
@@ -118,6 +121,28 @@
         
     }];
     
+    
+}
+
+#pragma mark push新页面的时候,隐藏tabBar
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+//    self.navigationController.navigationBar.hidden = NO;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+}
+
+#pragma mark 返回的时候显示tabBar
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+//    self.navigationController.navigationBar.hidden = YES;
+    
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark -
@@ -339,6 +364,23 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 202;
+}
+
+#pragma mark cell的点击方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LTSectionModel *model = [self.playDataSourceArray objectAtIndex:indexPath.section];
+    
+    LTPlayModel *playModel = [model.playModelArray objectAtIndex:indexPath.row];
+    
+    LTArticleModel *articleModel = [playModel.articleModelArray firstObject];
+    
+    LTWKWebView *webView = [[LTWKWebView alloc] init];
+    
+    webView.url = articleModel.weburl;
+    
+    [self.navigationController pushViewController:webView animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

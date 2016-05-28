@@ -24,6 +24,9 @@
 		8D01D88E1CF8042600091054 /* LTMoviePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01D88D1CF8042600091054 /* LTMoviePicCell.m */; };
 		8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D06230B1CE4A75100507E69 /* LTPageControl.m */; };
 		8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D069F351CE4173A00B29D25 /* LTScrollImage.m */; };
+		8D0B27581CF988DD0037671A /* LTMyCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27571CF988DD0037671A /* LTMyCollectCell.m */; };
+		8D0B275B1CF99F240037671A /* LTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B275A1CF99F240037671A /* LTSwitchCell.m */; };
+		8D0FA7431CF8745500D49B1C /* LTWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FA7421CF8745500D49B1C /* LTWKWebView.m */; };
 		8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */; };
 		8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */; };
 		8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D4C1CF049F30000B2EB /* LTPlayCell.m */; };
@@ -124,6 +127,12 @@
 		8D06230B1CE4A75100507E69 /* LTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPageControl.m; sourceTree = "<group>"; };
 		8D069F341CE4173A00B29D25 /* LTScrollImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollImage.h; sourceTree = "<group>"; };
 		8D069F351CE4173A00B29D25 /* LTScrollImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollImage.m; sourceTree = "<group>"; };
+		8D0B27561CF988DD0037671A /* LTMyCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMyCollectCell.h; sourceTree = "<group>"; };
+		8D0B27571CF988DD0037671A /* LTMyCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMyCollectCell.m; sourceTree = "<group>"; };
+		8D0B27591CF99F240037671A /* LTSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchCell.h; sourceTree = "<group>"; };
+		8D0B275A1CF99F240037671A /* LTSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchCell.m; sourceTree = "<group>"; };
+		8D0FA7411CF8745500D49B1C /* LTWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTWKWebView.h; sourceTree = "<group>"; };
+		8D0FA7421CF8745500D49B1C /* LTWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTWKWebView.m; sourceTree = "<group>"; };
 		8D118D421CE726FE00FBAF9C /* LTMainMenuCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainMenuCollectionCell.h; sourceTree = "<group>"; };
 		8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMainMenuCollectionCell.m; sourceTree = "<group>"; };
 		8D223D481CEFFF3C0000B2EB /* LTScrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollModel.h; sourceTree = "<group>"; };
@@ -271,6 +280,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8D01D8B21CF8502500091054 /* WKWebView */ = {
+			isa = PBXGroup;
+			children = (
+				8D0FA7411CF8745500D49B1C /* LTWKWebView.h */,
+				8D0FA7421CF8745500D49B1C /* LTWKWebView.m */,
+			);
+			path = WKWebView;
+			sourceTree = "<group>";
+		};
 		8D5AFDE01CE2BFA2007C6E6C = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +310,7 @@
 		8D5AFDEB1CE2BFA3007C6E6C /* JasonMLT */ = {
 			isa = PBXGroup;
 			children = (
+				8D01D8B21CF8502500091054 /* WKWebView */,
 				8DBE60B61CE34BF1007F2D1F /* Community */,
 				8DBE60BA1CE34BF1007F2D1F /* HotNews */,
 				8DBE60BE1CE34BF1007F2D1F /* Play */,
@@ -479,6 +498,10 @@
 		8DBE60B91CE34BF1007F2D1F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D0B27561CF988DD0037671A /* LTMyCollectCell.h */,
+				8D0B27571CF988DD0037671A /* LTMyCollectCell.m */,
+				8D0B27591CF99F240037671A /* LTSwitchCell.h */,
+				8D0B275A1CF99F240037671A /* LTSwitchCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -942,6 +965,7 @@
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
 				8D00D72D1CEB6B2A003B6ECC /* LTCategoryDetailTableViewCell.m in Sources */,
 				8DFCA4911CF71999005FD6F4 /* LTTopicEntranceMediaModel.m in Sources */,
+				8D0FA7431CF8745500D49B1C /* LTWKWebView.m in Sources */,
 				8DFCA4971CF7248E005FD6F4 /* LTEntranceOnePicCell.m in Sources */,
 				8DFCA4761CF5EF5C005FD6F4 /* LTTopicArticleModel.m in Sources */,
 				8D0086631CF4728100D0902B /* LTListOnePicTableViewCell.m in Sources */,
@@ -984,6 +1008,8 @@
 				8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */,
 				8D01D8881CF7F98100091054 /* LTMovieAutherModel.m in Sources */,
 				8D223D5F1CF085170000B2EB /* LTPlayScrollModel.m in Sources */,
+				8D0B27581CF988DD0037671A /* LTMyCollectCell.m in Sources */,
+				8D0B275B1CF99F240037671A /* LTSwitchCell.m in Sources */,
 				8D223D561CF069640000B2EB /* LTPicModel.m in Sources */,
 				8D223D6E1CF17CF50000B2EB /* LTDisPlayCell.m in Sources */,
 				8D01D88E1CF8042600091054 /* LTMoviePicCell.m in Sources */,
@@ -1104,6 +1130,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;
@@ -1124,6 +1151,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;

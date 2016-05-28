@@ -16,6 +16,8 @@
 
 #import "LTMainListModel.h"
 
+#import "LTWKWebView.h"
+
 @implementation LTMainListCategoryCell
 
 - (void)dealloc
@@ -122,6 +124,16 @@
     }
     
     return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LTMainListModel *model = [self.dataSource objectAtIndex:indexPath.row];
+    
+
+    // 命令代理人执行代理方法
+    [self.LTWebViewDelegate getToTheWKWebView:model.weburl];
+    
 }
 
 #pragma mark cell 的高度

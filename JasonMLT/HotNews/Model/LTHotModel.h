@@ -10,7 +10,6 @@
 #import "LTHotStyleModel.h"
 #import "LTHotLinkModel.h"
 
-@class Link;
 
 @interface LTHotModel : LTBaseModel
 
@@ -30,7 +29,11 @@
 @property (nonatomic, retain) NSMutableDictionary *style;
 
 /** 点击进入详细页的链接? */
-@property (nonatomic, strong) LTHotLinkModel *link;
+@property (nonatomic, retain) LTHotLinkModel *linkModel;
+
+@property (nonatomic, retain) NSDictionary *link;
+
+@property (nonatomic, retain) NSMutableArray *linkModelArray;
 
 /** 消息来源 */
 @property (nonatomic, copy) NSString *source;
@@ -49,6 +52,9 @@
 
 /** 新闻时间 */
 @property (nonatomic, copy) NSString *updateTime;
+
+
+@property (nonatomic, copy) NSString *wapurl;
 
 
 

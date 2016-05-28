@@ -14,7 +14,9 @@
 
 #import "LTMainListCategoryCell.h"
 
-@interface LTMainListCategoryViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+#import "LTWKWebView.h"
+
+@interface LTMainListCategoryViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LTWebViewDelegate>
 
 @property (nonatomic, retain) NSMutableArray *tempArray;
 
@@ -200,6 +202,8 @@
     
     LTMainListCategoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"mainListCell" forIndexPath:indexPath];
     
+    cell.LTWebViewDelegate = self;
+    
     NSMutableArray *arr = [self.mainDataSourceArray objectAtIndex:indexPath.item];
     
     cell.dataSource = arr;
@@ -208,6 +212,33 @@
     
     return cell;
 }
+
+#pragma mark - LTWebViewDelegate
+-(void)getToTheWKWebView:(NSString *)url
+{
+    LTWKWebView *webView = [[LTWKWebView alloc] init];
+    
+    webView.url = url;
+    
+    [self.navigationController pushViewController:webView animated:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.hidesBottomBarWhenPushed = YES;
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+    
+    self.hidesBottomBarWhenPushed = YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -12,6 +12,8 @@
 
 #import "LTHotModel.h"
 
+#import "LTHotLinkModel.h"
+
 #import "LTNetTool.h"
 
 #import <MJRefresh.h>
@@ -87,6 +89,28 @@
     }];
     
     
+}
+
+
+#pragma mark push新页面的时候,隐藏tabBar
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+//    self.navigationController.navigationBar.hidden = NO;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+}
+
+#pragma mark 返回的时候显示tabBar
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+//    self.navigationController.navigationBar.hidden = YES;
+    
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark -
@@ -197,6 +221,19 @@
     }
 
     return 0;
+}
+
+#pragma mark cell点击方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LTWKWebView *webView = [[LTWKWebView alloc] init];
+    
+    LTHotModel *model = [self.hotDataSourceArray objectAtIndex:indexPath.row];
+    
+    webView.url = model.wapurl;
+    
+    [self.navigationController pushViewController:webView animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

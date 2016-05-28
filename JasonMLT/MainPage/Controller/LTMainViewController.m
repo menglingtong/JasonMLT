@@ -183,7 +183,7 @@
     [self askForScrollImageData];
     
     // 设置导航左侧按钮
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedUserSetLeftButton:)] autorelease];
+//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedUserSetLeftButton:)] autorelease];
     
     // 设置导航右侧按钮
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedAddCategoryButton:)] autorelease];

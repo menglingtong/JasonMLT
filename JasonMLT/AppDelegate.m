@@ -55,7 +55,7 @@
     
     UINavigationController *communityNav = [[UINavigationController alloc] initWithRootViewController:communityVC];
     
-    communityVC.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Community" image:[[UIImage imageNamed:@"circleGray"] imageWithRenderingMode:1] selectedImage:[[UIImage imageNamed:@"circleYellow"] imageWithRenderingMode:1]] autorelease];
+    communityVC.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Setting" image:[[UIImage imageNamed:@"userGray"] imageWithRenderingMode:1] selectedImage:[[UIImage imageNamed:@"userYellow"] imageWithRenderingMode:1]] autorelease];
     
     
     

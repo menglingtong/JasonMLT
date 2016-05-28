@@ -14,6 +14,8 @@
 
 #import "LTMainPicCategoryCell.h"
 
+#import "LTWKWebView.h"
+
 @interface LTMainPicCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -105,6 +107,27 @@
     
 }
 
+#pragma mark push新页面的时候,隐藏tabBar
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+//    self.navigationController.navigationBar.hidden = YES;
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+}
+
+#pragma mark 返回的时候显示tabBar
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+    
+    self.hidesBottomBarWhenPushed = YES;
+}
+
 #pragma mark goBack
 - (void) didClickedGoBackBtn:(UIButton *)btn
 {
@@ -166,6 +189,18 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LTMainPicModel *model = [self.mainDataSourceArray objectAtIndex:indexPath.row];
+    
+    LTWKWebView *webView = [[LTWKWebView alloc] init];
+    
+    webView.url = model.weburl;
+    
+    [self.navigationController pushViewController:webView animated:YES];
+    
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -207,6 +242,7 @@
     
     return 0;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

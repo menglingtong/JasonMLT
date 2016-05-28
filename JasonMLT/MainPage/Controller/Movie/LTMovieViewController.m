@@ -185,7 +185,11 @@
     // 判断有图片
     if (model.mediaModelArray != nil && model.mediaModelArray.count > 0) {
         
-        return 340;
+        LTMovieMediasModel *mediaModel = [model.mediaModelArray firstObject];
+        
+        CGFloat scale = [mediaModel.h integerValue] / [mediaModel.w integerValue] * 1.0;
+        
+        return ScreenWidth * scale + 150;
         
     }
     

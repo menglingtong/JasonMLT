@@ -8,6 +8,8 @@
 
 #import "LTBaseViewController.h"
 
+#import "LTWKWebView.h"
+
 @interface LTHotNewsViewController : LTBaseViewController
 
 /** 热点界面的tableview */
