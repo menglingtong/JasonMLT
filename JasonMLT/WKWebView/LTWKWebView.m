@@ -69,7 +69,23 @@
     [self.view addSubview:_backBar];
     [_backBar release];
     
-    NSLog(@"%@", self.url);
+    // 设置主题切换时的回调方法
+    [self.backBar ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
 }
 
 //-(void)viewDidDisappear:(BOOL)animated
@@ -119,6 +135,24 @@
     [webView evaluateJavaScript:@"document.getElementById('top').style.display = 'none'" completionHandler:nil];
     
     [webView evaluateJavaScript:@"document.getElementsByClassName('tuiguang1)[0].style.display = 'none'" completionHandler:nil];
+    
+    
+    @ea_weakify(webView);
+    
+    [webView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(webView);
+        
+        NSString *hexBackgroundString = [currentThemeIdentifier isEqualToString:EAThemeBlack] ? @"#777" : @"#ffffff";
+        
+        NSString *hexTitleString = [currentThemeIdentifier isEqualToString:EAThemeBlack] ? @"#ffffff" : @"#777";
+        
+        NSString *jsString = [NSString stringWithFormat:@"document.body.style.background = \"%@\";document.body.style.webkitTextFillColor= \"%@\";", hexBackgroundString, hexTitleString];
+        
+        [webView evaluateJavaScript:jsString completionHandler:nil];
+        
+    }];
+    
 }
 
 #pragma mark goBack

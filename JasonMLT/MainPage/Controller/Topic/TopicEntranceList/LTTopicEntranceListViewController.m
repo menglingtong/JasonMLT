@@ -118,6 +118,24 @@
     [self.view addSubview:_backBar];
     [_backBar release];
     
+    // 设置主题切换时的回调方法
+    [self.backBar ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
+    
 }
 
 #pragma mark goBack
@@ -198,6 +216,29 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                cell.author.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                cell.author.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
         return cell;
         
     }
@@ -208,6 +249,29 @@
         cell.model = model;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                cell.author.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                cell.author.textColor = TEXT_COLOR_DARK;
+                
+            }
+            
+        }];
         
         return cell;
     }

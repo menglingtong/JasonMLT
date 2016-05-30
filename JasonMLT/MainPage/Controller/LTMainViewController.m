@@ -200,6 +200,30 @@
     }];
     
     
+    @ea_weakify(self);
+    // 设置主题切换时的回调方法
+    [self.mainMenuCollectionView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(self);
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = CELL_BACKGROUND_DARK;
+
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = CELL_BACKGROUND_NORMAL;
+
+            
+        }
+        
+    }];
+    
+    
 }
 
 #pragma mark 请求掉下来的图片
@@ -976,13 +1000,37 @@
         
         cell.LTImageView.image = img;
         
-        cell.LTImageView.backgroundColor = [UIColor whiteColor];
-        
-        NSString *str = [NSString stringWithFormat:@"0x%@", model.color];
-        
-        cell.LTImageView.tintColor = UIColorFromRGBA((NSInteger)str, 0.75);
-        
-        cell.LTImageView.clipsToBounds = YES;
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.menuNameLabel.textColor = TEXT_COLOR_DARK;
+                cell.LTImageView.tintColor = [UIColor grayColor];
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.menuNameLabel.textColor = TEXT_COLOR_NORMAL;
+                
+                cell.LTImageView.backgroundColor = [UIColor whiteColor];
+                
+                NSString *str = [NSString stringWithFormat:@"0x%@", model.color];
+                
+                cell.LTImageView.tintColor = UIColorFromRGBA((NSInteger)str, 0.75);
+                
+                cell.LTImageView.clipsToBounds = YES;
+                
+            }
+            
+        }];
         
         
         cell.menuNameLabel.text = model.title;

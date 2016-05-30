@@ -12,6 +12,8 @@
 
 #import "LTSwitchCell.h"
 
+#import "LTSwitchThemeCell.h"
+
 @interface LTCommunityViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -34,6 +36,8 @@
 {
     [super loadView];
     
+    
+    
     self.mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 49 - 64) style:UITableViewStyleGrouped];
     
     self.mainTableView.delegate = self;
@@ -50,19 +54,43 @@
     
     [self.mainTableView registerClass:[LTSwitchCell class] forCellReuseIdentifier:@"switchCell"];
     
+    [self.mainTableView registerClass:[LTSwitchThemeCell class] forCellReuseIdentifier:@"switchThemeCell"];
+    
+    
+    @ea_weakify(self);
+    // 设置主题切换时的回调方法
+    [self.mainTableView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(self);
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
+    
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark <UITableViewDelegate, UITableViewDataSource>
 #pragma mark 返回cell的个数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     
     if (indexPath.row == 0) {
         
@@ -72,10 +100,34 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
+        
         return cell;
     }
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         
         LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
         
@@ -85,8 +137,65 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
         return cell;
         
+    }
+    
+    if (indexPath.row == 3) {
+        
+        LTSwitchThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchThemeCell"];
+        
+        cell.string = @"切换主题";
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
+        return cell;
     }
     
     if (indexPath.row == 1) {
@@ -96,6 +205,29 @@
         cell.string = @"夜间模式";
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
         
         return cell;
     }
@@ -107,6 +239,29 @@
         cell.string = @"彩色图标";
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
         
         return cell;
         

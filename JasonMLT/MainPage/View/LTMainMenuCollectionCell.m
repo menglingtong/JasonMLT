@@ -108,7 +108,7 @@
     }];
     
 //    self.menuNameLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.73 blue:0.61 alpha:1.00];
-    self.menuNameLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
+//    self.menuNameLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
     self.menuNameLabel.textAlignment = 1;
     [self.menuNameLabel setFont:[UIFont systemFontOfSize:14]];
     

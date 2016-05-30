@@ -123,6 +123,25 @@
     [self.view addSubview:_backBar];
     [_backBar release];
     
+
+    // 设置主题切换时的回调方法
+    [self.backBar ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
+    
 }
 
 #pragma mark 请求并解析数据
@@ -209,6 +228,24 @@
     cell.dataSource = arr;
     
     cell.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    
+    // 设置主题切换时的回调方法
+    [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            cell.backgroundColor = CELL_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
     
     return cell;
 }

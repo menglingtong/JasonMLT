@@ -55,7 +55,7 @@
     
     self.navigationItem.title = self.categoryTitle;
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.00];
+//    self.view.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.00];
     
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self; // 自定义返回按钮后，边缘返回手势失效，使边缘手势生效
     
@@ -139,6 +139,35 @@
     
     [self.view addSubview:_backBar];
     [_backBar release];
+    
+    @ea_weakify(self);
+    // 设置主题切换时的回调方法
+    [self.backBar ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(self);
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+            self.mainTableView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+            self.view.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+            self.mainTableView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+            self.view.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.00];
+            
+        }
+        
+    }];
     
 }
 
@@ -253,6 +282,24 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                
+            }
+            
+        }];
+        
         return cell;
     }
     else if (indexPath.row < 3 && indexPath.row >0)
@@ -266,6 +313,28 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                
+                cell.title.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                
+                cell.title.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
         return cell;
     }
     else if (indexPath.row == 3)
@@ -278,6 +347,24 @@
         cell.model = entranceModel;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                
+            }
+            
+        }];
         
         return cell;
     }

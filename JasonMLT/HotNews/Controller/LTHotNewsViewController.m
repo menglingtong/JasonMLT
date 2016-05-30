@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.url = @"http://api.irecommend.ifeng.com/read.php?uid=864260027969516";
+    self.url = @"http://api.irecommend.ifeng.com/read.php?uid=864260027969513";
     
     [self askForData:self.url Action:@"pullUp"];
     
@@ -85,6 +85,27 @@
     self.hotTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self askForData:self.url Action:@"pullUp"];
+        
+    }];
+    
+    @ea_weakify(self);
+    // 设置主题切换时的回调方法
+    [self.hotTableView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(self);
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
         
     }];
     
@@ -183,6 +204,33 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.titleLabel.textColor = TEXT_COLOR_DARK;
+                cell.autherNameLabel.textColor = TEXT_COLOR_DARK;
+                cell.dateLabel.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.titleLabel.textColor = TEXT_COLOR_NORMAL;
+                cell.autherNameLabel.textColor = TEXT_COLOR_NORMAL;
+                cell.dateLabel.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
+        
         return cell;
         
     }
@@ -194,6 +242,33 @@
         cell.model = model;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        @ea_weakify(self);
+        // 设置主题切换时的回调方法
+        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+            
+            @ea_strongify(self);
+            
+            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_DARK;
+                cell.titleLabel.textColor = TEXT_COLOR_DARK;
+                cell.autherNameLabel.textColor = TEXT_COLOR_DARK;
+                cell.dateLabel.textColor = TEXT_COLOR_DARK;
+                
+            }
+            else
+            {
+                
+                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+                cell.titleLabel.textColor = TEXT_COLOR_NORMAL;
+                cell.autherNameLabel.textColor = TEXT_COLOR_NORMAL;
+                cell.dateLabel.textColor = TEXT_COLOR_NORMAL;
+                
+            }
+            
+        }];
         
         return cell;
         

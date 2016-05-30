@@ -101,6 +101,24 @@
     [self.view addSubview:_backBar];
     [_backBar release];
     
+    // 设置主题切换时的回调方法
+    [self.backBar ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            currentView.backgroundColor = VIEW_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
+    
 }
 
 #pragma mark push新页面的时候,隐藏tabBar
@@ -173,6 +191,24 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.model = model;
+    
+    // 设置主题切换时的回调方法
+    [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+        {
+            
+            cell.backgroundColor = CELL_BACKGROUND_DARK;
+            
+        }
+        else
+        {
+            
+            cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+            
+        }
+        
+    }];
     
     return cell;
 }

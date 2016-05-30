@@ -159,7 +159,7 @@
 
     
     
-    self.titleLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
+//    self.titleLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
     
     [self.titleLabel setFont:[UIFont systemFontOfSize:14]];
     
@@ -180,7 +180,7 @@
     
 
     
-    self.autherNameLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
+//    self.autherNameLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
     [self.autherNameLabel setFont:[UIFont systemFontOfSize:12]];
     
     
@@ -198,7 +198,7 @@
     
 
     
-    self.dateLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
+//    self.dateLabel.textColor = [UIColor colorWithRed:0.17 green:0.12 blue:0.03 alpha:1.00];
     [self.dateLabel setFont:[UIFont systemFontOfSize:12]];
     
     

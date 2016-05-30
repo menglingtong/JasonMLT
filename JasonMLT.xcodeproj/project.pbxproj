@@ -24,8 +24,12 @@
 		8D01D88E1CF8042600091054 /* LTMoviePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01D88D1CF8042600091054 /* LTMoviePicCell.m */; };
 		8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D06230B1CE4A75100507E69 /* LTPageControl.m */; };
 		8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D069F351CE4173A00B29D25 /* LTScrollImage.m */; };
+		8D09D12F1CFB419F009B49FA /* LTArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D09D12E1CFB419F009B49FA /* LTArchiver.m */; };
 		8D0B27581CF988DD0037671A /* LTMyCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27571CF988DD0037671A /* LTMyCollectCell.m */; };
 		8D0B275B1CF99F240037671A /* LTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B275A1CF99F240037671A /* LTSwitchCell.m */; };
+		8D0B27651CF9EB0A0037671A /* EAThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27621CF9EB0A0037671A /* EAThemeManager.m */; };
+		8D0B27661CF9EB0A0037671A /* UIView+EATheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27641CF9EB0A0037671A /* UIView+EATheme.m */; };
+		8D0B27691CF9FD980037671A /* LTSwitchThemeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27681CF9FD980037671A /* LTSwitchThemeCell.m */; };
 		8D0FA7431CF8745500D49B1C /* LTWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0FA7421CF8745500D49B1C /* LTWKWebView.m */; };
 		8D118D441CE726FE00FBAF9C /* LTMainMenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D118D431CE726FE00FBAF9C /* LTMainMenuCollectionCell.m */; };
 		8D223D4A1CEFFF3C0000B2EB /* LTScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D223D491CEFFF3C0000B2EB /* LTScrollModel.m */; };
@@ -127,10 +131,21 @@
 		8D06230B1CE4A75100507E69 /* LTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTPageControl.m; sourceTree = "<group>"; };
 		8D069F341CE4173A00B29D25 /* LTScrollImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTScrollImage.h; sourceTree = "<group>"; };
 		8D069F351CE4173A00B29D25 /* LTScrollImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollImage.m; sourceTree = "<group>"; };
+		8D09D12D1CFB419F009B49FA /* LTArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTArchiver.h; sourceTree = "<group>"; };
+		8D09D12E1CFB419F009B49FA /* LTArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTArchiver.m; sourceTree = "<group>"; };
 		8D0B27561CF988DD0037671A /* LTMyCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMyCollectCell.h; sourceTree = "<group>"; };
 		8D0B27571CF988DD0037671A /* LTMyCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMyCollectCell.m; sourceTree = "<group>"; };
 		8D0B27591CF99F240037671A /* LTSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchCell.h; sourceTree = "<group>"; };
 		8D0B275A1CF99F240037671A /* LTSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchCell.m; sourceTree = "<group>"; };
+		8D0B275D1CF9EB0A0037671A /* EATheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EATheme.h; sourceTree = "<group>"; };
+		8D0B275E1CF9EB0A0037671A /* EAThemesConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAThemesConfiguration.h; sourceTree = "<group>"; };
+		8D0B27601CF9EB0A0037671A /* EA_metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EA_metamacros.h; sourceTree = "<group>"; };
+		8D0B27611CF9EB0A0037671A /* EAThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAThemeManager.h; sourceTree = "<group>"; };
+		8D0B27621CF9EB0A0037671A /* EAThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAThemeManager.m; sourceTree = "<group>"; };
+		8D0B27631CF9EB0A0037671A /* UIView+EATheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EATheme.h"; sourceTree = "<group>"; };
+		8D0B27641CF9EB0A0037671A /* UIView+EATheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EATheme.m"; sourceTree = "<group>"; };
+		8D0B27671CF9FD980037671A /* LTSwitchThemeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchThemeCell.h; sourceTree = "<group>"; };
+		8D0B27681CF9FD980037671A /* LTSwitchThemeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchThemeCell.m; sourceTree = "<group>"; };
 		8D0FA7411CF8745500D49B1C /* LTWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTWKWebView.h; sourceTree = "<group>"; };
 		8D0FA7421CF8745500D49B1C /* LTWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTWKWebView.m; sourceTree = "<group>"; };
 		8D118D421CE726FE00FBAF9C /* LTMainMenuCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMainMenuCollectionCell.h; sourceTree = "<group>"; };
@@ -289,6 +304,28 @@
 			path = WKWebView;
 			sourceTree = "<group>";
 		};
+		8D0B275C1CF9EB0A0037671A /* EATheme */ = {
+			isa = PBXGroup;
+			children = (
+				8D0B275D1CF9EB0A0037671A /* EATheme.h */,
+				8D0B275E1CF9EB0A0037671A /* EAThemesConfiguration.h */,
+				8D0B275F1CF9EB0A0037671A /* Handle */,
+			);
+			path = EATheme;
+			sourceTree = "<group>";
+		};
+		8D0B275F1CF9EB0A0037671A /* Handle */ = {
+			isa = PBXGroup;
+			children = (
+				8D0B27601CF9EB0A0037671A /* EA_metamacros.h */,
+				8D0B27611CF9EB0A0037671A /* EAThemeManager.h */,
+				8D0B27621CF9EB0A0037671A /* EAThemeManager.m */,
+				8D0B27631CF9EB0A0037671A /* UIView+EATheme.h */,
+				8D0B27641CF9EB0A0037671A /* UIView+EATheme.m */,
+			);
+			path = Handle;
+			sourceTree = "<group>";
+		};
 		8D5AFDE01CE2BFA2007C6E6C = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +481,7 @@
 		8D5AFE1D1CE2CC31007C6E6C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				8D0B275C1CF9EB0A0037671A /* EATheme */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -465,6 +503,8 @@
 				8DFF077D1CED6DE700C6EC7B /* LTDataBaseManager.m */,
 				8DFF3B0F1CF2BFE70062391B /* LTUIImage+Tint.h */,
 				8DFF3B101CF2BFE70062391B /* LTUIImage+Tint.m */,
+				8D09D12D1CFB419F009B49FA /* LTArchiver.h */,
+				8D09D12E1CFB419F009B49FA /* LTArchiver.m */,
 			);
 			path = MyToolsClass;
 			sourceTree = "<group>";
@@ -502,6 +542,8 @@
 				8D0B27571CF988DD0037671A /* LTMyCollectCell.m */,
 				8D0B27591CF99F240037671A /* LTSwitchCell.h */,
 				8D0B275A1CF99F240037671A /* LTSwitchCell.m */,
+				8D0B27671CF9FD980037671A /* LTSwitchThemeCell.h */,
+				8D0B27681CF9FD980037671A /* LTSwitchThemeCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -960,6 +1002,7 @@
 				8DFE94B91CEEF60900A63DC9 /* LTHotLinkModel.m in Sources */,
 				8DFCA4941CF71C92005FD6F4 /* LTEntranceNoPicCell.m in Sources */,
 				8DFE94BC1CEF0CF200A63DC9 /* LTHotTrebleImageCell.m in Sources */,
+				8D0B27661CF9EB0A0037671A /* UIView+EATheme.m in Sources */,
 				8DFF077E1CED6DE700C6EC7B /* LTDataBaseManager.m in Sources */,
 				8DFD69911CF34CF000B560F3 /* LTMainPicModel.m in Sources */,
 				8D00D7271CEB5F4C003B6ECC /* LTCategoryTableViewCell.m in Sources */,
@@ -971,6 +1014,7 @@
 				8D0086631CF4728100D0902B /* LTListOnePicTableViewCell.m in Sources */,
 				8D223D6B1CF0926B0000B2EB /* LTDisplayWebModel.m in Sources */,
 				8D223D501CF060670000B2EB /* LTPlayModel.m in Sources */,
+				8D0B27651CF9EB0A0037671A /* EAThemeManager.m in Sources */,
 				8DFFAC7B1CF3302D00977E52 /* LTMainPicCategoryCell.m in Sources */,
 				8D5AFE161CE2C38B007C6E6C /* LTMainViewController.m in Sources */,
 				8D223D651CF090D00000B2EB /* LTTwoDisplayModel.m in Sources */,
@@ -1005,9 +1049,11 @@
 				8D5AFE0F1CE2C21E007C6E6C /* LTBaseView.m in Sources */,
 				8DFF67AF1CE96A1E00C8D3B1 /* LTCategoryViewController.m in Sources */,
 				8DFCA46A1CF5D695005FD6F4 /* LTTopicEntranceModel.m in Sources */,
+				8D0B27691CF9FD980037671A /* LTSwitchThemeCell.m in Sources */,
 				8D223D4D1CF049F30000B2EB /* LTPlayCell.m in Sources */,
 				8D01D8881CF7F98100091054 /* LTMovieAutherModel.m in Sources */,
 				8D223D5F1CF085170000B2EB /* LTPlayScrollModel.m in Sources */,
+				8D09D12F1CFB419F009B49FA /* LTArchiver.m in Sources */,
 				8D0B27581CF988DD0037671A /* LTMyCollectCell.m in Sources */,
 				8D0B275B1CF99F240037671A /* LTSwitchCell.m in Sources */,
 				8D223D561CF069640000B2EB /* LTPicModel.m in Sources */,

@@ -104,7 +104,7 @@
         
     }];
     
-    self.title.textColor = [UIColor colorWithRed:0.57 green:0.57 blue:0.57 alpha:1.00];
+//    self.title.textColor = [UIColor colorWithRed:0.57 green:0.57 blue:0.57 alpha:1.00];
     
     [self.title setFont:[UIFont systemFontOfSize:14]];
     
@@ -120,7 +120,7 @@
         
     }];
     
-    self.author.textColor = [UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.00];
+//    self.author.textColor = [UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.00];
     
     [self.author setFont:[UIFont systemFontOfSize:12]];
     
