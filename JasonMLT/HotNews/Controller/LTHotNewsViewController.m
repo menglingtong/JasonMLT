@@ -142,6 +142,10 @@
     // 调用网络请求方法开始请求数据
     [LTNetTool GetNetWithUrl:urlString body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *hotDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:hotDic ByKey:@"hotDic" WithPath:@"hotDic.plist"];
+        
         NSArray *tempArr = [result objectForKey:@"item"];
         
         for (NSDictionary *tempDic in tempArr) {
@@ -177,7 +181,40 @@
         
     } failure:^(NSError *error) {
         
-        NSLog(@"请求失败");
+        NSDictionary *hotDic = [LTArchiver unarchiverObjectByKey:@"hotDic" WithPath:@"hotDic.plist"];
+        
+        NSArray *tempArr = [hotDic objectForKey:@"item"];
+        
+        for (NSDictionary *tempDic in tempArr) {
+            
+            LTHotModel *model = [[LTHotModel alloc] initWithDic:tempDic];
+            
+            if ([action isEqualToString:@"pullDown"]) {
+                
+                // 下拉刷新时,把新请求的数据放到数组最前面
+                [self.hotDataSourceArray insertObject:model atIndex:0];
+                
+            }
+            else if ([action isEqualToString:@"pullUp"])
+            {
+                
+                // 上拉加载时,把新请求的数据放到数组最后面
+                [self.hotDataSourceArray addObject:model];
+                
+            }
+            
+            
+            [model release];
+            
+        }
+        
+        //        self.hotDataSourceArray = [[self.hotDataSourceArray reverseObjectEnumerator] allObjects];
+        
+        [self.hotTableView.mj_header endRefreshing];
+        
+        [self.hotTableView.mj_footer endRefreshing];
+        
+        [self.hotTableView reloadData];
         
     }];
     

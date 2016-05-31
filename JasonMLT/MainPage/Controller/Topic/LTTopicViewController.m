@@ -187,6 +187,10 @@
     
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *topicDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:topicDic ByKey:@"topicDic" WithPath:@"topicDic.plist"];
+        
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"list"];
         
         self.next_url = [[result objectForKey:@"data"] objectForKey:@"next_url"];
@@ -212,6 +216,31 @@
         [self.mainTableView reloadData];
     } failure:^(NSError *error) {
         
+        NSDictionary *topicDic = [LTArchiver unarchiverObjectByKey:@"topicDic" WithPath:@"topicDic.plist"];
+        
+        NSArray *arr = [[topicDic objectForKey:@"data"] objectForKey:@"list"];
+        
+        self.next_url = [[topicDic objectForKey:@"data"] objectForKey:@"next_url"];
+        
+        
+        for (NSDictionary *dict in arr) {
+            
+            NSArray *tempArr = [dict objectForKey:@"topic_list"];
+            
+            for (NSDictionary *tempDic in tempArr) {
+                
+                LTTopicListModel *model = [[LTTopicListModel alloc] initWithDic:tempDic];
+                
+                [self.dataSourceArray addObject:model];
+                [model release];
+                
+            }
+            
+        }
+        
+        [self.mainTableView.mj_footer endRefreshing];
+        
+        [self.mainTableView reloadData];
         
     }];
     

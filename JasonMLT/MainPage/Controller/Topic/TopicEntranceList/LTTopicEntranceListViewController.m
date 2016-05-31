@@ -157,6 +157,10 @@
     
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *entranceDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:entranceDic ByKey:@"entranceDic" WithPath:@"entranceDic.plist"];
+        
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"articles"];
         
 //        NSString *imageFrame = [[[[result objectForKey:@"data"] objectForKey:@"block_info"] objectForKey:@"diy"] objectForKey:@"bgimage_frame"];
@@ -188,6 +192,21 @@
         [self.mainTableView reloadData];
     } failure:^(NSError *error) {
         
+        NSDictionary *entranceDic = [LTArchiver unarchiverObjectByKey:@"entranceDic" WithPath:@"entranceDic.plist"];
+        
+        NSArray *arr = [[entranceDic objectForKey:@"data"] objectForKey:@"articles"];
+        
+        for (NSDictionary *dict in arr) {
+            
+            LTTopicEntranceListModel *model = [[LTTopicEntranceListModel alloc] initWithDic:dict];
+            
+            [self.dataSourceArray addObject:model];
+            
+            [model release];
+            
+        }
+        
+        [self.mainTableView reloadData];
         
     }];
     

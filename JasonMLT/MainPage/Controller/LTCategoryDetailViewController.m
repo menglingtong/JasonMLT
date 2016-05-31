@@ -36,7 +36,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // 初始化自定义搜索框
-    self.searchBar = [[LTSearchBar alloc] initWithFrame:CGRectMake(0, 0, 300, 31) cornerRadius:15 borderWidth:0 backgroundColor:[UIColor whiteColor] borderColor:[UIColor whiteColor]];
+    self.searchBar = [[LTSearchBar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - 75, 31) cornerRadius:15 borderWidth:0 backgroundColor:[UIColor whiteColor] borderColor:[UIColor whiteColor]];
     
     // 将自定义搜索框放置到导航控制器的 titleView
     self.navigationItem.titleView = self.searchBar;

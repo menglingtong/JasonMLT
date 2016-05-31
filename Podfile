@@ -6,3 +6,4 @@ pod 'SDWebImage', '~>3.7'
 pod 'Masonry'
 pod 'FMDB'
 pod 'SDCycleScrollView','~> 1.64'
+pod 'MMTweenAnimation', :head

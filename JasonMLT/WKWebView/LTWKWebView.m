@@ -136,6 +136,8 @@
     
     [webView evaluateJavaScript:@"document.getElementsByClassName('tuiguang1)[0].style.display = 'none'" completionHandler:nil];
     
+    [webView evaluateJavaScript:@"document.getElementsByClassName('zk_top_bar')[0].style.display = 'none'" completionHandler:nil];
+    
     
     @ea_weakify(webView);
     

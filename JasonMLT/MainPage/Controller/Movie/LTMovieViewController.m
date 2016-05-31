@@ -137,6 +137,10 @@
     
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *movieDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:movieDic ByKey:@"movieDic" WithPath:@"movieDic.plist"];
+        
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"posts"];
         
         for (NSDictionary *dict in arr) {
@@ -153,6 +157,22 @@
         [self.mainTableView reloadData];
     } failure:^(NSError *error) {
         
+        NSDictionary *movieDic = [LTArchiver unarchiverObjectByKey:@"movieDic" WithPath:@"movieDic.plist"];
+        
+        NSArray *arr = [[movieDic objectForKey:@"data"] objectForKey:@"posts"];
+        
+        for (NSDictionary *dict in arr) {
+            
+            LTMovieModel *model = [[LTMovieModel alloc] initWithDic:dict];
+            
+            [self.dataSourceArray addObject:model];
+            
+            [model release];
+            
+        }
+        
+        
+        [self.mainTableView reloadData];
         
     }];
     

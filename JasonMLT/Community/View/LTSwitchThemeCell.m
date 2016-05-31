@@ -134,9 +134,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     
@@ -150,9 +150,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     
@@ -165,9 +165,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     
@@ -180,9 +180,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     
@@ -195,9 +195,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     
@@ -210,9 +210,9 @@
         
         make.top.equalTo(self.contentView).offset(20);
         
-        make.width.equalTo(30);
+        make.width.equalTo(ScreenWidth / 12.5);
         
-        make.height.equalTo(20);
+        make.height.equalTo(ScreenWidth / 18.75);
         
     }];
     

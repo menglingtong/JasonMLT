@@ -163,6 +163,10 @@
 {
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *picCategory = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:picCategory ByKey:@"picCategory" WithPath:@"picCategory.plist"];
+        
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"articles"];
         
         for (NSDictionary *dic in arr) {
@@ -177,7 +181,20 @@
         [self.mainTableView reloadData];
     } failure:^(NSError *error) {
         
+        NSDictionary *picCategory = [LTArchiver unarchiverObjectByKey:@"picCategory" WithPath:@"picCategory.plist"];
         
+        NSArray *arr = [[picCategory objectForKey:@"data"] objectForKey:@"articles"];
+        
+        for (NSDictionary *dic in arr) {
+            
+            LTMainPicModel *model = [[LTMainPicModel alloc] initWithDic:dic];
+            
+            [self.mainDataSourceArray addObject:model];
+            [model release];
+            
+        }
+        
+        [self.mainTableView reloadData];
         
     }];
     

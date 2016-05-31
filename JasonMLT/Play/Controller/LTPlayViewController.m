@@ -152,6 +152,10 @@
     
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *playDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:playDic ByKey:@"playDic" WithPath:@"playDic.plist"];
+        
         self.next_url = [[[result objectForKey:@"data"] objectForKey:@"info"] objectForKey:@"next_url"];
         
         // 解析 columns 页面主要内容及 section头的内容
@@ -199,6 +203,54 @@
         
         
     } failure:^(NSError *error) {
+        
+        NSDictionary *playDic = [LTArchiver unarchiverObjectByKey:@"playDic" WithPath:@"playDic.plist"];
+        
+        self.next_url = [[[playDic objectForKey:@"data"] objectForKey:@"info"] objectForKey:@"next_url"];
+        
+        // 解析 columns 页面主要内容及 section头的内容
+        for (NSDictionary *dic in [[playDic objectForKey:@"data"] objectForKey:@"columns"]) {
+            
+            LTSectionModel *model = [[LTSectionModel alloc] initWithDic:dic];
+            
+            [self.playDataSourceArray addObject:model];
+            [model release];
+            
+        }
+        
+        
+        if (url == _playApiUrl) {
+            
+            // 解析 promote 滚动视图的内容
+            for (NSDictionary *dic in [[playDic objectForKey:@"data"] objectForKey:@"promote"]) {
+                
+                LTPlayScrollModel *model = [[LTPlayScrollModel alloc] initWithDic:dic];
+                
+                [self.playScrollDataSourceArray addObject:model];
+                [model release];
+                
+            }
+            
+            // 解析 display 滚动视图下两个展示图片
+            for (NSDictionary *dic in [[playDic objectForKey:@"data"] objectForKey:@"display"]) {
+                
+                LTTwoDisplayModel *model = [[LTTwoDisplayModel alloc] initWithDic:dic];
+                
+                [self.playTowDataSourceArray addObject:model];
+                [model release];
+                
+            }
+            
+            [self setPlayScrollView];
+            
+        }
+        
+        [self.playTableView.mj_header endRefreshing];
+        
+        [self.playTableView.mj_footer endRefreshing];
+        
+        [self.playTableView reloadData];
+        
         
         
     }];

@@ -25,6 +25,7 @@
 		8D06230C1CE4A75100507E69 /* LTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D06230B1CE4A75100507E69 /* LTPageControl.m */; };
 		8D069F361CE4173A00B29D25 /* LTScrollImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D069F351CE4173A00B29D25 /* LTScrollImage.m */; };
 		8D09D12F1CFB419F009B49FA /* LTArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D09D12E1CFB419F009B49FA /* LTArchiver.m */; };
+		8D09D1541CFC18DA009B49FA /* launchPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D09D1531CFC18DA009B49FA /* launchPage.png */; };
 		8D0B27581CF988DD0037671A /* LTMyCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27571CF988DD0037671A /* LTMyCollectCell.m */; };
 		8D0B275B1CF99F240037671A /* LTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B275A1CF99F240037671A /* LTSwitchCell.m */; };
 		8D0B27651CF9EB0A0037671A /* EAThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B27621CF9EB0A0037671A /* EAThemeManager.m */; };
@@ -133,6 +134,7 @@
 		8D069F351CE4173A00B29D25 /* LTScrollImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTScrollImage.m; sourceTree = "<group>"; };
 		8D09D12D1CFB419F009B49FA /* LTArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTArchiver.h; sourceTree = "<group>"; };
 		8D09D12E1CFB419F009B49FA /* LTArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTArchiver.m; sourceTree = "<group>"; };
+		8D09D1531CFC18DA009B49FA /* launchPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchPage.png; sourceTree = "<group>"; };
 		8D0B27561CF988DD0037671A /* LTMyCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMyCollectCell.h; sourceTree = "<group>"; };
 		8D0B27571CF988DD0037671A /* LTMyCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTMyCollectCell.m; sourceTree = "<group>"; };
 		8D0B27591CF99F240037671A /* LTSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchCell.h; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 		8D5AFDEB1CE2BFA3007C6E6C /* JasonMLT */ = {
 			isa = PBXGroup;
 			children = (
+				8D09D1531CFC18DA009B49FA /* launchPage.png */,
 				8D01D8B21CF8502500091054 /* WKWebView */,
 				8DBE60B61CE34BF1007F2D1F /* Community */,
 				8DBE60BA1CE34BF1007F2D1F /* HotNews */,
@@ -924,6 +927,7 @@
 				8D5AFDF91CE2BFA3007C6E6C /* Assets.xcassets in Resources */,
 				8DFF67D41CE9C06E00C8D3B1 /* Category.plist in Resources */,
 				8D5AFDF71CE2BFA3007C6E6C /* Main.storyboard in Resources */,
+				8D09D1541CFC18DA009B49FA /* launchPage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,6 +1192,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.lrymlt.JasonMLTJJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1209,6 +1214,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.lrymlt.JasonMLTJJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

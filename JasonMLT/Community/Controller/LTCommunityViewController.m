@@ -14,7 +14,11 @@
 
 #import "LTSwitchThemeCell.h"
 
+#import <SDImageCache.h>
+
 @interface LTCommunityViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, copy) NSString *cacheImage;
 
 @end
 
@@ -80,91 +84,130 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.mainTableView reloadData];
+}
+
 #pragma mark -
 #pragma mark <UITableViewDelegate, UITableViewDataSource>
 #pragma mark 返回cell的个数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
     
+//    if (indexPath.row == 0) {
+//        
+//        LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
+//        
+//        cell.string = @"我的收藏";
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        @ea_weakify(self);
+//        // 设置主题切换时的回调方法
+//        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+//            
+//            @ea_strongify(self);
+//            
+//            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_DARK;
+//                cell.title.textColor = TEXT_COLOR_DARK;
+//                
+//            }
+//            else
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+//                cell.title.textColor = TEXT_COLOR_NORMAL;
+//                
+//            }
+//            
+//        }];
+//        
+//        
+//        return cell;
+//    }
+    
+//    if (indexPath.row == 1) {
+//        
+//        LTSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchCell"];
+//        
+//        cell.string = @"夜间模式";
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        @ea_weakify(self);
+//        // 设置主题切换时的回调方法
+//        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+//            
+//            @ea_strongify(self);
+//            
+//            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_DARK;
+//                cell.title.textColor = TEXT_COLOR_DARK;
+//                
+//            }
+//            else
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+//                cell.title.textColor = TEXT_COLOR_NORMAL;
+//                
+//            }
+//            
+//        }];
+//        
+//        return cell;
+//    }
+//    
+//    if (indexPath.row == 2) {
+//        
+//        LTSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchCell"];
+//        
+//        cell.string = @"彩色图标";
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        @ea_weakify(self);
+//        // 设置主题切换时的回调方法
+//        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+//            
+//            @ea_strongify(self);
+//            
+//            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_DARK;
+//                cell.title.textColor = TEXT_COLOR_DARK;
+//                
+//            }
+//            else
+//            {
+//                
+//                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
+//                cell.title.textColor = TEXT_COLOR_NORMAL;
+//                
+//            }
+//            
+//        }];
+//        
+//        return cell;
+//        
+//    }
+    
     if (indexPath.row == 0) {
-        
-        LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
-        
-        cell.string = @"我的收藏";
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        @ea_weakify(self);
-        // 设置主题切换时的回调方法
-        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
-            
-            @ea_strongify(self);
-            
-            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_DARK;
-                cell.title.textColor = TEXT_COLOR_DARK;
-                
-            }
-            else
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
-                cell.title.textColor = TEXT_COLOR_NORMAL;
-                
-            }
-            
-        }];
-        
-        
-        return cell;
-    }
-    
-    if (indexPath.row == 4) {
-        
-        LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
-        
-        cell.string = @"清除缓存";
-        
-        cell.tempCacheStr = @"当前缓存";
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        @ea_weakify(self);
-        // 设置主题切换时的回调方法
-        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
-            
-            @ea_strongify(self);
-            
-            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_DARK;
-                cell.title.textColor = TEXT_COLOR_DARK;
-                
-            }
-            else
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
-                cell.title.textColor = TEXT_COLOR_NORMAL;
-                
-            }
-            
-        }];
-        
-        return cell;
-        
-    }
-    
-    if (indexPath.row == 3) {
         
         LTSwitchThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchThemeCell"];
         
@@ -200,9 +243,7 @@
     
     if (indexPath.row == 1) {
         
-        LTSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchCell"];
-        
-        cell.string = @"夜间模式";
+        LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -229,39 +270,14 @@
             
         }];
         
-        return cell;
-    }
-    
-    if (indexPath.row == 2) {
+        cell.string = @"清除缓存";
         
-        LTSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switchCell"];
+        [self imageCacheSize:2];
         
-        cell.string = @"彩色图标";
+        cell.tempCacheStr = [NSString stringWithFormat:@"当前缓存 %@", self.cacheImage];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        @ea_weakify(self);
-        // 设置主题切换时的回调方法
-        [cell ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
-            
-            @ea_strongify(self);
-            
-            if([currentThemeIdentifier isEqualToString:EAThemeBlack])
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_DARK;
-                cell.title.textColor = TEXT_COLOR_DARK;
-                
-            }
-            else
-            {
-                
-                cell.backgroundColor = CELL_BACKGROUND_NORMAL;
-                cell.title.textColor = TEXT_COLOR_NORMAL;
-                
-            }
-            
-        }];
+        
         
         return cell;
         
@@ -275,6 +291,71 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        LTMyCollectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCollectCell"];
+        
+        NSString *str = [NSString stringWithFormat:@"清除缓存 %@", self.cacheImage];
+        
+        UIAlertController *clearCache = [UIAlertController alertControllerWithTitle:@"清除缓存" message:str preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self clearCache];
+            
+            [self imageCacheSize:0];
+            
+            cell.tempCacheStr = [NSString stringWithFormat:@"当前缓存 %d", 0];
+            
+        }];
+        
+        [clearCache addAction:confirm];
+        [clearCache addAction:cancel];
+        
+        [self presentViewController:clearCache animated:YES completion:nil];
+        
+
+        
+    }
+}
+
+- (void)clearCache
+{
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+    
+    [self.mainTableView reloadData];
+}
+
+- (void)imageCacheSize:(NSInteger) accuracy
+{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    
+        CGFloat imageSize = ([[SDImageCache sharedImageCache] getSize] / 1024.0f) / 1024.0f;
+        
+        NSString *imageSizeString = [NSString stringWithFormat:@"%f",imageSize];
+        
+        NSRange dotRange = [imageSizeString rangeOfString:@"."];
+        
+        NSInteger lastPosition = dotRange.location + accuracy;
+        
+        imageSizeString = [imageSizeString substringToIndex:lastPosition];
+        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            self.cacheImage = [NSString stringWithFormat:@"%@ M",imageSizeString];
+            
+//        });
+        
+//    });
+    
 }
 
 

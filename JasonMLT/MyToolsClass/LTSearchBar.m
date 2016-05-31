@@ -93,6 +93,8 @@
         searchField.layer.masksToBounds = YES;
     }
     
+    
+    
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     
 }
@@ -104,7 +106,7 @@
     
     [searchBar setShowsCancelButton:YES animated:YES];
     
-
+    [self.LTDelegate searchResultView];
     
 }
 
@@ -117,7 +119,27 @@
     
     [searchBar endEditing:YES];
     
+    [self.LTDelegate cancelSearchResultView];
+    
 }
+
+#pragma mark 点击搜索按钮
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    [self.LTDelegate didBeginSearchWithCondition:searchBar.text];
+    
+}
+
+#pragma mark 搜索框文字改变
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+    [self.LTDelegate didBeginSearchWithCondition:searchBar.text];
+    
+}
+
+
 
 
 

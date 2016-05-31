@@ -9,6 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "LTUISearchBar+LTSetSearchBar.h"
 
+@protocol LTSearchBarDelegate <NSObject>
+
+@required
+// 打开遮罩层
+- (void) searchResultView;
+
+// 关闭遮罩层
+- (void) cancelSearchResultView;
+
+// 执行搜索
+- (void) didBeginSearchWithCondition:(NSString *)condition;
+
+@end
+
 
 @interface LTSearchBar : UIView <UISearchBarDelegate>
 
@@ -32,5 +46,8 @@
 
 /** 自定义初始化方法 */
 -(instancetype)initWithFrame:(CGRect)frame cornerRadius:(CGFloat)cornerRadius borderWidth:(NSInteger)borderWidth backgroundColor:(UIColor *)backgroundColor borderColor:(UIColor *)borderColor;
+
+@property (nonatomic, assign) id<LTSearchBarDelegate> LTDelegate;
+
 
 @end

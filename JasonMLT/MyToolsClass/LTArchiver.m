@@ -41,12 +41,12 @@
 }
 
 /**
- *  <#Description#>
+ *  反归档工具
  *
- *  @param key  <#key description#>
- *  @param path <#path description#>
+ *  @param key  归档时所使用的key
+ *  @param path 存储路径
  *
- *  @return <#return value description#>
+ *  @return 返回存储进去的obj
  */
 +(id)unarchiverObjectByKey:(NSString *)key WithPath:(NSString *)path
 {

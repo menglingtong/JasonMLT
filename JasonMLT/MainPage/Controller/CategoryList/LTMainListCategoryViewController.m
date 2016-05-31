@@ -150,6 +150,10 @@
     
     [LTNetTool GetNetWithUrl:url body:nil header:nil response:LTJSON success:^(id result) {
         
+        NSDictionary *listCategory = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:listCategory ByKey:@"listCategory" WithPath:@"listCategory.plist"];
+        
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"articles"];
         
         // 遍历字典,为model赋值
@@ -187,6 +191,41 @@
         
     } failure:^(NSError *error) {
         
+        NSDictionary *listCategory = [LTArchiver unarchiverObjectByKey:@"listCategory" WithPath:@"listCategory.plist"];
+        
+        NSArray *arr = [[listCategory objectForKey:@"data"] objectForKey:@"articles"];
+        
+        // 遍历字典,为model赋值
+        for (NSInteger i = 1; i <= arr.count; i++) {
+            
+            if (i == 1) {
+                
+                // 创建临时数组
+                self.tempArray = [NSMutableArray array];
+                
+            }
+            
+            
+            LTMainListModel *model = [[LTMainListModel alloc] initWithDic:[arr objectAtIndex:(i - 1)]];
+            
+            [self.tempArray addObject:model];
+            
+            // model 每 3 个分一组
+            if (i % 3 == 0) {
+                
+                [self.mainDataSourceArray addObject:self.tempArray];
+                
+                //                [self.tempArray release];
+                
+                self.tempArray = [NSMutableArray array];
+                
+                continue;
+            }
+            
+            
+        }
+        
+        [self.mainCollectionView reloadData];
         
     }];
     

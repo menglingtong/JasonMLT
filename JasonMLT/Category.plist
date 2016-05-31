@@ -62,18 +62,6 @@
 				<key>title</key>
 				<string>爆笑日常</string>
 			</dict>
-			<dict>
-				<key>pic</key>
-				<string>dz</string>
-				<key>color</key>
-				<string>60a6c3</string>
-				<key>type</key>
-				<string>single</string>
-				<key>api_url</key>
-				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=10721</string>
-				<key>title</key>
-				<string>段子</string>
-			</dict>
 		</array>
 	</dict>
 	<dict>
@@ -123,18 +111,6 @@
 				<string>http://iphone.myzaker.com/zaker/blog.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12304</string>
 				<key>title</key>
 				<string>摄影札记</string>
-			</dict>
-			<dict>
-				<key>pic</key>
-				<string>sp</string>
-				<key>color</key>
-				<string>fb4747</string>
-				<key>type</key>
-				<string>single</string>
-				<key>api_url</key>
-				<string>http://iphone.myzaker.com/zaker/news.php?_appid=iphone&amp;_bsize=640_1136&amp;_version=6.54&amp;app_id=12179&amp;clean_local_cache=Y</string>
-				<key>title</key>
-				<string>视频</string>
 			</dict>
 			<dict>
 				<key>pic</key>

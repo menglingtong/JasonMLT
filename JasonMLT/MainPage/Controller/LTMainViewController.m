@@ -32,6 +32,8 @@
 
 #import "LTMovieViewController.h"
 
+#import "LTArchiver.h"
+
 
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -129,7 +131,7 @@
                         
                         
                         // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 0, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
+                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 1, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
                         
                         [db executeUpdate:insertDetailCategorySql];
                     }
@@ -230,10 +232,14 @@
 - (void) askForFronImagePage
 {
     
-    NSString *frontImageApiUrl = @"http://iphone.myzaker.com/zaker/cover.php?_appid=iphone&_bsize=750_1334&_dev=iPhone%2C9.3.1&_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&_lat=0.000000&_lng=0.000000&_mac=02%3A00%3A00%3A00%3A00%3A00&_net=wifi&_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&_uid=&_utoken=&_v=6.5.2&_version=6.54&api_version=3.4";
+    NSString *frontImageApiUrl = FRONT_IMAGE_API_URL;
     
     
     [LTNetTool GetNetWithUrl:frontImageApiUrl body:nil header:nil response:LTJSON success:^(id result) {
+        
+        NSDictionary *archiverDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:archiverDic ByKey:@"FrontImagePageCache" WithPath:@"frontImage.plist"];
         
         self.fontImageStr = [[result objectForKey:@"data"] objectForKey:@"pic"];
         
@@ -281,6 +287,51 @@
         
     } failure:^(NSError *error) {
         
+        NSDictionary *archiverDic = [LTArchiver unarchiverObjectByKey:@"FrontImagePageCache" WithPath:@"frontImage.plist"];
+        
+        self.fontImageStr = [[archiverDic objectForKey:@"data"] objectForKey:@"pic"];
+        
+        NSURL *url = [NSURL URLWithString:self.fontImageStr];
+        
+        self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight)];
+        
+        // 打开交互
+        self.frontImage.userInteractionEnabled = YES;
+        
+        // 创建一个轻扫手势
+        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFontImageBack)];
+        
+        // 设置清扫手势向上
+        swipe.direction = UISwipeGestureRecognizerDirectionUp;
+        
+        [self.frontImage addGestureRecognizer:swipe];
+        [swipe release];
+        
+        [self.frontImage sd_setImageWithURL:url];
+        
+        [self.tabBarController.view addSubview:_frontImage];
+        [_frontImage release];
+        
+        
+        [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+            
+            [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
+                
+                self.frontImage.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+                
+            }];
+            
+            
+        } completion:^(BOOL finished) {
+            
+            
+            
+        }];
+        
+        
+        
+        
+        [self.mainMenuCollectionView.mj_header endRefreshing];
         
     }];
     
@@ -311,10 +362,14 @@
 - (void) askForScrollImageData
 {
     
-    NSString *scrollUrl = @"http://iphone.myzaker.com/zaker/follow_promote.php?_appid=iphone&_bsize=750_1334&_dev=iPhone%2C9.3.1&_idfa=44C64D22-DBB4-49AD-BB93-DC50565EFC46&_lat=0.000000&_lng=0.000000&_mac=02%3A00%3A00%3A00%3A00%3A00&_net=wifi&_udid=EFF67A40-E743-4850-978E-0E96FC82A7B2&_uid=&_utoken=&_v=6.5.2&_version=6.54&m=1462848242";
+    NSString *scrollUrl = SCROLL_URL;
     
     
     [LTNetTool GetNetWithUrl:scrollUrl body:nil header:nil response:LTJSON success:^(id result) {
+        
+        NSDictionary *scrollDic = (NSDictionary *)result;
+        
+        [LTArchiver archiverObject:scrollDic ByKey:@"scrollPage" WithPath:@"mainPageScroll.plist"];
         
         NSArray *arr = [[result objectForKey:@"data"] objectForKey:@"list"];
         
@@ -334,6 +389,23 @@
         
     } failure:^(NSError *error) {
         
+        NSDictionary *scrollDic = [LTArchiver unarchiverObjectByKey:@"scrollPage" WithPath:@"mainPageScroll.plist"];
+        
+        NSArray *arr = [[scrollDic objectForKey:@"data"] objectForKey:@"list"];
+        
+        for (NSDictionary *dic in arr) {
+            
+            LTScrollModel *model = [[LTScrollModel alloc] initWithDic:dic];
+            
+            [self.scrollViewDataSource addObject:model];
+            [model release];
+            
+        }
+        
+        // 初始化自定义滚动视图
+        self.scrollImage = [[LTScrollImage alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (211 / 375.0) * self.view.frame.size.width) dataSource:self.scrollViewDataSource time:6 isCirculatory:YES isHasText:YES];
+        
+        [self.mainMenuCollectionView reloadData];
         
     }];
     
