@@ -35,6 +35,9 @@
 /** 滚动视图pageControl */
 @property (nonatomic, retain) LTPageControl *pageControl;
 
+/** 是否添加pageControl */
+@property (nonatomic, assign) BOOL isAddPageControl;
+
 /** 滚动视图的自定义初始化方法 */
 - (instancetype) initWithFrame:(CGRect)frame
                     dataSource:(NSArray *)dataSource

@@ -15,6 +15,8 @@
 
 #import "LTTopicGalleryModel.h"
 
+#import "LTGalleryDetailModel.h"
+
 #import "LTTopicEntranceModel.h"
 
 #import "LTEntranceDetailModel.h"
@@ -31,6 +33,8 @@
 #import <MJRefresh.h>
 
 #import "LTTopicEntranceListViewController.h"
+
+#import "LTWKWebView.h"
 
 @interface LTTopicViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -430,14 +434,30 @@
     // 一个 model 是个一section
     LTTopicListModel *model = [self.dataSourceArray objectAtIndex:indexPath.section];
     
+    LTWKWebView *ltwv = [[LTWKWebView alloc] init];
+    
     if (indexPath.row == 0) {
         
+        LTTopicGalleryModel *galleryModel = [model.galleryModelArray firstObject];
         
+        LTGalleryDetailModel *galleryDetailModel = [galleryModel.articleModelArray firstObject];
+        
+        ltwv.url = galleryDetailModel.weburl;
+        
+        [self.navigationController pushViewController:ltwv animated:YES];
         
     }
     else if (indexPath.row < 3)
     {
         
+        // 获取文章model
+        LTTopicArticleModel *articleModel = [model.articleModelArray objectAtIndex:indexPath.row - 1];
+        
+        LTArticleDetailModel *articleDetailModel = [articleModel.articleDetailModelArray firstObject];
+        
+        ltwv.url = articleDetailModel.weburl;
+        
+        [self.navigationController pushViewController:ltwv animated:YES];
         
         
     }

@@ -129,20 +129,32 @@
     
     [self.LTDelegate didBeginSearchWithCondition:searchBar.text];
     
+    [searchBar endEditing:YES];
+    
 }
 
 #pragma mark 搜索框文字改变
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    if ([searchBar.text isEqualToString:@""]) {
+        
+        
+    }
+    else
+    {
+        [self.LTDelegate didBeginSearchWithCondition:searchBar.text];
+    }
     
-    [self.LTDelegate didBeginSearchWithCondition:searchBar.text];
     
 }
 
 
 
 
-
+-(void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar
+{
+    
+}
 
 
 

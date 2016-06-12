@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#define DB_NAME @"JasonMLT.sqlite"
+
 // 宏定义宽和高
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 

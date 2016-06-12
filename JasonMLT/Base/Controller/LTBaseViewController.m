@@ -27,7 +27,7 @@
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    [self.navigationItem setTitle:@"MLT"];
+    [self.navigationItem setTitle:@"闭眼看世界"];
     
     NSDictionary *barColorDic = @{EAThemeNormal : [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00],  // 正常模式颜色
                                   EAThemeBlack  : [UIColor colorWithRed:0.08 green:0.08 blue:0.08 alpha:1.00],  // 黑色模式

@@ -292,6 +292,8 @@
     
     displayLayout.itemSize = CGSizeMake((ScreenWidth - 21) / 2.0, 75);
     
+    displayLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
     displayLayout.sectionInset = UIEdgeInsetsMake(7, 7, 7, 7);
     
     displayLayout.minimumLineSpacing = 7;
@@ -301,7 +303,11 @@
     
     displayCollection.contentSize = CGSizeMake(ScreenWidth, headerView.frame.size.height - cycleScrollView.frame.size.height);
     
-    displayCollection.scrollEnabled = NO;
+    displayCollection.scrollEnabled = YES;
+    
+    displayCollection.showsHorizontalScrollIndicator = NO;
+    
+    displayCollection.pagingEnabled = NO;
     
     displayCollection.delegate = self;
     displayCollection.dataSource = self;

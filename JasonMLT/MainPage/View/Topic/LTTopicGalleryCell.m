@@ -84,7 +84,15 @@
         
         [self.galleryImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placehoderYellow"]];
         
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:model.title];
+        NSString *string = model.title;
+        
+        if (model.title == nil) {
+            
+            string = @"暂无标题";
+            
+        }
+        
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:string];
         
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         

@@ -8,6 +8,8 @@
 
 #import "LTPageControl.h"
 
+#import "EATheme.h"
+
 @implementation LTPageControl
 
 -(void)dealloc
@@ -26,7 +28,7 @@
     if (self) {
         
         // 设置默认未选中的颜色
-        self.pointColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
+        self.pointColor = [UIColor colorWithRed:1.00 green:0.96 blue:0.85 alpha:1.00];
         
         // 设置默认选中颜色
         self.selectedColor = [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00];
@@ -45,6 +47,38 @@
     }
     
     return self;
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    NSDictionary *tintColorDic = @{EAThemeNormal : [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00],  // 正常模式颜色
+                                   EAThemeBlack  : [UIColor whiteColor],  // 黑色模式
+                                   EAThemeRed    : [UIColor colorWithRed:0.91 green:0.31 blue:0.25 alpha:1.00],  // 红色模式
+                                   EAThemeOrange : [UIColor colorWithRed:0.91 green:0.50 blue:0.15 alpha:1.00],  // 橘黄色模式
+                                   EAThemeBlue   : [UIColor colorWithRed:0.38 green:0.69 blue:0.89 alpha:1.00],  // 蓝色模式
+                                   EAThemeGreen  : [UIColor colorWithRed:0.11 green:0.73 blue:0.61 alpha:1.00]}; // 绿色模式
+    @ea_weakify(self);
+    [self ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+        
+        @ea_strongify(self);
+        
+        if ([currentThemeIdentifier isEqualToString:EAThemeBlack]) {
+            
+            self.selectedColor = tintColorDic[currentThemeIdentifier];
+            self.pointColor = [UIColor colorWithRed:0.16 green:0.17 blue:0.21 alpha:1.00];
+            
+        }else{
+            
+            self.selectedColor = tintColorDic[currentThemeIdentifier];
+            
+        }
+        
+        
+    }];
+    
+    
 }
 
 

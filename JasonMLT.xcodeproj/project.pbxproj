@@ -1181,8 +1181,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Meng Lingtong (8W92H9E78J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Meng Lingtong (8W92H9E78J)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1203,8 +1203,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Meng Lingtong (Y64D4DPV66)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Meng Lingtong (8W92H9E78J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Meng Lingtong (8W92H9E78J)";
 				INFOPLIST_FILE = JasonMLT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

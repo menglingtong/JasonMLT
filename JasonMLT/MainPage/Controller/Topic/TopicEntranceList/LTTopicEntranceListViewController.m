@@ -18,6 +18,8 @@
 
 #import <UIImageView+WebCache.h>
 
+#import "LTWKWebView.h"
+
 
 @interface LTTopicEntranceListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -298,6 +300,17 @@
 
     return nil;
 }
+#pragma mark 点击方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LTTopicEntranceListModel *model = [self.dataSourceArray objectAtIndex:indexPath.row];
+    
+    LTWKWebView *ltwv = [[LTWKWebView alloc] init];
+    
+    ltwv.url = model.weburl;
+    
+    [self.navigationController pushViewController:ltwv animated:YES];
+}
 
 #pragma mark 返回cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -317,6 +330,8 @@
     
     return 0;
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

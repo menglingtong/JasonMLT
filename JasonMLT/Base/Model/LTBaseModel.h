@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 @interface LTBaseModel : NSObject
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

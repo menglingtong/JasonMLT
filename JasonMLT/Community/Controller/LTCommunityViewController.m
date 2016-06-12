@@ -336,7 +336,6 @@
 
 - (void)imageCacheSize:(NSInteger) accuracy
 {
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     
         CGFloat imageSize = ([[SDImageCache sharedImageCache] getSize] / 1024.0f) / 1024.0f;
         
@@ -348,13 +347,11 @@
         
         imageSizeString = [imageSizeString substringToIndex:lastPosition];
         
-//        dispatch_async(dispatch_get_main_queue(), ^{
+
         
-            self.cacheImage = [NSString stringWithFormat:@"%@ M",imageSizeString];
+        self.cacheImage = [NSString stringWithFormat:@"%@ M",imageSizeString];
             
-//        });
-        
-//    });
+
     
 }
 

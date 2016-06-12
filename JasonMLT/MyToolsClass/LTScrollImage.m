@@ -40,6 +40,8 @@
     
     if (self) {
         
+        self.isAddPageControl = NO;
+        
         self.scrollImageDataSource = [[NSArray alloc] init];
         
         self.scrollImageDataSource = dataSource;
@@ -56,6 +58,7 @@
         
         [self addSubview:_scrollImageView];
         [_scrollImageView release];
+        
         
         
     }
@@ -132,6 +135,55 @@
         // 使用SDWebImage 将图片请求到本地并放置到imageview上
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderScroll"]];
         
+        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderScroll"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.height - 30, frame.size.width, 30)];
+            titleLabel.textColor = [UIColor whiteColor];
+            titleLabel.backgroundColor = [UIColor colorWithRed:0.12 green:0.13 blue:0.13 alpha:0.60];
+            
+            [titleLabel setFont:[UIFont systemFontOfSize:14]];
+            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:model.title];
+            
+            NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+            
+            style.firstLineHeadIndent = 10;
+            
+            [str addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+            
+            titleLabel.attributedText = str;
+            
+            [imageView addSubview:titleLabel];
+            [titleLabel release];
+            
+            
+            
+            if (self.isAddPageControl == 0) {
+                
+                // 添加pageControl (小点)
+                self.pageControl = [[LTPageControl alloc] initWithFrame:CGRectMake(ScreenWidth / 2.67, ScreenHeight / 3.19, ScreenWidth / 3.75, 10) pageStyle:LTPageControlStyleSquare imageArray:nil];
+                
+                
+                self.pageControl.pageCount = self.scrollImageDataSource.count;
+                
+                self.pageControl.pointColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
+                
+                self.pageControl.selectedColor = [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00];
+                
+                self.pageControl.layer.contentsCenter = self.scrollImageView.layer.contentsCenter;
+                
+                [self addSubview:_pageControl];
+                [_pageControl release];
+                
+                [self.scrollImageView bringSubviewToFront:_pageControl];
+                
+                self.isAddPageControl = YES;
+                
+            }
+            
+            
+        }];
+        
         // 将imageview 放到滚动视图中
         [self.scrollImageView addSubview:imageView];
         [imageView release];
@@ -182,22 +234,6 @@
     }
     
     [NSTimer scheduledTimerWithTimeInterval:self.Stime target:self selector:@selector(setTimerCirculatory) userInfo:nil repeats:YES];
-    
-    self.pageControl = [[LTPageControl alloc] initWithFrame:CGRectMake(140, 200, 100, 30) pageStyle:LTPageControlStyleSquare imageArray:nil];
-    
-    
-    self.pageControl.pageCount = self.scrollImageDataSource.count;
-    
-    self.pageControl.pointColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
-    
-    self.pageControl.selectedColor = [UIColor colorWithRed:0.99 green:0.76 blue:0.18 alpha:1.00];
-    
-    self.pageControl.layer.contentsCenter = self.scrollImageView.layer.contentsCenter;
-    
-    [self addSubview:_pageControl];
-    [_pageControl release];
-    
-    [self.scrollImageView bringSubviewToFront:_pageControl];
     
 }
 

@@ -34,6 +34,8 @@
 
 #import "LTArchiver.h"
 
+#import "LTDataBaseManager.h"
+
 
 @interface LTMainViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -50,125 +52,31 @@
 -(void)dealloc
 {
     [_frontImage release];
-    
     [_mainMenuDataSourceArray release];
-    
     [_mainMenuWillDeleteDictionary release];
-    
     [_mainMenuWillDeleteArray release];
     
     _mainMenuCollectionView.delegate = nil;
     _mainMenuCollectionView.dataSource = nil;
-    
     [_mainMenuCollectionView release];
     
     [_editView release];
-    
     [_tempMovingCell release];
-    
     [_pointedCellIndexPath release];
-    
     [_moveIndexPath release];
-    
     [_scrollViewDataSource release];
-    
     [_scrollImage release];
-    
     [super dealloc];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 获取本地document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
-    
-    NSLog(@"%@", documentPath);
-    
-    // 判断文件存在就不执行创建
-    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
+    // 调用基于FMDB 封装的方法 创建数据库 及表结构
+    [LTDataBaseManager createDataBaseWithDBName:DB_NAME];
         
-        // 创建数据库路径
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-        
-        // 判断打开数据库连接
-        if ([db open]) {
-            
-            // 创建栏目表 - 栏目ID(主键) - 栏目名称 -
-            NSString *createCategorySql = @"create table if not exists category(cateID integer primary key autoincrement, categoryTitle varchar(225) not null)";
-            
-            NSString *createCategoryDetailSql = @"create table if not exists categoryDetail(title varchar(225) primary key not null, parentTitle varchar(225) not null, api_url varchar(225) not null, is_Selected integer not null, indexPath integer not null, pic varchar(225) not null, color varchar(225) not null)";
-            
-            // 执行创建语句
-            [db executeUpdate:createCategorySql];
-            [db executeUpdate:createCategoryDetailSql];
-            
-            // 获取plist文件
-            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Category" ofType:@"plist"];
-            NSArray *array = [NSMutableArray arrayWithContentsOfFile:plistPath];
-            
-            // 解析plist文件
-            for (NSDictionary *dic in array) {
-                
-                LTCategoryModel *categoryModel = [[LTCategoryModel alloc] init];
-                
-                [categoryModel initWithDic:dic];
-                
-                // 创建插入主栏目sql语句
-                NSString *insertCategorySql = [NSString stringWithFormat:@"insert into category(categoryTitle) values('%@')", categoryModel.categoryTitle];
-                
-                // 执行语句
-                [db executeUpdate:insertCategorySql];
-                
-                
-                NSArray *categoryArray = [dic objectForKey:@"category"];
-                
-                for (NSDictionary *dicInArray in categoryArray) {
-                    
-                    if ([[dicInArray objectForKey:@"type"] isEqualToString:@"single"]) {
-                        
-                        
-                        // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, [dicInArray objectForKey:@"api_url"], 1, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
-                        
-                        [db executeUpdate:insertDetailCategorySql];
-                    }
-                    else
-                    {
-                        // 创建插入子栏目 sql语句
-                        NSString *insertDetailCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dicInArray objectForKey:@"title"], categoryModel.categoryTitle, @"子栏目", 0, 1000, [dicInArray objectForKey:@"pic"], [dicInArray objectForKey:@"color"]];
-                        
-                        [db executeUpdate:insertDetailCategorySql];
-                        
-                        NSArray *supCategory = [dicInArray objectForKey:@"subCategory"];
-                        
-                        for (NSDictionary *dict in supCategory) {
-                            
-                            NSString *insertSubCategorySql = [NSString stringWithFormat:@"insert into categoryDetail(title, parentTitle, api_url, is_Selected, indexPath, pic, color) values('%@', '%@', '%@', %d, %d, '%@', '%@')", [dict objectForKey:@"title"], [dicInArray objectForKey:@"title"], [dict objectForKey:@"api_url"], 0, 1000, @"图片", @"颜色"];
-                            
-                            [db executeUpdate:insertSubCategorySql];
-                        }
-                        
-                    }
-                    
-                    
-                }
-                
-                
-            }
-            
-            [db close];
-            
-        }
-        
-    }
-    
     
 }
-
-
 
 -(void)loadView
 {
@@ -184,9 +92,7 @@
     // 调用请求方法,请求滚动视图数据
     [self askForScrollImageData];
     
-    // 设置导航左侧按钮
-//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedUserSetLeftButton:)] autorelease];
-    
+
     // 设置导航右侧按钮
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickedAddCategoryButton:)] autorelease];
     
@@ -197,7 +103,6 @@
     self.mainMenuCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self askForFronImagePage];
-        
         
     }];
     
@@ -210,17 +115,11 @@
         
         if([currentThemeIdentifier isEqualToString:EAThemeBlack])
         {
-            
             currentView.backgroundColor = CELL_BACKGROUND_DARK;
-
-            
         }
         else
         {
-            
             currentView.backgroundColor = CELL_BACKGROUND_NORMAL;
-
-            
         }
         
     }];
@@ -241,46 +140,7 @@
         
         [LTArchiver archiverObject:archiverDic ByKey:@"FrontImagePageCache" WithPath:@"frontImage.plist"];
         
-        self.fontImageStr = [[result objectForKey:@"data"] objectForKey:@"pic"];
-        
-        NSURL *url = [NSURL URLWithString:self.fontImageStr];
-        
-        self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight)];
-        
-        // 打开交互
-        self.frontImage.userInteractionEnabled = YES;
-        
-        // 创建一个轻扫手势
-        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFontImageBack)];
-        
-        // 设置清扫手势向上
-        swipe.direction = UISwipeGestureRecognizerDirectionUp;
-        
-        [self.frontImage addGestureRecognizer:swipe];
-        [swipe release];
-        
-        [self.frontImage sd_setImageWithURL:url];
-        
-        [self.tabBarController.view addSubview:_frontImage];
-        [_frontImage release];
-        
-        
-        [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
-    
-            [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
-    
-                self.frontImage.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-    
-            }];
-    
-    
-        } completion:^(BOOL finished) {
-            
-            
-            
-        }];
-        
-        
+        [self popTheFrontImageWithDic:result];
         
         
         [self.mainMenuCollectionView.mj_header endRefreshing];
@@ -289,52 +149,54 @@
         
         NSDictionary *archiverDic = [LTArchiver unarchiverObjectByKey:@"FrontImagePageCache" WithPath:@"frontImage.plist"];
         
-        self.fontImageStr = [[archiverDic objectForKey:@"data"] objectForKey:@"pic"];
-        
-        NSURL *url = [NSURL URLWithString:self.fontImageStr];
-        
-        self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight)];
-        
-        // 打开交互
-        self.frontImage.userInteractionEnabled = YES;
-        
-        // 创建一个轻扫手势
-        UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFontImageBack)];
-        
-        // 设置清扫手势向上
-        swipe.direction = UISwipeGestureRecognizerDirectionUp;
-        
-        [self.frontImage addGestureRecognizer:swipe];
-        [swipe release];
-        
-        [self.frontImage sd_setImageWithURL:url];
-        
-        [self.tabBarController.view addSubview:_frontImage];
-        [_frontImage release];
-        
-        
-        [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
-            
-            [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
-                
-                self.frontImage.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-                
-            }];
-            
-            
-        } completion:^(BOOL finished) {
-            
-            
-            
-        }];
-        
-        
-        
+        [self popTheFrontImageWithDic:archiverDic];
         
         [self.mainMenuCollectionView.mj_header endRefreshing];
         
     }];
     
+}
+
+- (void) popTheFrontImageWithDic:(NSDictionary *)dic
+{
+    self.fontImageStr = [[dic objectForKey:@"data"] objectForKey:@"pic"];
+    
+    NSURL *url = [NSURL URLWithString:self.fontImageStr];
+    
+    self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -ScreenHeight, ScreenWidth, ScreenHeight)];
+    
+    // 打开交互
+    self.frontImage.userInteractionEnabled = YES;
+    
+    // 创建一个轻扫手势
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFontImageBack)];
+    
+    // 设置清扫手势向上
+    swipe.direction = UISwipeGestureRecognizerDirectionUp;
+    
+    [self.frontImage addGestureRecognizer:swipe];
+    [swipe release];
+    
+    [self.frontImage sd_setImageWithURL:url];
+    
+    [self.tabBarController.view addSubview:_frontImage];
+    [_frontImage release];
+    
+    
+    [UIView animateKeyframesWithDuration:0.6 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+        
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.25 animations:^{
+            
+            self.frontImage.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+            
+        }];
+        
+        
+    } completion:^(BOOL finished) {
+        
+        
+        
+    }];
 }
 
 #pragma mark 将掉下来的图片送回去
@@ -349,9 +211,7 @@
             
         }];
         
-        
     } completion:^(BOOL finished) {
-        
         
         
     }];
@@ -419,32 +279,19 @@
     // 初始化数据源数组
     self.mainMenuDataSourceArray = [[NSMutableArray alloc] init];
     
-    // 获取本地document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSMutableArray *arr = [LTDataBaseManager manageDataBaseWithOpreation:LTSelect UpdateBody:nil TableName:@"categoryDetail" Condition:@"is_Selected = 1 order by indexPath asc" DBName:DB_NAME];
     
-    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
     
-    // 创建数据库路径
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    
-    if ([db open]) {
+    for (NSDictionary *dic in arr) {
         
-        NSString *sql = @"select * from categoryDetail where is_Selected = 1 order by indexPath asc";
+        LTCategoryModel *model = [[LTCategoryModel alloc] initWithDic:dic];
         
-        [db executeStatements:sql withResultBlock:^int(NSDictionary *resultsDictionary) {
-           
-            
-            LTCategoryModel *model = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
-            
-            [self.mainMenuDataSourceArray addObject:model];
-            [model release];
-            
-            return 0;
-        }];
+        [self.mainMenuDataSourceArray addObject:model];
+        [model release];
         
     }
     
-    [db close];
+    [arr removeAllObjects];
     
     [self.mainMenuCollectionView reloadData];
 }
@@ -683,11 +530,9 @@
                 //移动
                 [self.mainMenuCollectionView moveItemAtIndexPath:self.pointedCellIndexPath toIndexPath:self.moveIndexPath];
                 
-                
                 //通知代理
                 //设置移动后的起始indexPath
                 self.pointedCellIndexPath = self.moveIndexPath;
-                
                 
                 break;
             }
@@ -725,8 +570,6 @@
             
             LTSelf.mainMenuCollectionView.userInteractionEnabled = YES;
             
-//            [LTSelf.mainMenuCollectionView reloadData];
-            
         }];
         
         
@@ -745,13 +588,6 @@
         
         // 将对应collectionView的数据源数组赋值给 temp 临时数组
         [temp addObjectsFromArray:[self dataSourceArrayOfCollectionView:self.mainMenuCollectionView]];
-        
-    }
-    
-    
-    for (int i = 0; i < temp.count; i++) {
-        
-//        [temp replaceObjectAtIndex:i withObject:[temp[i] mutableCopy]];
         
     }
     
@@ -813,7 +649,6 @@
     self.isEditing = YES;
     
     [self.tabBarController.view addSubview:_editView];
-  //  [_editView release];
     
     __block LTMainViewController *LTSelf = self;
     
@@ -821,10 +656,7 @@
         
         LTSelf.editView.frame = CGRectMake(0, ScreenHeight - 96, ScreenWidth, 96);
         
-        
     } completion:^(BOOL finished) {
-        
-//        [self.mainMenuCollectionView reloadData];
         
     }];
     
@@ -861,31 +693,16 @@
                 // 将被选择的cell 移动到最后
                 [self.mainMenuCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForItem:self.mainMenuDataSourceArray.count - 1  inSection:0]];
                 
-                // 获取本地document路径
-                NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-                
-                NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
-                
-                // 创建数据库路径
-                FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-                
-                // 打开数据库
-                [db open];
-                
                 // 遍历数据源中的model
                 for (LTCategoryModel *model in self.mainMenuDataSourceArray) {
                     
                     // 如果数据源数组中的model 的title 与被选择的cell的menuNameLabel.text相等, 执行sql语句将其在数据库中的状态修改
                     if ([model.title isEqualToString:cell.menuNameLabel.text]) {
                         
-                        NSString *sql = [NSString stringWithFormat:@"update categoryDetail set is_Selected = 0 where title = '%@'", cell.menuNameLabel.text];
+                        NSString *str = [NSString stringWithFormat:@"title = '%@'", cell.menuNameLabel.text];
                         
-
-                        if ([db open]) {
-
-                            [db executeUpdate:sql];
-                            
-                        }
+                        // 更新数据库
+                        [LTDataBaseManager manageDataBaseWithOpreation:LTUpdate UpdateBody:@"is_Selected = 0, indexPath = 1000" TableName:@"categoryDetail" Condition:str DBName:DB_NAME];
                         
                         // 将被筛选出的model存储到临时数组中等待 从数据源数组中 删除
                         [tempArr addObject:model];
@@ -893,10 +710,6 @@
                     }
 
                 }
-
-                // 关闭数据库
-                [db close];
-
             }
             
         }
@@ -966,44 +779,21 @@
         // 刷新collectionView
         [LTSelf.mainMenuCollectionView reloadItemsAtIndexPaths:[LTSelf.mainMenuCollectionView indexPathsForVisibleItems]];
         
-        // 获取本地document路径
-        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        
-        NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
-        
-        // 创建数据库路径
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-        
-        [db open];
-        
         for (LTMainMenuCollectionCell *tempCell in [self.mainMenuCollectionView visibleCells])
         {
             
             // 更新数据库
-            NSString *updateSql = [NSString stringWithFormat:@"update categoryDetail set indexPath = %d where title = '%@'", (int)tempCell.indexPathOfItem, tempCell.menuNameLabel.text];
+            NSString *updateBody = [NSString stringWithFormat:@"indexPath = %d", (int)tempCell.indexPathOfItem];
+            NSString *updateCondition = [NSString stringWithFormat:@"title = '%@'", tempCell.menuNameLabel.text];
             
-            
-            if ([db open]) {
-                
-                [db executeUpdate:updateSql];
-                
-            }
-            
+            [LTDataBaseManager manageDataBaseWithOpreation:LTUpdate UpdateBody:updateBody TableName:@"categoryDetail" Condition:updateCondition DBName:DB_NAME];
         }
-        
-        [db close];
         
     }];
     
     [self.mainMenuCollectionView reloadData];
     
     
-}
-
-#pragma mark 用户设置按钮
-- (void) didClickedUserSetLeftButton:(UIBarButtonItem *)sender
-{
-    NSLog(@"抽屉");
 }
 
 #pragma mark 添加栏目按钮
@@ -1204,44 +994,31 @@
             {
                 
                 LTMainListCategoryViewController *listVC = [[LTMainListCategoryViewController alloc] init];
-                
-//                LTCategoryModel *model = [self.mainMenuDataSourceArray objectAtIndex:indexPath.item];
+
                 
                 if ([model.api_url isEqualToString:@"子栏目"]) {
                     
-                    // 获取本地document路径
-                    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+                    NSString *selectCondition = [NSString stringWithFormat:@"parentTitle = '%@'", model.title];
+                    NSMutableArray *arr = [LTDataBaseManager manageDataBaseWithOpreation:LTSelect UpdateBody:nil TableName:@"categoryDetail" Condition:selectCondition DBName:DB_NAME];
                     
-                    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+                    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
                     
-                    // 创建数据库路径
-                    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-                    
-                    if ([db open]) {
+                    for (NSDictionary *dic in arr) {
                         
-                        NSString *str =[NSString stringWithFormat:@"select * from categoryDetail where parentTitle = '%@'", model.title];
+                        LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:dic];
                         
-                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                        [tempArray addObject:tempModel];
+                        [tempModel release];
                         
-                        [db executeStatements:str withResultBlock:^int(NSDictionary *resultsDictionary) {
-                            
-                            LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
-                            
-                            [tempArray addObject:tempModel];
-                            [tempModel release];
-                            
-                            return 0;
-                        }];
-                        
-                        
-                        LTCategoryModel *m = [tempArray objectAtIndex:0];
-                        
-                        listVC.url = m.api_url;
-                        
-                        [self.navigationController pushViewController:listVC animated:YES];
-                    }
+                    } 
                     
                     
+                    [arr removeAllObjects];
+                    LTCategoryModel *m = [tempArray objectAtIndex:0];
+                        
+                    listVC.url = m.api_url;
+                        
+                    [self.navigationController pushViewController:listVC animated:YES];
                     
                 }
                 else
@@ -1273,40 +1050,33 @@
                 
                 if ([model.api_url isEqualToString:@"子栏目"]) {
                     
-                    // 获取本地document路径
-                    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
                     
-                    NSString *dbPath = [documentPath stringByAppendingString:@"/JasonMLT.sqlite"];
+                    NSString *condition = [NSString stringWithFormat:@"parentTitle = '%@'", model.title];
                     
-                    // 创建数据库路径
-                    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+                    NSMutableArray *arr = [LTDataBaseManager manageDataBaseWithOpreation:LTSelect UpdateBody:nil TableName:@"categoryDetail" Condition:condition DBName:DB_NAME];
                     
-                    if ([db open]) {
+                    
+                    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                    
+                    for (NSDictionary *dic in arr) {
                         
-                        NSString *str =[NSString stringWithFormat:@"select * from categoryDetail where parentTitle = '%@'", model.title];
+                        LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:dic];
                         
-                        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-                        
-                        [db executeStatements:str withResultBlock:^int(NSDictionary *resultsDictionary) {
-                            
-                            LTCategoryModel *tempModel = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
-                            
-                            [tempArray addObject:tempModel];
-                            [tempModel release];
-                            
-                            return 0;
-                        }];
-                        
-                        LTCategoryModel *m = [tempArray objectAtIndex:1];
-                        
-                        movieVC.url = m.api_url;
-                        
-                        movieVC.categoryTitle = m.title;
-                        
-                        
-                        [self.navigationController pushViewController:movieVC animated:YES];
+                        [tempArray addObject:tempModel];
+                        [tempModel release];
                         
                     }
+                    
+                    [arr removeAllObjects];
+                    
+                    LTCategoryModel *m = [tempArray objectAtIndex:1];
+                    
+                    movieVC.url = m.api_url;
+                    
+                    movieVC.categoryTitle = m.title;
+                    
+                    [self.navigationController pushViewController:movieVC animated:YES];
+                    
                         
                 }
                 
@@ -1317,7 +1087,6 @@
         
      
     }
-    
     
 }
 

@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString *api_url;
 
 /** 是否被选中 */
-@property (nonatomic, assign) BOOL is_Selected;
+@property (nonatomic, assign) bool is_Selected;
 
 /** 父类名字 */
 @property (nonatomic, copy) NSString *parentTitle;

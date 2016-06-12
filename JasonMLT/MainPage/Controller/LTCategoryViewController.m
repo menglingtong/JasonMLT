@@ -63,7 +63,7 @@
     self.searchBar.LTDelegate = self;
     
     // 将自定义搜索框放置到导航控制器的 titleView
-    self.navigationItem.titleView = self.searchBar;
+//    self.navigationItem.titleView = self.searchBar;
     
     // 修改返回按钮样式
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backWhite"] style:UIBarButtonItemStylePlain target:self action:@selector(popToFrontPage)];
@@ -127,15 +127,16 @@
     // 注册cell
     [self.categoryTableView registerClass:[LTCategoryTableViewCell class] forCellReuseIdentifier:@"categoryCell"];
     
-    self.searchResultTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
+//    self.searchResultTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
+//    
+//    self.searchResultTableView.backgroundColor = [UIColor redColor];
+//    
+//    self.searchResultTableView.delegate = self;
+//    self.searchResultTableView.dataSource = self;
+//    
+//    [self.searchResultTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"searchResultCell"];
     
-    self.searchResultTableView.delegate = self;
-    self.searchResultTableView.dataSource = self;
     
-    [self.searchResultTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"searchResultCell"];
-    
-    [self.searchView addSubview:_searchResultTableView];
-    [_searchResultTableView release];
     
     
 }
@@ -153,14 +154,20 @@
     
     __weak __typeof(&*self)LT = self;
     
-    self.searchView = [[UIView alloc] initWithFrame:CGRectMake(0, -ScreenHeight + 64, ScreenWidth, ScreenHeight - 64)];
+    self.searchResultTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -ScreenHeight + 64, ScreenWidth, ScreenHeight - 64) style:UITableViewStylePlain];
     
-    [self.view addSubview:_searchView];
-    [_searchView release];
+    self.searchResultTableView.delegate = self;
+    self.searchResultTableView.dataSource = self;
+    
+    [self.searchResultTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"searchResultCell"];
+    
+    
+    [self.view addSubview:_searchResultTableView];
+    [_searchResultTableView release];
     
     @ea_weakify(self);
     // 设置主题切换时的回调方法
-    [self.searchView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
+    [self.searchResultTableView ea_setThemeContents:^(UIView *currentView, NSString *currentThemeIdentifier) {
         
         @ea_strongify(self);
         
@@ -182,12 +189,12 @@
     self.animStart.duration = 2.0f;
     
     // 设置起始位置
-    self.animStart.fromValue = @[@(self.searchView.center.y)];
+    self.animStart.fromValue = @[@(self.searchResultTableView.center.y)];
     
     // 设置结束位置
-    self.animStart.toValue = @[@(self.searchView.center.y + (ScreenHeight - 64))];
+    self.animStart.toValue = @[@(self.searchResultTableView.center.y + (ScreenHeight - 64))];
     
-    [self.searchView pop_addAnimation:self.animStart forKey:@"enter"];
+    [self.searchResultTableView pop_addAnimation:self.animStart forKey:@"enter"];
     
     
     self.animStart.animationBlock =  ^(double c,double d,NSArray *v,id target,MMTweenAnimation *animation)
@@ -195,7 +202,7 @@
         
         double value = [v[0] doubleValue];
         
-        LT.searchView.center = CGPointMake(LT.searchView.center.x, value);
+        LT.searchResultTableView.center = CGPointMake(LT.searchResultTableView.center.x, value);
         
     };
     
@@ -204,39 +211,40 @@
 #pragma mark LTSearchBarDelegate
 -(void)cancelSearchResultView
 {
-    __weak __typeof(&*self)LT = self;
+//    __weak __typeof(&*self)LT = self;
     
-    self.animEnd = [MMTweenAnimation animation];
-    
-    self.animEnd.functionType = MMTweenFunctionCirc;
-    
-    self.animEnd.easingType = MMTweenEasingIn;
-    
-    self.animEnd.duration = 1.0f;
-    
-    self.animEnd.fromValue = @[@(self.searchView.center.y)];
-    
-    self.animEnd.toValue = @[@(self.searchView.center.y - (ScreenHeight + 64))];
-    
-    [self.searchView pop_addAnimation:self.animEnd forKey:@"exit"];
-    
-    self.animEnd.animationBlock = ^(double c,double d,NSArray *v,id target,MMTweenAnimation *animation)
-    {
-        
-        double value = [v[0] doubleValue];
-        
-        LT.searchView.center = CGPointMake(LT.searchView.center.x, value);
-        
-    };
+//    self.animEnd = [MMTweenAnimation animation];
+//    
+//    self.animEnd.functionType = MMTweenFunctionCirc;
+//    
+//    self.animEnd.easingType = MMTweenEasingIn;
+//    
+//    self.animEnd.duration = 0.01f;
+//    
+//    self.animEnd.fromValue = @[@(self.searchResultTableView.center.y)];
+//    
+//    self.animEnd.toValue = @[@(self.searchResultTableView.center.y - (ScreenHeight + 64))];
+//    
+//    [self.searchResultTableView pop_addAnimation:self.animEnd forKey:@"exit"];
+//    
+//    self.animEnd.animationBlock = ^(double c,double d,NSArray *v,id target,MMTweenAnimation *animation)
+//    {
+//        
+//        double value = [v[0] doubleValue];
+//        
+//        LT.searchResultTableView.center = CGPointMake(LT.searchResultTableView.center.x, value);
+//        
+//    };
 
-    
+    [self.searchResultDataSourceArray removeAllObjects];
+    [self.searchResultTableView removeFromSuperview];
 }
 
 #pragma mark LTSearchBarDelegate
 -(void)didBeginSearchWithCondition:(NSString *)condition
 {
     
-    
+    [self.searchResultDataSourceArray removeAllObjects];
     [self searchingWithCondition:condition];
     
     
@@ -254,13 +262,14 @@
     
     if ([db open]) {
         
-        NSString *sql = [NSString stringWithFormat:@"select * from categoryDetail where title = '%@'", condition];
+        NSString *sql = [NSString stringWithFormat:@"select * from categoryDetail where title like '%%%@%%'", condition];
         
         [db executeStatements:sql withResultBlock:^int(NSDictionary *resultsDictionary) {
             
             LTCategoryModel *model = [[LTCategoryModel alloc] initWithDic:resultsDictionary];
             
             [self.searchResultDataSourceArray addObject:model];
+            [model release];
             
             return 0;
         }];
@@ -296,7 +305,18 @@
 #pragma mark 返回cell个数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.categoryDataSource.count;
+    
+    if (tableView == self.categoryTableView) {
+        
+        
+        return self.categoryDataSource.count;
+    }
+    if (tableView == self.searchResultTableView) {
+        
+        
+        return self.searchResultDataSourceArray.count;
+    }
+    return 0;
 }
 
 #pragma mark 返回每个cell的值
@@ -320,12 +340,12 @@
     
     if (tableView == self.searchResultTableView) {
         
-        
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
         
         cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor clearColor];
         
-        LTCategoryModel *model = [self.categoryDataSource objectAtIndex:indexPath.row];
+        LTCategoryModel *model = [self.searchResultDataSourceArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text = model.title;
         
@@ -346,14 +366,24 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    LTCategoryDetailViewController *detailVC = [[LTCategoryDetailViewController alloc] init];
+    if (tableView == self.categoryTableView) {
+        
+        LTCategoryDetailViewController *detailVC = [[LTCategoryDetailViewController alloc] init];
+        
+        LTCategoryModel *model = [self.categoryDataSource objectAtIndex:indexPath.row];
+        
+        detailVC.model = model;
+        
+        [self.navigationController pushViewController:detailVC animated:YES];
+        [detailVC release];
+        
+    }
+    if (tableView == self.searchResultTableView) {
+        
+        
+        
+    }
     
-    LTCategoryModel *model = [self.categoryDataSource objectAtIndex:indexPath.row];
-    
-    detailVC.model = model;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    [detailVC release];
     
 }
 
